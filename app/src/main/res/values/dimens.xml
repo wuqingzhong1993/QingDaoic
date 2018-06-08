@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="view_margin_normal">16dp</dimen>
+    <dimen name="view_margin_big">32dp</dimen>
+    <dimen name="view_margin_small">10dp</dimen>
+    <dimen name="account_margin_start">30dp</dimen>
+    <dimen name="account_margin_end">15dp</dimen>
+    <dimen name="view_padding_big">32dp</dimen>
+    <dimen name="view_padding_normal">16dp</dimen>
+    <dimen name="view_padding_small">10dp</dimen>
+    <dimen name="font_size_big">23sp</dimen>
+    <dimen name="font_size_normal">16sp</dimen>
+    <dimen name="font_size">13sp</dimen>
+    <dimen name="font_size_small">9sp</dimen>
+    <dimen name="font_size_header_small">11sp</dimen>
+    <dimen name="font_size_header_big">18sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="status_bar_height">0dp</dimen>
+    <dimen name="sidebar_text_size">15sp</dimen>
+    <dimen name="login_ic_margin">21dp</dimen>
+    <dimen name="line_height">1dp</dimen>
+    <dimen name="sidebar_textsize">10sp</dimen>
+    <dimen name="view_pager_dot_size">9dp</dimen>
+    <dimen name="view_pager_dot_margin">5dp</dimen>
+    <dimen name="k_line_axis_right_width">16dp</dimen>
+    <dimen name="letter_spacing">0.2</dimen>
+</resources>

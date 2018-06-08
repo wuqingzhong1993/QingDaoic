@@ -1,0 +1,101 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@drawable/bg_common</item>
+    </style>
+
+
+    <style name="LoadingDialogStyle">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <!--<item name="android:background">@android:color/transparent</item>-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+        <!--<item name="android:windowFullscreen">true</item>-->
+    </style>
+
+    <style name="ETStyle">
+        <!--控件默认颜色-->
+        <item name="android:colorControlNormal">@color/colorTextLogin</item>
+
+        <item name="android:editTextBackground">@drawable/bg_edit_text_material</item>
+    </style>
+
+
+
+    <style name="LoginLL">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingStart">@dimen/view_padding_normal</item>
+        <item name="android:paddingEnd">@dimen/view_padding_normal</item>
+        <item name="android:background">@null</item>
+
+    </style>
+
+
+    <style name="LoginTIL">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColorHint">@color/colorTextLogin</item>
+        <item name="android:paddingEnd">@dimen/login_ic_margin</item>
+        <item name="android:theme">@style/ETStyle</item>
+    </style>
+
+    <style name="LoginET">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <!--<item name="android:background">@null</item>-->
+        <item name="android:textColorHint">@color/colorTextLogin</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/font_size</item>
+        <item name="android:lines">1</item>
+        <!--<item name="android:padding">@dimen/view_margin_small</item>-->
+        <item name="android:paddingEnd">6dp</item>
+        <item name="android:paddingBottom">18dp</item>
+        <item name="android:textCursorDrawable">@drawable/color_cursor</item>
+    </style>
+
+    <style name="LoginLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:background">@color/colorTextLogin</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+
+    <style name="BaseIVInLL">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/ic_arrow</item>
+    </style>
+
+    <style name="LoginIV" parent="BaseIVInLL">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_margin">@dimen/login_ic_margin</item>
+
+    </style>
+
+    <style name="BaseBtn">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">47dp</item>
+        <item name="android:background">@drawable/bg_confirm_btn</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_marginStart">@dimen/view_margin_big</item>
+        <item name="android:layout_marginEnd">@dimen/view_margin_big</item>
+        <item name="android:layout_marginTop">@dimen/view_margin_big</item>
+        <item name="android:layout_marginBottom">@dimen/view_margin_big</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.2</item>
+    </style>
+
+</resources>

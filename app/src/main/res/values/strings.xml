@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">QingDaoic</string>
+    <string name="loading">Loading…</string>
+    <string name="login">"Sign in  "</string>
+    <string name="login_pass">Login password</string>
+    <string name="toast_no_pass">Please enter the password</string>
+    <string name="toast_no_username">Please enter the username</string>
+    <string name="logging">Logged in…</string>
+</resources>

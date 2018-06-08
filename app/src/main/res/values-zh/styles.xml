@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BaseBtn">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">47dp</item>
+        <item name="android:background">@drawable/bg_confirm_btn</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_marginStart">@dimen/view_margin_big</item>
+        <item name="android:layout_marginEnd">@dimen/view_margin_big</item>
+        <item name="android:layout_marginTop">@dimen/view_margin_big</item>
+        <item name="android:layout_marginBottom">@dimen/view_margin_big</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">1</item>
+    </style>
+</resources>

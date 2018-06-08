@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">QingDaoic</string>
+    <string name="loading">正在加载…</string>
+    <string name="login">登录</string>
+    <string name="login_pass">登录密码</string>
+    <string name="toast_no_pass">请输入密码</string>
+    <string name="toast_no_username">请输入用户名</string>
+    <string name="logging">正在登录…</string>
+</resources>
