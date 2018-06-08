@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#21B9F0</color>
     <color name="colorTextLogin">#445d96</color>
+    <color name="colorTabSelect">#21B9F0</color>
+    <color name="colorTabNormal">#727a8f</color>
+    <color name="colorDivider">#66445d96</color>
 </resources>
