@@ -29,7 +29,6 @@ class LoginActivity : BaseActivity() {
 
     private fun initView() {
         initListener()
-
     }
 
 
@@ -71,13 +70,14 @@ class LoginActivity : BaseActivity() {
 
 
     private fun login(username: String, password: String) {
-        HttpClient.instance.login("周蕾", "1")
+        HttpClient.instance.login("经办人1", "1")
                 .bindToLifecycle(this)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     json:JsonObject ->
                     handleLoginData(json)
+                    cancelProgressDialog()
 
                 }, {
                     e: Throwable ->
@@ -86,8 +86,7 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun handleLoginData(json: JsonObject) {
-        var i:Int=0
-        i++;
+
         val data=json.getAsJsonObject("data")
         val result= data.get("result").asInt
         if(result==2)
@@ -95,7 +94,8 @@ class LoginActivity : BaseActivity() {
             val presonId=data.get("personId").asString
             HttpClient.instance.setPersonId(presonId)
             //todo 跳转至MainActivity
-
+            val intent = Intent(this,MainActivity::class.java)
+            jumpToActivity(intent)
         }
 
     }

@@ -70,8 +70,8 @@ class HttpClient private constructor() {
      */
     fun login(username: String, password: String): Observable<JsonObject> {
         val map = getBaseMap(false)
-        map.put("username", username)
-        map.put("password", password)
+        map.put("userName", username)
+        map.put("passWord", password)
         return apiService.login(DataHandler.encryptParams(map))
     }
 
