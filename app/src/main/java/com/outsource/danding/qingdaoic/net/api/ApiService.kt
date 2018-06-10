@@ -13,6 +13,10 @@ interface  ApiService{
 
     @GET("mb_login.do")
     fun login(@QueryMap map: Map<String, String> ): Observable<JsonObject>
+
+    @FormUrlEncoded
+    @POST("/m_getTodoList.do")
+    fun getAuditWaiting(@Field("personId") personId:String): Observable<JsonObject>
 }
 
 

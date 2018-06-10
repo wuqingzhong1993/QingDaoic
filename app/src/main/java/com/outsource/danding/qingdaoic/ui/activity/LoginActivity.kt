@@ -70,7 +70,7 @@ class LoginActivity : BaseActivity() {
 
 
     private fun login(username: String, password: String) {
-        HttpClient.instance.login("经办人1", "1")
+        HttpClient.instance.login("财务处2", "1")
                 .bindToLifecycle(this)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

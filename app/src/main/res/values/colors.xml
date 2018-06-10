@@ -7,4 +7,7 @@
     <color name="colorTabSelect">#21B9F0</color>
     <color name="colorTabNormal">#727a8f</color>
     <color name="colorDivider">#66445d96</color>
+    <color name="colorBgListItem">#2a3d6f</color>
+    <color name="colorCommonTextNormal">#66FFFFFF</color>
+    <color name="colorTabTop">#80445D96</color>
 </resources>

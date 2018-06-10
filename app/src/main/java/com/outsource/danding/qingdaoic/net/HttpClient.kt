@@ -21,6 +21,9 @@ import java.io.File
 import java.io.IOException
 import java.util.*
 import java.util.concurrent.TimeUnit
+import org.json.JSONObject
+
+
 
 
 
@@ -72,9 +75,20 @@ class HttpClient private constructor() {
         val map = getBaseMap(false)
         map.put("userName", username)
         map.put("passWord", password)
+        map.put("mobileClient","1")
         return apiService.login(DataHandler.encryptParams(map))
     }
 
+    /**
+     * 获取待办事项
+     */
+    fun getAuditWaiting(): Observable<JsonObject> {
+        val map = getBaseMap(false)
+        map.put("personId", this.personId!!)
+        val json = JSONObject()
+        json.put("personId",this.personId!!)
+        return apiService.getAuditWaiting(this.personId!!)
+    }
 
 
 
