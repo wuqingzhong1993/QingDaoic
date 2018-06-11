@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import com.google.gson.Gson
+import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.R
 import com.outsource.danding.qingdaoic.base.BaseListActivity
@@ -61,7 +63,6 @@ class AuditWaitingActivity : BaseListActivity<AuditWaiting>() {
     override fun getView(parent: ViewGroup?, viewType: Int): View = layoutInflater.inflate(R.layout.item_list_audit_waiting, parent, false)
 
     override fun bindDataToView(holder: FNAdapter.MyViewHolder?, position: Int) {
-        holder!!.itemView.audit_content.text = mList[position].content
         holder!!.itemView.audit_type.text = mList[position].type
         holder!!.itemView.audit_price.text = mList[position].price
         holder!!.itemView.audit_date.text=mList[position].taskId
@@ -85,7 +86,20 @@ class AuditWaitingActivity : BaseListActivity<AuditWaiting>() {
                     json: JsonObject ->
 
                     cancelProgressDialog()
-
+                    val data= json.getAsJsonObject("data")
+                    if(data!=null&&data.getAsJsonArray("dataList")!=null)
+                    {
+                        val list=data.getAsJsonArray("dataList")
+                        if(list!=null&&list.size()>0)
+                        {
+                            val  gson=Gson()
+                            for(ob in list)
+                            {
+                                val audit:AuditWaiting = gson.fromJson(ob,AuditWaiting::class.java)
+                                mList.add(audit)
+                            }
+                        }
+                    }
 
                     enableLoadMore(false)
                     setListAdapter()
