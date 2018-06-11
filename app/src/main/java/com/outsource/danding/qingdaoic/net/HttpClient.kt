@@ -2,6 +2,7 @@ package com.outsource.danding.qingdaoic.net
 
 import android.os.Build
 import android.text.TextUtils
+import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.app.QdApp
 import com.outsource.danding.qingdaoic.net.api.ApiConstants
@@ -22,11 +23,8 @@ import java.io.IOException
 import java.util.*
 import java.util.concurrent.TimeUnit
 import org.json.JSONObject
-
-
-
-
-
+import okhttp3.RequestBody
+import kotlin.collections.HashMap
 
 
 class HttpClient private constructor() {
@@ -83,10 +81,13 @@ class HttpClient private constructor() {
      * 获取待办事项
      */
     fun getAuditWaiting(): Observable<JsonObject> {
-        val map = getBaseMap(false)
+        val gson=Gson();
+
+        val map = HashMap<String,String>()
         map.put("personId", this.personId!!)
-        val json = JSONObject()
-        json.put("personId",this.personId!!)
+        val postInfoStr = gson.toJson(map)
+        val body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), postInfoStr)
+
         return apiService.getAuditWaiting(this.personId!!)
     }
 

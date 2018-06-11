@@ -76,52 +76,36 @@ class AuditWaitingActivity : BaseListActivity<AuditWaiting>() {
 
 
 
-//        HttpClient.instance.getAuditWaiting()
-//                .bindToLifecycle(this)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
+        HttpClient.instance.getAuditWaiting()
+                .bindToLifecycle(this)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+
+                .subscribe({
+                    json: JsonObject ->
+
+                    cancelProgressDialog()
+
+
+                    enableLoadMore(false)
+                    setListAdapter()
+
+
+                }, {
+                    e: Throwable ->
+                    cancelProgressDialog()
+                })
+
+//        mList.add(AuditWaiting("报销审核","办公费","0","0","1","1142","first","1000"))
+//        mList.add(AuditWaiting("执行审核","差旅费","1","0","1","1143","first","1000"))
+//        mList.add(AuditWaiting("执行审核","差旅费","0","0","1","1141","first","1000"))
 //
-//                .subscribe({
-//                    json: JsonObject ->
-//                    val data=json.getAsJsonObject("data")
-//                    cancelProgressDialog()
-//
-//                }, {
-//                    e: Throwable ->
-//                    cancelProgressDialog()
-//                })
-
-        mList.add(AuditWaiting("报销审核","办公费","0","0","1","1142","first","1000"))
-        mList.add(AuditWaiting("执行审核","差旅费","1","0","1","1143","first","1000"))
-        mList.add(AuditWaiting("执行审核","差旅费","0","0","1","1141","first","1000"))
-
-        mList.add(AuditWaiting("执行审核","差旅费","1","0","1","1148","first","1000"))
-        mList.add(AuditWaiting("执行审核","差旅费","0","0","1","1145","first","1000"))
-        enableLoadMore(false)
-        setListAdapter()
+//        mList.add(AuditWaiting("执行审核","差旅费","1","0","1","1148","first","1000"))
+//        mList.add(AuditWaiting("执行审核","差旅费","0","0","1","1145","first","1000"))
 
 
 
-//                .subscribe(object : NetObserver<Message>() {
-//                    override fun onHandleSuccess(t: Message?) {
-//                        if (t == null) {
-//                            setListAdapter()
-//                            return
-//                        }
-//                        if (typeList.isEmpty()) {
-//                            typeList.addAll(t.type_list)
-//                        }
-//                        if (t.message.messages.size < mCount) {
-//                            enableLoadMore(false)
-//                        } else {
-//                            enableLoadMore(true)
-//                        }
-//                        mList.addAll(t.message.messages)
-//                        if (!mList.isEmpty())
-//                            minId = mList.last().id
-//                        setListAdapter()
-//                    }
-//                })
+
     }
 
 }
