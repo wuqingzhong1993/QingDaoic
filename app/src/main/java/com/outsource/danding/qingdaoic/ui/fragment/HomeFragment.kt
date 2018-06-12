@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.outsource.danding.qingdaoic.R
 import com.outsource.danding.qingdaoic.base.BaseFragment
+import com.outsource.danding.qingdaoic.ui.activity.AuditByOperatorActivity
 import com.outsource.danding.qingdaoic.ui.activity.AuditWaitingActivity
 import com.outsource.danding.qingdaoic.util.GlideImageLoader
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -31,6 +32,13 @@ class HomeFragment:BaseFragment() {
             val intent:Intent=Intent(this.activity,AuditWaitingActivity::class.java)
             activity?.startActivityForResult(intent,0)
         }
+
+        audit_by_operator.setOnClickListener{
+            val intent:Intent= Intent(this.activity,AuditByOperatorActivity::class.java)
+            activity?.startActivityForResult(intent,0)
+        }
+
+
     }
 
 

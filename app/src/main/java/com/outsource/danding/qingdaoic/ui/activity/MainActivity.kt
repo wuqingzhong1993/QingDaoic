@@ -9,6 +9,7 @@ import com.outsource.danding.qingdaoic.R;
 import com.outsource.danding.qingdaoic.base.BaseActivity
 import com.outsource.danding.qingdaoic.base.BaseTabActivity
 import com.outsource.danding.qingdaoic.ui.fragment.HomeFragment
+import com.outsource.danding.qingdaoic.ui.fragment.MineFragment
 import com.outsource.danding.qingdaoic.util.GlideImageLoader
 import com.outsource.danding.qingdaoic.util.UIUtils
 import com.outsource.danding.qingdaoic.util.Utils
@@ -19,7 +20,7 @@ import kotlinx.android.synthetic.main.main_title_bar.*
 class MainActivity : BaseTabActivity() {
 
 
-    override fun getFragmentClasses()= arrayOf(HomeFragment::class.java,HomeFragment::class.java,HomeFragment::class.java)
+    override fun getFragmentClasses()= arrayOf(HomeFragment::class.java,HomeFragment::class.java,MineFragment::class.java)
 
     override fun getStrings(): Array<String> = arrayOf("申请","审核","我的")
 
@@ -62,6 +63,10 @@ class MainActivity : BaseTabActivity() {
             0 -> {
                 title = getString(R.string.tab_home)
                 toolbar.visibility = View.GONE
+            }
+            2 ->{
+                title= getString(R.string.tab_mine)
+                toolbar.visibility=View.GONE
             }
             else -> {
 

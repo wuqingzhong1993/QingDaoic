@@ -7,4 +7,5 @@
     <string name="toast_no_username">Please enter the username</string>
     <string name="logging">Logged in…</string>
     <string name="tab_home">tab_home</string>
+    <string name="tab_mine">tab_mine</string>
 </resources>

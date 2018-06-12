@@ -108,7 +108,7 @@
 
             <!-- 经办工作 -->
             <LinearLayout
-                android:id="@+id/audit_doing"
+                android:id="@+id/audit_by_operator"
                 android:background="#fff"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -208,7 +208,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="待 办 工 作"
+                        android:text="已 办 工 作"
                         android:textSize="17sp"
                         android:textColor="#222"
                         />

@@ -27,7 +27,8 @@
         </activity>
         <activity android:name=".ui.activity.AuditWaitingActivity" />
         <activity android:name=".ui.activity.BasicInfoActivity" />
-        <activity android:name=".ui.activity.DetailActivity"></activity>
+        <activity android:name=".ui.activity.DetailActivity" />
+        <activity android:name=".ui.activity.AuditByOperatorActivity"></activity>
     </application>
 
 </manifest>

@@ -78,6 +78,14 @@ class HttpClient private constructor() {
     }
 
     /**
+     * 获取个人信息
+     */
+    fun getUserInfo():Observable<JsonObject>{
+
+        return apiService.getUserInfo(this.personId!!)
+    }
+
+    /**
      * 获取待办事项
      */
     fun getAuditWaiting(): Observable<JsonObject> {
@@ -87,11 +95,35 @@ class HttpClient private constructor() {
         map.put("personId", this.personId!!)
         val postInfoStr = gson.toJson(map)
         val body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), postInfoStr)
-
         return apiService.getAuditWaiting(this.personId!!)
     }
 
+    /**
+     * 获取经办事项
+     */
+    fun getAuditByOperator(): Observable<JsonObject> {
+        val gson=Gson();
 
+        val map = HashMap<String,String>()
+        map.put("personId", this.personId!!)
+        val postInfoStr = gson.toJson(map)
+        val body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), postInfoStr)
+        return apiService.getAuditByOperator(this.personId!!,"1")
+    }
+
+    /**
+     * 获取个人资产
+     */
+    fun getZCList(): Observable<JsonObject> {
+        return apiService.getAuditByOperator(this.personId!!,"1")
+    }
+
+    /**
+     * 获取个人信息
+     */
+    fun getMessage(): Observable<JsonObject> {
+        return apiService.getAuditByOperator(this.personId!!,"1")
+    }
 
 
     /**

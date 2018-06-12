@@ -1,6 +1,5 @@
 package com.outsource.danding.qingdaoic.bean
 
-import com.google.gson.annotations.SerializedName
 
 
 
