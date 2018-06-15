@@ -12,8 +12,13 @@ interface  ApiService{
     @POST("api/login_email")
     fun loginByEmail(@FieldMap map: Map<String, String>): Observable<HttpResult<JsonObject>>
 
-    @GET("mb_login.do")
-    fun login(@QueryMap map: Map<String, String> ): Observable<JsonObject>
+//    @GET("mb_login.do")
+//    fun login(@QueryMap map: Map<String, String> ): Observable<JsonObject>
+
+    @FormUrlEncoded
+    @POST("mb_login.do")
+    fun login(@FieldMap map: Map<String, String> ): Observable<JsonObject>
+
 
 
     @FormUrlEncoded
@@ -34,9 +39,14 @@ interface  ApiService{
 
     @FormUrlEncoded
     @Headers("Accept-Encoding:application/json")
-    @POST("m_getdozcList.do")
-    fun getZCList(@Field("personId") personId:String,@Field("pageNum") pageNum: String): Observable<JsonObject>
+    @POST("m_getApplyInfoList.do")
+    fun getApplyInfoList(@Field("personId") personId:String,@Field("pageNum") pageNum: String): Observable<JsonObject>
 
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("m_out_apply_add_init.do")
+    fun initApplyAdd(@Field("personId") personId:String): Observable<JsonObject>
 
 
 }

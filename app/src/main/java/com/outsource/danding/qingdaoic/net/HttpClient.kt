@@ -5,6 +5,7 @@ import android.text.TextUtils
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.app.QdApp
+import com.outsource.danding.qingdaoic.app.QdApplication
 import com.outsource.danding.qingdaoic.net.api.ApiConstants
 import com.outsource.danding.qingdaoic.net.api.ApiConstants.BASE_URL
 import com.outsource.danding.qingdaoic.net.api.ApiService
@@ -125,6 +126,26 @@ class HttpClient private constructor() {
         return apiService.getAuditByOperator(this.personId!!,"1")
     }
 
+    /**
+     * 获取办公列表
+     */
+    fun getApplyInfoList():Observable<JsonObject>{
+        return apiService.getApplyInfoList(this.personId!!,"1")
+    }
+
+    /**
+     * 初始化办公
+     */
+    fun initApplyAdd():Observable<JsonObject>{
+        return apiService.initApplyAdd(this.personId!!)
+    }
+
+    /**
+     * 获取差旅列表
+     */
+    fun getTravelList():Observable<JsonObject>{
+        return apiService.getApplyInfoList(this.personId!!,"1")
+    }
 
     /**
      * 初始化OKHttpClient,设置缓存,设置超时时间,设置打印日志,设置UA拦截器
@@ -135,7 +156,7 @@ class HttpClient private constructor() {
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         if (mOkHttpClient == null) {
             //设置Http缓存
-            val cache = Cache(File(QdApp.appContext.cacheDir, "HttpCache"), (1024 * 1024 * 10).toLong())
+            val cache = Cache(File(QdApplication.appContext.cacheDir, "HttpCache"), (1024 * 1024 * 10).toLong())
             mOkHttpClient = OkHttpClient.Builder()
                     .protocols(Collections.singletonList(Protocol.HTTP_1_1))
                     .cache(cache)
@@ -164,7 +185,7 @@ class HttpClient private constructor() {
 //            val maxStale = 60 * 60 * 24
             val maxStale = 60 * 60
             var request = chain.request()
-            request = if (NetworkUtils.isNetworkAvailable(QdApp.appContext)) {
+            request = if (NetworkUtils.isNetworkAvailable(QdApplication.appContext)) {
                 //有网络时只从网络获取
                 request.newBuilder().cacheControl(CacheControl.FORCE_NETWORK).build()
             } else {
@@ -174,7 +195,7 @@ class HttpClient private constructor() {
 
 
             var response = chain.proceed(request)
-            response = if (NetworkUtils.isNetworkAvailable(QdApp.appContext)) {
+            response = if (NetworkUtils.isNetworkAvailable(QdApplication.appContext)) {
                 response.newBuilder()
                         .removeHeader("Pragma")
                         .header("Cache-Control", "public, max-age=" + maxAge)
@@ -212,7 +233,7 @@ class HttpClient private constructor() {
                     .header("Mobile-Model-CU", SystemUtils.getSystemModel())
                     .header("UUID-CU:APP", "xxxxxxxxxxxxxxxx")
                     .header("Platform-CU", "android")
-                    .header("Network-CU", NetworkUtils.getNetType(QdApp.appContext)!!)
+                    .header("Network-CU", NetworkUtils.getNetType(QdApplication.appContext)!!)
                     .header("Language", language)
                     .build()
             return chain.proceed(originalRequest)

@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.google.gson.JsonParseException;
 import com.outsource.danding.qingdaoic.app.QdApp;
+import com.outsource.danding.qingdaoic.app.QdApplication;
 import com.outsource.danding.qingdaoic.net.api.HttpResult;
 import com.outsource.danding.qingdaoic.ui.activity.LoginActivity;
 
@@ -38,7 +39,7 @@ public abstract class NetObserver<T> implements Observer<HttpResult<T>> {
 
     @Override
     public void onError(Throwable e) {
-        if (!NetworkUtils.isNetworkAvailable(QdApp.appContext)) {
+        if (!NetworkUtils.isNetworkAvailable(QdApplication.appContext)) {
             onHandleError("网络连接断开");
             return;
         }
