@@ -1,0 +1,1054 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.outsource.danding.qingdaoic.ui.activity.NewTravelActivity"
+    >
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <include layout="@layout/base_title_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#eee"
+        android:padding="10dp"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#fff"
+            android:padding="12dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="2dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="当前单位:"
+                android:textColor="#444"
+                android:textSize="17sp"
+                />
+
+
+            <Spinner
+                android:id="@+id/sp_dept"
+                android:layout_marginStart="30dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#fff"
+            android:padding="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="2dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="是否借款:"
+                android:textColor="#444"
+                android:textSize="17sp"
+                />
+
+            <RadioGroup
+                android:id="@+id/rent"
+                android:layout_marginStart="30dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <RadioButton
+                    android:id="@+id/no"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="否"
+                    android:textAlignment="center"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/yes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:text="是"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#fff"
+            android:padding="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="20dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="出差类别:"
+                android:textColor="#444"
+                android:textSize="17sp"
+                />
+
+            <RadioGroup
+                android:id="@+id/travel_type"
+                android:layout_marginStart="30dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <RadioButton
+                    android:id="@+id/spontaneous"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="自发"
+                    android:textAlignment="center"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/cultivate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:text="培训"/>
+
+
+                <RadioButton
+                    android:id="@+id/conference"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:text="开会"/>
+
+                <RadioButton
+                    android:id="@+id/countrySide"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:text="下乡"/>
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#fff"
+            android:padding="12dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="2dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="出差地点"
+                android:drawableLeft="@drawable/ic_star_red_24"
+                android:textColor="#444"
+                android:textSize="17sp"
+                />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+                <Spinner
+                    android:id="@+id/sp_province"
+                    android:layout_marginStart="30dp"
+                    android:padding="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+                <Spinner
+                    android:id="@+id/sp_city"
+                    android:padding="4dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#fff"
+            android:padding="12dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="2dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="出差人员"
+                android:drawableLeft="@drawable/ic_star_red_24"
+                android:textColor="#444"
+                android:textSize="17sp"
+                />
+
+
+            <Spinner
+                android:id="@+id/sp_person"
+                android:layout_marginStart="30dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#fff"
+            android:padding="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="2dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="本单位人员:"
+                android:textColor="#444"
+                android:textSize="17sp"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="外单位人员:"
+                android:textColor="#444"
+                android:textSize="17sp"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#fff"
+            android:padding="4dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="2dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:drawableLeft="@drawable/ic_star_red_24"
+                android:text="办理事项:"
+                android:textColor="#444"
+                android:textSize="17sp"
+                />
+
+
+            <EditText
+                android:id="@+id/et_type"
+                android:layout_marginStart="30dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#fff"
+            android:padding="12dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="2dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginStart="10dp"
+                android:text="出发/返回\n时间:"
+
+                android:textColor="#444"
+                android:textSize="17sp"
+                />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_marginStart="40dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/ll_begin_date"
+                    android:gravity="center_vertical"
+                    android:padding="6dp">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/begin_date"
+                        android:textColor="#000"
+                        android:textSize="15sp"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_date_picker_black_24" />
+
+
+                    <TextView
+                        android:text="@string/begin"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="#555"
+                        android:textSize="15sp"
+                        />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/ll_end_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:padding="6dp">
+
+                    <TextView
+                        android:id="@+id/text_birth_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/end_date"
+                        android:textColor="#000"
+                        android:textSize="15sp"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        />
+
+                    <ImageView
+                        android:id="@+id/birth_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_date_picker_black_24" />
+
+                    <TextView
+                        android:text="@string/end"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="#555"
+                        android:textSize="15sp"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#fff"
+            android:padding="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="20dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="出发工具:"
+                android:textColor="#444"
+                android:textSize="17sp"
+                />
+
+            <RadioGroup
+                android:id="@+id/go_off_tool"
+                android:layout_marginStart="30dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <RadioButton
+                    android:id="@+id/car_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="汽车"
+                    android:textAlignment="center"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/train_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:text="火车"/>
+
+
+                <RadioButton
+                    android:id="@+id/plane_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:text="飞机"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#fff"
+            android:padding="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="2dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="返回工具:"
+                android:textColor="#444"
+                android:textSize="17sp"
+                />
+
+            <RadioGroup
+                android:id="@+id/go_back_tool"
+                android:layout_marginStart="30dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <RadioButton
+                    android:id="@+id/car_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="汽车"
+                    android:textAlignment="center"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/train_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:text="火车"/>
+
+
+                <RadioButton
+                    android:id="@+id/plane_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:text="飞机"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#fff"
+            android:padding="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="2dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="食宿自理:"
+                android:textColor="#444"
+                android:textSize="17sp"
+                />
+
+            <RadioGroup
+                android:id="@+id/accommodation_type"
+                android:layout_marginStart="30dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <RadioButton
+                    android:id="@+id/yes_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="是"
+                    android:textAlignment="center"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/no_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="否"
+                    android:textAlignment="center"
+                    android:checked="true"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#fff"
+            android:padding="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="2dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="是否派车:"
+                android:textColor="#444"
+                android:textSize="17sp"
+                />
+
+            <RadioGroup
+                android:id="@+id/pickup_type"
+                android:layout_marginStart="30dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <RadioButton
+                    android:id="@+id/send_car"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="派车"
+                    android:textAlignment="center"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/go_alone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="自行前往"
+                    android:textAlignment="center"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/pickup_else"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="乘坐其他单位车辆"
+                    android:textAlignment="center"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/rent_car"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="租车"
+                    android:textAlignment="center"
+                    android:checked="true"/>
+
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#fff"
+            android:padding="4dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="2dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="预算金额:"
+                android:textColor="#444"
+                android:textSize="17sp"
+                />
+
+
+            <EditText
+                android:id="@+id/tv_budget"
+                android:enabled="false"
+                android:layout_marginStart="30dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#fff"
+            android:padding="4dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="10dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="用款内容:"
+                android:textColor="#444"
+                android:drawableLeft="@drawable/ic_star_red_24"
+                android:textSize="17sp"
+                />
+
+
+            <EditText
+                android:id="@+id/et_content"
+                android:enabled="false"
+                android:layout_marginStart="20dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#fff"
+            android:padding="4dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="2dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="备注:"
+                android:textColor="#444"
+                android:textSize="17sp"
+                />
+
+
+            <EditText
+                android:id="@+id/et_remark"
+                android:enabled="false"
+                android:layout_marginStart="65dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/border_radius_10"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:drawableLeft="@drawable/ic_star_red_24"
+                        android:text="名称:"
+                        android:textColor="#444"
+                        android:textSize="17sp" />
+
+
+                    <EditText
+                        android:id="@+id/et_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_weight="1"
+                        android:enabled="false" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#aaa" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="4dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:drawableLeft="@drawable/ic_star_red_24"
+                            android:text="规格:"
+                            android:textColor="#444"
+                            android:textSize="17sp" />
+
+
+                        <EditText
+                            android:id="@+id/et_size"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_weight="1"
+                            android:enabled="false" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:drawableLeft="@drawable/ic_star_red_24"
+                            android:text="单价:"
+                            android:textColor="#444"
+                            android:textSize="17sp" />
+
+
+                        <EditText
+                            android:id="@+id/et_single_price"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_weight="1"
+                            android:enabled="false" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#aaa" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="4dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:drawableLeft="@drawable/ic_star_red_24"
+                            android:text="数量:"
+                            android:textColor="#444"
+                            android:textSize="17sp" />
+
+
+                        <EditText
+                            android:id="@+id/et_amount"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+
+                            />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:drawableLeft="@drawable/ic_star_red_24"
+                            android:text="金额:"
+                            android:textColor="#444"
+                            android:textSize="17sp" />
+
+
+                        <EditText
+                            android:id="@+id/et_total"
+                            android:enabled="false"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_weight="1"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#aaa" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="4dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:drawableLeft="@drawable/ic_star_red_24"
+                        android:text="备注:"
+                        android:textColor="#444"
+                        android:textSize="17sp" />
+
+
+                    <EditText
+                        android:id="@+id/et_item_remark"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_weight="1"
+                        android:enabled="false" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="删除" />
+
+
+        </LinearLayout>
+
+
+
+
+
+        <!-- 按钮 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"
+                android:background="#00f">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="提交"
+                    android:textColor="#fff"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"
+                android:background="#0ff">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#fff"
+                    android:text="暂存"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
+</ScrollView>

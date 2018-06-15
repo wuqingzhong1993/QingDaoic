@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".app.QdApp"
+        android:name=".app.QdApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -28,7 +28,11 @@
         <activity android:name=".ui.activity.AuditWaitingActivity" />
         <activity android:name=".ui.activity.BasicInfoActivity" />
         <activity android:name=".ui.activity.DetailActivity" />
-        <activity android:name=".ui.activity.AuditByOperatorActivity"></activity>
+        <activity android:name=".ui.activity.AuditByOperatorActivity" />
+        <activity android:name=".ui.activity.BusinessActivity" />
+        <activity android:name=".ui.activity.NewBusinessActivity" />
+        <activity android:name=".ui.activity.TravelActivity" />
+        <activity android:name=".ui.activity.NewTravelActivity"></activity>
     </application>
 
 </manifest>
