@@ -25,6 +25,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import org.json.JSONObject
 import okhttp3.RequestBody
+import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 
@@ -145,6 +146,41 @@ class HttpClient private constructor() {
      */
     fun getTravelList():Observable<JsonObject>{
         return apiService.getApplyInfoList(this.personId!!,"1")
+    }
+
+    /**
+     * 计算金额
+     */
+    fun getMoney(city:String, province:String, personIds:MutableList<String>, outStartDate:String,
+                 outEndDate:String,jt_tools:String,fh_tools:String,type:String,w_numbe:String,fare:String,hotel:String,
+                 zs_jd:String,paiche:String):Observable<JsonObject>{
+
+        val map = HashMap<String,String>()
+        map.put("personId", this.personId!!)
+        map.put("city",city)
+        map.put("province",province)
+        map.put("personIds",personIds.toString())
+        map.put("outStartDate",outStartDate)
+        map.put("outEndDate",outEndDate)
+        map.put("jt_tools",jt_tools)
+        map.put("fh_tools",fh_tools)
+        map.put("type",type)
+        map.put("w_numbe",w_numbe)
+        map.put("fare",fare)
+        map.put("hotel",hotel)
+        map.put("zs_jd",zs_jd)
+        map.put("paiche",paiche)
+
+        return apiService.getMoney(map)
+    }
+
+    /**
+     * 提交
+     */
+    fun commit(map:HashMap<String,String>):Observable<JsonObject>{
+        val map = HashMap<String,String>()
+        map.put("personId", this.personId!!)
+        return apiService.commit(map)
     }
 
     /**

@@ -48,6 +48,15 @@ interface  ApiService{
     @POST("m_out_apply_add_init.do")
     fun initApplyAdd(@Field("personId") personId:String): Observable<JsonObject>
 
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("m_out_apply_add_getmoney.do")
+    fun getMoney(@FieldMap map: Map<String, String> ):Observable<JsonObject>
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("do_saveByOffice.do")
+    fun commit(@FieldMap map: Map<String, String> ):Observable<JsonObject>
 
 }
 

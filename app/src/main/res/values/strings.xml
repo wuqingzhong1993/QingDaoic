@@ -13,4 +13,6 @@
     <string name="end_date">end date</string>
     <string name="begin">begin</string>
     <string name="end">end</string>
+    <string name="report_date">report date</string>
+    <string name="jc_time">meal time</string>
 </resources>

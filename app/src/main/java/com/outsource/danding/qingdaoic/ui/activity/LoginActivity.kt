@@ -70,7 +70,7 @@ class LoginActivity : BaseActivity() {
 
 
     /**
-     * 账户1: 财务处2 1
+     * 账户1: 财务处2 1 -> 审核
      * 账户2: 经办人1 1
      */
     private fun login(username: String, password: String) {

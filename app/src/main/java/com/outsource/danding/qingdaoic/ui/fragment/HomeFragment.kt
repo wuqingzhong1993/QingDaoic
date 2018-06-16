@@ -10,10 +10,7 @@ import com.outsource.danding.qingdaoic.app.QdApplication
 import com.outsource.danding.qingdaoic.base.BaseFragment
 import com.outsource.danding.qingdaoic.bean.*
 import com.outsource.danding.qingdaoic.net.HttpClient
-import com.outsource.danding.qingdaoic.ui.activity.AuditByOperatorActivity
-import com.outsource.danding.qingdaoic.ui.activity.AuditWaitingActivity
-import com.outsource.danding.qingdaoic.ui.activity.BusinessActivity
-import com.outsource.danding.qingdaoic.ui.activity.TravelActivity
+import com.outsource.danding.qingdaoic.ui.activity.*
 import com.outsource.danding.qingdaoic.util.GlideImageLoader
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -57,6 +54,10 @@ class HomeFragment:BaseFragment() {
 
         ll_travel.setOnClickListener {
             val intent:Intent=Intent(this.activity,TravelActivity::class.java)
+            activity?.startActivityForResult(intent,0)
+        }
+        ll_cultivate.setOnClickListener {
+            val intent:Intent=Intent(this.activity,CultivateActivity::class.java)
             activity?.startActivityForResult(intent,0)
         }
 
