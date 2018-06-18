@@ -20,11 +20,16 @@ interface  ApiService{
     fun login(@FieldMap map: Map<String, String> ): Observable<JsonObject>
 
 
-
     @FormUrlEncoded
     @Headers("Accept-Encoding:application/json")
     @POST("m_getTodoList.do")
     fun getAuditWaiting(@Field("personId") personId:String): Observable<JsonObject>
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("m_getApplyInfoDetail.do")
+    fun getApplyInfoDetail(@Field("personId") personId:String,@Field("expendId") expendId:String): Observable<JsonObject>
+
 
 
     @FormUrlEncoded
@@ -41,6 +46,12 @@ interface  ApiService{
     @Headers("Accept-Encoding:application/json")
     @POST("m_getApplyInfoList.do")
     fun getApplyInfoList(@Field("personId") personId:String,@Field("pageNum") pageNum: String): Observable<JsonObject>
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("m_getApplyInfoList.do")
+    fun getAuditApplyList(@Field("personId") personId:String,@Field("pageNum") pageNum: String): Observable<JsonObject>
+
 
 
     @FormUrlEncoded

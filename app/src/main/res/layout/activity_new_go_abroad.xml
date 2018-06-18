@@ -799,7 +799,7 @@
                 android:id="@+id/et_zs_address"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
+                android:layout_marginStart="35dp"
                 android:hint="请输入住宿地点"
                 android:layout_weight="1"
                 android:enabled="false" />
@@ -831,7 +831,7 @@
                 android:id="@+id/et_zs_days"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
+                android:layout_marginStart="35dp"
                 android:hint="请输入住宿天数"
                 android:layout_weight="1"
                 android:enabled="false" />

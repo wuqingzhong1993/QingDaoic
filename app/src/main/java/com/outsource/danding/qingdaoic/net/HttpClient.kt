@@ -101,6 +101,15 @@ class HttpClient private constructor() {
     }
 
     /**
+     * 获取审核项详情
+     */
+    fun getApplyInfoDetail(expendId:String):Observable<JsonObject>{
+
+        return apiService.getApplyInfoDetail(this.personId!!,expendId)
+    }
+
+
+    /**
      * 获取经办事项
      */
     fun getAuditByOperator(): Observable<JsonObject> {
@@ -131,6 +140,13 @@ class HttpClient private constructor() {
      * 获取办公列表
      */
     fun getApplyInfoList():Observable<JsonObject>{
+        return apiService.getApplyInfoList(this.personId!!,"1")
+    }
+
+    /**
+     * 获取审核申请列表
+     */
+    fun getAuditApplyList():Observable<JsonObject>{
         return apiService.getApplyInfoList(this.personId!!,"1")
     }
 

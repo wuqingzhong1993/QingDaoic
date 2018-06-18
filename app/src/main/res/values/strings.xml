@@ -8,11 +8,13 @@
     <string name="logging">Logged in…</string>
     <string name="tab_home">tab_home</string>
     <string name="tab_mine">tab_mine</string>
+    <string name="tab_audit">tab_audit</string>
     <string name="add">add</string>
     <string name="begin_date">begin date</string>
     <string name="end_date">end date</string>
     <string name="begin">begin</string>
     <string name="end">end</string>
     <string name="report_date">report date</string>
+    <string name="leave_date">leave date</string>
     <string name="jc_time">meal time</string>
 </resources>

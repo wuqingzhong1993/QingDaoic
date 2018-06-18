@@ -38,7 +38,13 @@
         <activity android:name=".ui.activity.JdActivity" />
         <activity android:name=".ui.activity.NewJdActivity" />
         <activity android:name=".ui.activity.GoAbroadActivity" />
-        <activity android:name=".ui.activity.NewGoAbroadActivity"></activity>
+        <activity android:name=".ui.activity.NewGoAbroadActivity" />
+        <activity android:name=".ui.activity.ConferenceActivity" />
+        <activity android:name=".ui.activity.NewConferenceActivity" />
+        <activity android:name=".ui.activity.BaoXiaoActivity" />
+        <activity android:name=".ui.activity.NewBaoXiaoActivity" />
+        <activity android:name=".ui.activity.AuditActivity" />
+        <activity android:name=".ui.activity.AuditApplyDetailActivity"></activity>
     </application>
 
 </manifest>
