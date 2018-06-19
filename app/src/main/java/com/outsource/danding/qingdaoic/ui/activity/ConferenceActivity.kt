@@ -43,8 +43,12 @@ class ConferenceActivity : BaseListActivity<AuditWaiting>() {
         title="会议申请"
         initListener()
     }
+    private fun initListener(){
+
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?):Boolean{
-        menuInflater.inflate(R.menu.menu_add:Menu)
+        menuInflater.inflate(R.menu.menu_add,menu)
         return super.onCreateOptionsMenu(menu)
     }
 
