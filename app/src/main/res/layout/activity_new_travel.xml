@@ -386,7 +386,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:enabled="false"
                         android:hint="@string/begin_date"
                         android:textColor="#000"
                         android:textSize="15sp" />
@@ -421,7 +420,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:enabled="false"
                         android:hint="@string/end_date"
                         android:textColor="#000"
                         android:textSize="15sp" />
@@ -706,8 +704,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="65dp"
-                android:layout_weight="1"
-                android:enabled="false" />
+                android:layout_weight="1"/>
 
         </LinearLayout>
 
