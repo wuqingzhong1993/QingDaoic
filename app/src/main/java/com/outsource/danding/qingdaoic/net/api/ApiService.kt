@@ -49,6 +49,14 @@ interface  ApiService{
 
     @FormUrlEncoded
     @Headers("Accept-Encoding:application/json")
+    @POST("m_getHistoryList.do")
+    fun getAuditHistoryList(@Field("personId") personId:String,@Field("pageNum") pageNum: String): Observable<JsonObject>
+
+
+
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
     @POST("m_getApplyInfoList.do")
     fun getAuditApplyList(@Field("personId") personId:String,@Field("pageNum") pageNum: String): Observable<JsonObject>
 

@@ -151,6 +151,13 @@ class HttpClient private constructor() {
     }
 
     /**
+     * 获取审核历史列表
+     */
+    fun getAuditHistoryList():Observable<JsonObject>{
+        return apiService.getAuditHistoryList(this.personId!!,"1")
+    }
+
+    /**
      * 初始化办公
      */
     fun initApplyAdd():Observable<JsonObject>{

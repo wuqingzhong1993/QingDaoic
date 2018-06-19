@@ -47,7 +47,7 @@ class NewBaoXiaoActivity : BaseActivity(), DatePickerFragment.OnDateSetListener 
         sp_dept.adapter=adapter
 
 
-        //初始化单位的adapter
+        //初始化支出事项的adapter
         val zhichuList:MutableList<ZhiChu> = QdApplication.getZhiChuList()
         val zhichuNames= mutableListOf<String>()
         for(zhichu in zhichuList)
