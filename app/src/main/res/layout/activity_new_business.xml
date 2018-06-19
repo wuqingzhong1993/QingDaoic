@@ -474,6 +474,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/btn_commit"
                     android:padding="10dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -483,6 +484,7 @@
                     android:background="#00f">
 
                     <TextView
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="提交"

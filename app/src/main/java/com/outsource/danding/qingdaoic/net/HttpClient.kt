@@ -165,6 +165,31 @@ class HttpClient private constructor() {
     }
 
     /**
+     * 办公申请添加页面——提交
+     */
+    fun commitBusinessApply(personId:String, flag:String,expendType:String,applyDeptName:String,
+                 isLoan:String,loanReason:String,budgetAmount:String,remark:String,isCrossing:String,fare:String,hotel:String,
+                 zs_jd:String,paiche:String):Observable<JsonObject>{
+
+        val map = HashMap<String,String>()
+        map.put("personId", this.personId!!)
+        map.put("city",city)
+        map.put("province",province)
+        map.put("personIds",personIds.toString())
+        map.put("outStartDate",outStartDate)
+        map.put("outEndDate",outEndDate)
+        map.put("jt_tools",jt_tools)
+        map.put("fh_tools",fh_tools)
+        map.put("type",type)
+        map.put("w_numbe",w_numbe)
+        map.put("fare",fare)
+        map.put("hotel",hotel)
+        map.put("zs_jd",zs_jd)
+        map.put("paiche",paiche)
+
+        return apiService.getMoney(map)
+    }
+    /**
      * 计算金额
      */
     fun getMoney(city:String, province:String, personIds:MutableList<String>, outStartDate:String,
