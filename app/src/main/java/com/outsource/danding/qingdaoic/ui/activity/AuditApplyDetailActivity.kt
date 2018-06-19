@@ -1,24 +1,27 @@
 package com.outsource.danding.qingdaoic.ui.activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.R
-import com.outsource.danding.qingdaoic.app.QdApplication
 import com.outsource.danding.qingdaoic.base.BaseActivity
 import com.outsource.danding.qingdaoic.bean.*
 import com.outsource.danding.qingdaoic.net.HttpClient
 import com.outsource.danding.qingdaoic.widget.AuditOfficeAdapter
 import com.outsource.danding.qingdaoic.widget.AuditRecordAdapter
+import com.outsource.danding.qingdaoic.widget.AuditTravelAdapter
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_audit_apply_detail.*
+import android.widget.ScrollView
+
+
 
 class AuditApplyDetailActivity : BaseActivity() {
 
@@ -30,6 +33,8 @@ class AuditApplyDetailActivity : BaseActivity() {
     private var kemuList:MutableList<Kemu>?=null
     private var kemuNameList:MutableList<String>?=null
     private var kemuAdapter:ArrayAdapter<String>?=null
+    private var travelList:MutableList<AuditTravel>?=null
+    private var travelAdapter:AuditTravelAdapter?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +58,9 @@ class AuditApplyDetailActivity : BaseActivity() {
         kemuAdapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         sp_dept.adapter=kemuAdapter
 
-
+        travelList= mutableListOf()
+        travelAdapter= AuditTravelAdapter(this,travelList!!)
+        lt_travelList.adapter=travelAdapter
 
         initListener()
         getApplyInfoDetail()
@@ -61,6 +68,19 @@ class AuditApplyDetailActivity : BaseActivity() {
 
     private fun initListener() {
 
+        img_travel_collapse.setOnClickListener {
+            if(lt_travelList.visibility!=View.GONE)
+            {
+                lt_travelList.visibility=View.GONE
+                img_travel_collapse.setImageResource(R.drawable.ic_keyboard_arrow_up_black_32)
+            }
+            else
+            {
+                lt_travelList.visibility=View.VISIBLE
+                img_travel_collapse.setImageResource(R.drawable.ic_keyboard_arrow_down_black_32)
+            }
+
+        }
 
     }
 
@@ -114,14 +134,42 @@ class AuditApplyDetailActivity : BaseActivity() {
                             }
                         }
 
-                        officeList?.clear()
+                        //差旅费
+                        travelList?.clear()
+                        if(data.get("travelList")!=null&&data.getAsJsonArray("travelList")!=null)
+                        {
+                            val list=data.getAsJsonArray("travelList")
+                            if(list!=null&&list.size()>0)
+                            {
+                                ll_travelList.visibility=View.VISIBLE
+                                val  gson= Gson()
+                                for(ob in list)
+                                {
+                                    val office: AuditTravel = gson.fromJson(ob, AuditTravel::class.java)
+                                    travelList?.add(office)
+                                }
+                                travelAdapter?.notifyDataSetChanged()
+                                var totalHeight=0
+                                for(i in travelList!!.indices)
+                                {
+                                    val itemView = travelAdapter?.getView(i, null, lt_travelList)
+                                    itemView?.measure(0,0)
+                                    totalHeight+=itemView!!.measuredHeight
+                                }
+                                var params: ViewGroup.LayoutParams  = lt_travelList.getLayoutParams();
+                                params.height = totalHeight + (lt_travelList.getDividerHeight() * (travelAdapter!!.count -1))
+                                lt_travelList.layoutParams=params
+                            }
+                        }
 
                         //办公费
+                        officeList?.clear()
                         if(data.get("dataList")!=null&&data.getAsJsonArray("dataList")!=null)
                         {
                             val list=data.getAsJsonArray("dataList")
                             if(list!=null&&list.size()>0)
                             {
+                                ll_office.visibility=View.VISIBLE
                                 val  gson= Gson()
                                 for(ob in list)
                                 {
@@ -140,6 +188,7 @@ class AuditApplyDetailActivity : BaseActivity() {
                                 val list=data.getAsJsonArray("recordList")
                                 if(list!=null&&list.size()>0)
                                 {
+                                    ll_record.visibility=View.VISIBLE
                                     val  gson= Gson()
                                     for(ob in list)
                                     {
@@ -147,6 +196,16 @@ class AuditApplyDetailActivity : BaseActivity() {
                                         recordList?.add(record)
                                     }
                                     recordAdapter?.notifyDataSetChanged()
+                                    var totalHeight=0
+                                    for(i in recordList!!.indices)
+                                    {
+                                        val itemView = recordAdapter?.getView(i, null, lt_record)
+                                        itemView?.measure(0,0)
+                                        totalHeight+=itemView!!.measuredHeight
+                                    }
+                                    var params: ViewGroup.LayoutParams  = lt_record.getLayoutParams();
+                                    params.height = totalHeight + (lt_record.getDividerHeight() * (recordAdapter!!.count -1))
+                                    lt_record.layoutParams=params
                                 }
                             }
                             else ->
@@ -154,6 +213,8 @@ class AuditApplyDetailActivity : BaseActivity() {
                                 Log.d("","")
                             }
                         }
+
+                        scrollView.post(Runnable { scrollView.fullScroll(ScrollView.FOCUS_UP) })
 
 
 
