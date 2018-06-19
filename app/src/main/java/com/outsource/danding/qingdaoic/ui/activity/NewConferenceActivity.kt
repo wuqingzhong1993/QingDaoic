@@ -38,7 +38,7 @@ class NewConferenceActivity : BaseActivity(), DatePickerFragment.OnDateSetListen
     var remark:String?=null
     var departments:MutableList<Department>?=null
     var departName:String?=null
-    var expendType:String?=null
+    var expendType:String="13"
     var zhichuList:MutableList<ZhiChu>?=null
     var isLoan:String?=null
     var loanReason:String?=null
@@ -86,6 +86,13 @@ class NewConferenceActivity : BaseActivity(), DatePickerFragment.OnDateSetListen
         btn_temp_save.setOnClickListener {
             saveConferenceApply("1")
         }
+        sp_dept?.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                departName=departments?.get(position)?.deptName
+            }
+        }
     }
 
     private fun saveConferenceApply(flag: String) {
@@ -107,15 +114,6 @@ class NewConferenceActivity : BaseActivity(), DatePickerFragment.OnDateSetListen
                     e: Throwable ->
                     cancelProgressDialog()
                 })
-
-        sp_dept?.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                departName=departments?.get(position)?.deptName
-            }
-        }
-
 
     }
 

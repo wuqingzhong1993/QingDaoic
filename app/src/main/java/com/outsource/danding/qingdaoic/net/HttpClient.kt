@@ -316,6 +316,54 @@ class HttpClient private constructor() {
         return apiService.saveBaoXiaoApply(map)
 
     }
+    /**
+     * 普通申请审核--通过
+     * zy20180619
+     */
+    fun checkApplyPassed(taskId: String, expendId: String, reason: String, kemuName: String , kemuId: String,
+                         basis:String ): Observable<JsonObject>  {
+        val map = HashMap<String,String>()
+        map.put("personId", this.personId!!)
+        map.put("taskId",taskId)
+        map.put("expendId",expendId)
+        map.put("reason",reason)
+        map.put("kemuName",kemuName)
+        map.put("kemuId",kemuId)
+        map.put("basis",basis)
+        return apiService.checkApplyPassed(map)
+    }
+
+    /**
+     * 普通申请审核--不通过
+     * zy20180619
+     */
+    fun checkApplyNotPassed(taskId: String, expendId: String, reason: String,
+                         basis:String ): Observable<JsonObject>  {
+        val map = HashMap<String,String>()
+        map.put("personId", this.personId!!)
+        map.put("taskId",taskId)
+        map.put("expendId",expendId)
+        map.put("reason",reason)
+        map.put("basis",basis)
+        return apiService.checkApplyNotPassed(map)
+    }
+
+    fun saveGoAbroadApply(flag: String, expendType: Any, departName: Any, loan: Any, loanReason: Any, budgetAmount: String, remark: Any, cashContent: Any, groupName: String, groupUnit: String, colonel: String, groupNum: String, visitingCountry: String, visitingDay: String, budgetAmount1: String, ht_money: String, zs_money: String, hs_money: Any, jt_money: String, qt_money: String): Any {
+        val map = HashMap<String,String>()
+
+//        map.put("personId", this.personId!!)
+//        map.put("flag",flag)
+//        map.put("expendType",expendType)
+//        map.put("applyDeptName",applyDeptName)
+//        map.put("isLoan",isLoan)
+//        map.put("loanReason",loanReason)
+//        map.put("budgetAmount",budgetAmount)
+//        map.put("remark",remark)
+//        map.put("cashContent",cashContent)
+
+        return apiService.checkApplyNotPassed(map)
+
+    }
 
 
     /**

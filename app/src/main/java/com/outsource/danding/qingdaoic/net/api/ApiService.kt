@@ -92,6 +92,16 @@ interface  ApiService{
     @POST("do_saveZjBaoxiao.do")
     fun saveBaoXiaoApply(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
 
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("m_getApplyInfoCheck.do")
+    abstract fun checkApplyPassed(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("m_getApplyInfoCheck_no.do")
+    abstract fun checkApplyNotPassed(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
+
 
 }
 
