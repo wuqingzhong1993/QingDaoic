@@ -54,6 +54,40 @@ class ReceiptAdapter(context:Context,list:MutableList<Receipt>): BaseAdapter() {
             }
 
         })
+
+        viewHolder.et_number.addTextChangedListener(object :TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if( viewHolder.et_number.text.toString()!="")
+                {
+                    mList[position].number=viewHolder.et_number.text.toString()
+                }
+            }
+
+        })
+
+        viewHolder.et_amount.addTextChangedListener(object :TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if( viewHolder.et_amount.text.toString()!="")
+                {
+                    mList[position].amount=viewHolder.et_amount.text.toString()
+                }
+            }
+
+        })
+
+
         viewHolder.ll_delete.setOnClickListener {
             mList.removeAt(position)
             notifyDataSetChanged()

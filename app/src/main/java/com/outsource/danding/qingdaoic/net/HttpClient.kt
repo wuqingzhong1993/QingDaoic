@@ -176,9 +176,9 @@ class HttpClient private constructor() {
      * 办公申请添加页面——提交0,暂存1
      * zy20180619
      */
-    fun saveBusinessApply(personId:String, flag:String,expendType:String,applyDeptName:String, isLoan:String,
-                  loanReason:String,budgetAmount:String,remark:String,isCrossing:String, fare:String,cashContent:String,
-                  officeList: MutableList<JsonObject>):Observable<JsonObject>{
+    fun saveBusinessApply( flag:String,expendType:String,applyDeptName:String, isLoan:String,
+                  loanReason:String,budgetAmount:String,remark:String,cashContent:String,
+                  officeList: String):Observable<JsonObject>{
 
         val map = HashMap<String,String>()
         map.put("personId", this.personId!!)
@@ -189,11 +189,8 @@ class HttpClient private constructor() {
         map.put("loanReason",loanReason)
         map.put("budgetAmount",budgetAmount)
         map.put("remark",remark)
-        map.put("isCrossing",isCrossing)
-        map.put("fare",fare)
         map.put("cashContent",cashContent)
-
-        map.put("officeList",officeList.toString())
+        map.put("officeList",officeList)
 
         return apiService.saveBusinessApply(map)
     }
@@ -201,8 +198,8 @@ class HttpClient private constructor() {
      * 会议申请添加页面——提交0,暂存1
      * zy20180619
      */
-    fun saveConferenceApply(personId:String, flag:String,expendType:String,applyDeptName:String, isLoan:String,
-                            loanReason:String,budgetAmount:String,remark:String,isCrossing:String, fare:String,cashContent:String,
+    fun saveConferenceApply(flag:String,expendType:String,applyDeptName:String, isLoan:String,
+                            loanReason:String,budgetAmount:String,remark:String,cashContent:String,
                             meetingName:String,meetingTime:String,trainEnd:String,trainReport:String,trainLeave:String,
                             meetingCategory:String,meetingPlace:String,estimatedNum:String,staffNum:String,
                             meetingBudget:String,meetingReason:String):Observable<JsonObject>{
@@ -216,11 +213,20 @@ class HttpClient private constructor() {
         map.put("loanReason",loanReason)
         map.put("budgetAmount",budgetAmount)
         map.put("remark",remark)
-        map.put("isCrossing",isCrossing)
-        map.put("fare",fare)
         map.put("cashContent",cashContent)
 
-        map.put("officeList",officeList.toString())
+        map.put("meetingName",meetingName)
+        map.put("meetingTime",meetingTime)
+        map.put("trainEnd",trainEnd)
+        map.put("trainReport",trainReport)
+        map.put("loanReason",loanReason)
+        map.put("trainLeave",trainLeave)
+        map.put("meetingCategory",meetingCategory)
+        map.put("meetingPlace",meetingPlace)
+        map.put("estimatedNum",estimatedNum)
+        map.put("staffNum",staffNum)
+        map.put("meetingBudget",meetingBudget)
+        map.put("meetingReason",meetingReason)
 
         return apiService.saveBusinessApply(map)
     }

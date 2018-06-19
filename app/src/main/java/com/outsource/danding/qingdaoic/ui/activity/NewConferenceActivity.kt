@@ -2,16 +2,22 @@ package com.outsource.danding.qingdaoic.ui.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.R
 import com.outsource.danding.qingdaoic.app.QdApplication
 import com.outsource.danding.qingdaoic.base.BaseActivity
+import com.outsource.danding.qingdaoic.bean.BusinessOffice
 import com.outsource.danding.qingdaoic.bean.Department
+import com.outsource.danding.qingdaoic.bean.ZhiChu
 import com.outsource.danding.qingdaoic.net.HttpClient
 import com.outsource.danding.qingdaoic.ui.fragment.DatePickerFragment
+import com.outsource.danding.qingdaoic.widget.OfficeAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_new_conference.*
@@ -19,13 +25,35 @@ import kotlinx.android.synthetic.main.activity_new_conference.*
 class NewConferenceActivity : BaseActivity(), DatePickerFragment.OnDateSetListener {
 
 
-    private  lateinit var mTarget: View
+//    private  lateinit var mTarget: View
+//
+//    private var passIsShow = false
+//
+//    var meetingTime:String?=null
+private var passIsShow = false
 
-    private var passIsShow = false
+    var budgetAmount:String ?=null
+    var cashContent:String?=null
+    var remark:String?=null
+    var departments:MutableList<Department>?=null
+    var departName:String?=null
+    var expendType:String?=null
+    var zhichuList:MutableList<ZhiChu>?=null
+    var isLoan:String?=null
+    var loanReason:String?=null
 
+    var meetingName:String?=null
     var meetingTime:String?=null
-
-
+    var trainEnd:String?=null
+    var trainReport:String?=null
+    var trainLeave:String?=null
+    var meetingCategory:String?=null
+    var meetingPlace:String?=null
+    var estimatedNum:String?=null
+    var staffNum:String?=null
+    var meetingBudget:String?=null
+    var meetingReason:String?=null
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_conference)
@@ -60,8 +88,11 @@ class NewConferenceActivity : BaseActivity(), DatePickerFragment.OnDateSetListen
     }
 
     private fun saveConferenceApply(flag: String) {
-        HttpClient.instance.saveConferenceApply(city!!,province!!,selectedPersonIds!!,
-                outStartDate!!,outEndDate!!,jt_tools!!,fh_tools!!,type!!,w_number !!,fare!!,"1000",zs_jd!!,"派车")
+        HttpClient.instance.saveConferenceApply(flag!!,expendType!!,departName!!, isLoan!!,
+                loanReason!!,budgetAmount!!,remark!!, cashContent!!,
+                meetingName!!,meetingTime!!,trainEnd!!,trainReport!!,trainLeave!!,
+                meetingCategory!!,meetingPlace!!,estimatedNum!!,staffNum!!,
+                meetingBudget!!,meetingReason!!)
                 .bindToLifecycle(this)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -76,7 +107,80 @@ class NewConferenceActivity : BaseActivity(), DatePickerFragment.OnDateSetListen
                     cancelProgressDialog()
                 })
 
+        sp_dept?.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                departName=departments?.get(position)?.deptName
+            }
+        }
+
+        sp_zhichu?.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                expendType=zhichuList?.get(position)?.value
+            }
+        }
+
+        et_budgetAmount.addTextChangedListener( object: TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_budgetAmount.text.toString()!="")
+                {
+                    budgetAmount=et_budgetAmount.text.toString()
+                }
+            }
+        })
+
+        et_cashContent.addTextChangedListener(object: TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_cashContent.text.toString()!="")
+                {
+                    cashContent=et_cashContent.text.toString()
+                }
+            }
+        })
+
+        et_remark.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_remark.text.toString()!="")
+                {
+                    remark=et_remark.text.toString()
+                }
+            }
+
+        })
+
+        rg_isLoan.setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId)
+            {
+                R.id.yes->
+                    isLoan="0"
+                R.id.no->
+                    isLoan="1"
+            }
+        }
     }
+
 
     fun pickDate(v: View) {
         mTarget=v//设置需要绑定日期回调的控件
