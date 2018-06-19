@@ -113,7 +113,6 @@
 
                 <EditText
                     android:id="@+id/et_budgetAmount"
-                    android:enabled="false"
                     android:layout_marginStart="30dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -198,7 +197,6 @@
 
                 <EditText
                     android:id="@+id/et_loanReason"
-                    android:enabled="false"
                     android:layout_marginStart="30dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -233,7 +231,6 @@
 
                 <EditText
                     android:id="@+id/et_cashContent"
-                    android:enabled="false"
                     android:layout_marginStart="20dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -265,7 +262,6 @@
 
                 <EditText
                     android:id="@+id/et_remark"
-                    android:enabled="false"
                     android:layout_marginStart="65dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

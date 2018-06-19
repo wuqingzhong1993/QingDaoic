@@ -80,12 +80,18 @@ interface  ApiService{
     @FormUrlEncoded
     @Headers("Accept-Encoding:application/json")
     @POST("do_saveByOffice.do")
-    fun saveBusinessApply(map: HashMap<String, String>): Observable<JsonObject>
+    fun saveBusinessApply(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
 
     @FormUrlEncoded
     @Headers("Accept-Encoding:application/json")
     @POST("do_saveByOffice.do")
-    fun saveConferenceApply(map: HashMap<String, String>): Observable<JsonObject>
+    fun saveConferenceApply(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("do_saveZjBaoxiao.do")
+    fun saveBaoXiaoApply(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
+
 
 }
 

@@ -18,6 +18,7 @@ import com.outsource.danding.qingdaoic.bean.ZhiChu
 import com.outsource.danding.qingdaoic.net.HttpClient
 import com.outsource.danding.qingdaoic.ui.fragment.DatePickerFragment
 import com.outsource.danding.qingdaoic.widget.OfficeAdapter
+import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_new_conference.*
@@ -25,12 +26,12 @@ import kotlinx.android.synthetic.main.activity_new_conference.*
 class NewConferenceActivity : BaseActivity(), DatePickerFragment.OnDateSetListener {
 
 
-//    private  lateinit var mTarget: View
-//
-//    private var passIsShow = false
-//
+   private  lateinit var mTarget: View
+
+   // private var passIsShow = false
+
 //    var meetingTime:String?=null
-private var passIsShow = false
+    private var passIsShow = false
 
     var budgetAmount:String ?=null
     var cashContent:String?=null
@@ -115,72 +116,8 @@ private var passIsShow = false
             }
         }
 
-        sp_zhichu?.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                expendType=zhichuList?.get(position)?.value
-            }
-        }
 
-        et_budgetAmount.addTextChangedListener( object: TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if(et_budgetAmount.text.toString()!="")
-                {
-                    budgetAmount=et_budgetAmount.text.toString()
-                }
-            }
-        })
-
-        et_cashContent.addTextChangedListener(object: TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if(et_cashContent.text.toString()!="")
-                {
-                    cashContent=et_cashContent.text.toString()
-                }
-            }
-        })
-
-        et_remark.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
-
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if(et_remark.text.toString()!="")
-                {
-                    remark=et_remark.text.toString()
-                }
-            }
-
-        })
-
-        rg_isLoan.setOnCheckedChangeListener { group, checkedId ->
-            when(checkedId)
-            {
-                R.id.yes->
-                    isLoan="0"
-                R.id.no->
-                    isLoan="1"
-            }
-        }
     }
-
 
     fun pickDate(v: View) {
         mTarget=v//设置需要绑定日期回调的控件

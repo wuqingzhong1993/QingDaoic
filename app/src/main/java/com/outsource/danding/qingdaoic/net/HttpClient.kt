@@ -193,6 +193,7 @@ class HttpClient private constructor() {
         map.put("officeList",officeList)
 
         return apiService.saveBusinessApply(map)
+
     }
     /**
      * 会议申请添加页面——提交0,暂存1
@@ -289,7 +290,32 @@ class HttpClient private constructor() {
                     .build()
         }
     }
+    /**
+     * 直接报销申请添加页面——提交0,暂存1
+     * zy20180619
+     */
+    fun saveBaoXiaoApply(flag: String, applyDeptId: String, applyDeptName: String, internalId: String, internalName: String,
+                         reason: String, sumNum: String, sumAmount: String, reimbList: String,
+                         zzList:String, expendType: String, expendId: String, offcard: String,
+                         cash: String): Observable<JsonObject> {
+        val map = HashMap<String,String>()
+        map.put("personId", this.personId!!)
+        map.put("applyDeptId",applyDeptId)
+        map.put("applyDeptName",applyDeptName)
+        map.put("internalId",internalId)
+        map.put("internalName",internalName)
+        map.put("reason",reason)
+        map.put("sumNum",sumNum)
+        map.put("sumAmount",sumAmount)
+        map.put("reimbList",reimbList)
+        map.put("zzList",zzList)
+        map.put("expendType",expendType)
+        map.put("expendId",expendId)
+        map.put("offcard",offcard)
+        map.put("cash",cash)
+        return apiService.saveBaoXiaoApply(map)
 
+    }
 
 
     /**

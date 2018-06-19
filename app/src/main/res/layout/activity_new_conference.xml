@@ -129,8 +129,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:hint="请输入会议名称"
-                    android:layout_weight="1"
-                    android:enabled="false" />
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
@@ -169,7 +168,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="30dp"
                         android:layout_weight="1"
-                        android:enabled="false"
                         android:hint="@string/begin_date"
                         android:textColor="#000"
                         android:textSize="15sp" />
@@ -218,7 +216,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="30dp"
                         android:layout_weight="1"
-                        android:enabled="false"
                         android:hint="@string/end_date"
                         android:textColor="#000"
                         android:textSize="15sp" />
@@ -268,7 +265,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="30dp"
                         android:layout_weight="1"
-                        android:enabled="false"
                         android:hint="@string/report_date"
                         android:textColor="#000"
                         android:textSize="15sp" />
@@ -318,7 +314,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="30dp"
                         android:layout_weight="1"
-                        android:enabled="false"
                         android:hint="@string/leave_date"
                         android:textColor="#000"
                         android:textSize="15sp" />
@@ -360,8 +355,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:hint="请输入会议类别"
-                    android:layout_weight="1"
-                    android:enabled="false" />
+                    android:layout_weight="1"/>
 
             </LinearLayout>
 
@@ -393,8 +387,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:hint="请输入会议地点"
-                    android:layout_weight="1"
-                    android:enabled="false" />
+                    android:layout_weight="1"/>
 
             </LinearLayout>
 
@@ -425,8 +418,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:hint="请输入会议预计人数"
-                    android:layout_weight="1"
-                    android:enabled="false" />
+                    android:layout_weight="1"/>
 
             </LinearLayout>
 
@@ -457,8 +449,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:hint="请输入工作人员人数"
-                    android:layout_weight="1"
-                    android:enabled="false" />
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
@@ -490,8 +481,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:hint="请输入召开会议理由"
-                    android:layout_weight="1"
-                    android:enabled="false" />
+                    android:layout_weight="1"/>
 
             </LinearLayout>
 

@@ -25,7 +25,7 @@ import com.outsource.danding.qingdaoic.bean.Department
 import com.outsource.danding.qingdaoic.bean.Receipt
 import com.outsource.danding.qingdaoic.widget.OfficeAdapter
 import kotlinx.android.synthetic.main.activity_new_business.*
-import kotlinx.android.synthetic.main.item_list_audit_apply.*
+
 import org.w3c.dom.Text
 
 
@@ -87,33 +87,6 @@ class NewBusinessActivity : BaseActivity() , OfficeAdapter.OnDeleteListener{
     }
 
     private fun initListener() {
-        btn_commit.setOnClickListener {
-            saveBusinessApply("0")
-        }
-        btn_temp_save.setOnClickListener {
-            saveBusinessApply("1")
-        }
-    }
-
-    private fun saveBusinessApply(flag:String) {
-        HttpClient.instance.saveBusinessApply(flag!!,expendType!!,departName!!, isLoan!!,
-                loanReason!!,budgetAmount!!,remark!!, cashContent!!,
-                officeList?.toString()!!)
-                .bindToLifecycle(this)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    json: JsonObject ->
-                    val data=json.getAsJsonObject("data")
-
-                    cancelProgressDialog()
-
-
-                }, {
-                    e: Throwable ->
-                    cancelProgressDialog()
-                })
-
         sp_dept?.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
@@ -230,6 +203,35 @@ class NewBusinessActivity : BaseActivity() , OfficeAdapter.OnDeleteListener{
                 Log.d("",ob.name)
             }
         }
+
+
+        btn_commit.setOnClickListener {
+            saveBusinessApply("0")
+        }
+        btn_temp_save.setOnClickListener {
+            saveBusinessApply("1")
+        }
+
+    }
+
+    private fun saveBusinessApply(flag:String) {
+        HttpClient.instance.saveBusinessApply(flag!!,expendType!!,departName!!, isLoan!!,
+                loanReason!!,budgetAmount!!,remark!!, cashContent!!,
+                officeList?.toString()!!)
+                .bindToLifecycle(this)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    json: JsonObject ->
+                    val data=json.getAsJsonObject("data")
+
+                    cancelProgressDialog()
+
+
+                }, {
+                    e: Throwable ->
+                    cancelProgressDialog()
+                })
 
 
     }

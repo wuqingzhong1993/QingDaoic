@@ -109,8 +109,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:hint="请输入事由"
-                    android:layout_weight="1"
-                    android:enabled="false" />
+                    android:layout_weight="1"/>
 
             </LinearLayout>
 
@@ -211,7 +210,7 @@
                 android:padding="10dp">
 
                 <LinearLayout
-                    android:id="@+id/ll_commit"
+                    android:id="@+id/btn_commit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -225,10 +224,10 @@
                         android:layout_height="wrap_content"
                         android:text="提交"
                         android:textColor="#fff" />
-
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/btn_temp_save"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
