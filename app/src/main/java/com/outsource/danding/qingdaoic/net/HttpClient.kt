@@ -25,6 +25,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import org.json.JSONObject
 import okhttp3.RequestBody
+import kotlin.collections.AbstractList
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
@@ -151,6 +152,13 @@ class HttpClient private constructor() {
     }
 
     /**
+     * 获取审核历史列表
+     */
+    fun getAuditHistoryList():Observable<JsonObject>{
+        return apiService.getAuditHistoryList(this.personId!!,"1")
+    }
+
+    /**
      * 初始化办公
      */
     fun initApplyAdd():Observable<JsonObject>{
@@ -165,30 +173,58 @@ class HttpClient private constructor() {
     }
 
     /**
-     * 办公申请添加页面——提交
+     * 办公申请添加页面——提交0,暂存1
+     * zy20180619
      */
-    fun commitBusinessApply(personId:String, flag:String,expendType:String,applyDeptName:String,
-                 isLoan:String,loanReason:String,budgetAmount:String,remark:String,isCrossing:String,fare:String,hotel:String,
-                 zs_jd:String,paiche:String):Observable<JsonObject>{
+    fun saveBusinessApply(personId:String, flag:String,expendType:String,applyDeptName:String, isLoan:String,
+                  loanReason:String,budgetAmount:String,remark:String,isCrossing:String, fare:String,cashContent:String,
+                  officeList: MutableList<JsonObject>):Observable<JsonObject>{
 
         val map = HashMap<String,String>()
         map.put("personId", this.personId!!)
-        map.put("city",city)
-        map.put("province",province)
-        map.put("personIds",personIds.toString())
-        map.put("outStartDate",outStartDate)
-        map.put("outEndDate",outEndDate)
-        map.put("jt_tools",jt_tools)
-        map.put("fh_tools",fh_tools)
-        map.put("type",type)
-        map.put("w_numbe",w_numbe)
+        map.put("flag",flag)
+        map.put("expendType",expendType)
+        map.put("applyDeptName",applyDeptName)
+        map.put("isLoan",isLoan)
+        map.put("loanReason",loanReason)
+        map.put("budgetAmount",budgetAmount)
+        map.put("remark",remark)
+        map.put("isCrossing",isCrossing)
         map.put("fare",fare)
-        map.put("hotel",hotel)
-        map.put("zs_jd",zs_jd)
-        map.put("paiche",paiche)
+        map.put("cashContent",cashContent)
 
-        return apiService.getMoney(map)
+        map.put("officeList",officeList.toString())
+
+        return apiService.saveBusinessApply(map)
     }
+    /**
+     * 会议申请添加页面——提交0,暂存1
+     * zy20180619
+     */
+    fun saveConferenceApply(personId:String, flag:String,expendType:String,applyDeptName:String, isLoan:String,
+                            loanReason:String,budgetAmount:String,remark:String,isCrossing:String, fare:String,cashContent:String,
+                            meetingName:String,meetingTime:String,trainEnd:String,trainReport:String,trainLeave:String,
+                            meetingCategory:String,meetingPlace:String,estimatedNum:String,staffNum:String,
+                            meetingBudget:String,meetingReason:String):Observable<JsonObject>{
+
+        val map = HashMap<String,String>()
+        map.put("personId", this.personId!!)
+        map.put("flag",flag)
+        map.put("expendType",expendType)
+        map.put("applyDeptName",applyDeptName)
+        map.put("isLoan",isLoan)
+        map.put("loanReason",loanReason)
+        map.put("budgetAmount",budgetAmount)
+        map.put("remark",remark)
+        map.put("isCrossing",isCrossing)
+        map.put("fare",fare)
+        map.put("cashContent",cashContent)
+
+        map.put("officeList",officeList.toString())
+
+        return apiService.saveBusinessApply(map)
+    }
+
     /**
      * 计算金额
      */
@@ -247,6 +283,7 @@ class HttpClient private constructor() {
                     .build()
         }
     }
+
 
 
     /**

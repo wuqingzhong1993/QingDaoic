@@ -49,7 +49,7 @@
                     android:id="@+id/sp_dept"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
+                    android:layout_marginStart="37dp"
                     android:layout_weight="1" />
 
             </LinearLayout>
@@ -165,7 +165,7 @@
                     android:id="@+id/tv_createName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="60dp"
+                    android:layout_marginStart="57dp"
                     android:textColor="#444"
                     android:textSize="17sp" />
 
@@ -195,7 +195,7 @@
                     android:id="@+id/tv_budgetAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="45dp"
+                    android:layout_marginStart="41dp"
                     android:textColor="#444"
                     android:textSize="17sp" />
 
@@ -225,7 +225,7 @@
                     android:id="@+id/tv_isLoan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="45dp"
+                    android:layout_marginStart="41dp"
                     android:textColor="#444"
                     android:textSize="17sp" />
 
@@ -255,7 +255,7 @@
                     android:id="@+id/tv_reason"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="45dp"
+                    android:layout_marginStart="41dp"
                     android:textColor="#444"
                     android:textSize="17sp" />
 
@@ -284,7 +284,7 @@
                     android:id="@+id/tv_createTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="45dp"
+                    android:layout_marginStart="41dp"
                     android:textColor="#444"
                     android:textSize="17sp" />
 

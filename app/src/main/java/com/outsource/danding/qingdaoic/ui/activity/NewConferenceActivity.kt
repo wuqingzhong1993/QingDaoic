@@ -5,11 +5,15 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.R
 import com.outsource.danding.qingdaoic.app.QdApplication
 import com.outsource.danding.qingdaoic.base.BaseActivity
 import com.outsource.danding.qingdaoic.bean.Department
+import com.outsource.danding.qingdaoic.net.HttpClient
 import com.outsource.danding.qingdaoic.ui.fragment.DatePickerFragment
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_new_conference.*
 
 class NewConferenceActivity : BaseActivity(), DatePickerFragment.OnDateSetListener {
@@ -47,6 +51,30 @@ class NewConferenceActivity : BaseActivity(), DatePickerFragment.OnDateSetListen
     }
 
     private fun initListener() {
+        btn_commit.setOnClickListener {
+            saveConferenceApply("0")
+        }
+        btn_temp_save.setOnClickListener {
+            saveConferenceApply("1")
+        }
+    }
+
+    private fun saveConferenceApply(flag: String) {
+        HttpClient.instance.saveConferenceApply(city!!,province!!,selectedPersonIds!!,
+                outStartDate!!,outEndDate!!,jt_tools!!,fh_tools!!,type!!,w_number !!,fare!!,"1000",zs_jd!!,"派车")
+                .bindToLifecycle(this)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    json: JsonObject ->
+                    val data=json.getAsJsonObject("data")
+
+                    cancelProgressDialog()
+
+                }, {
+                    e: Throwable ->
+                    cancelProgressDialog()
+                })
 
     }
 

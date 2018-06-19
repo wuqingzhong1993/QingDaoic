@@ -6,6 +6,7 @@ import android.view.View
 import com.outsource.danding.qingdaoic.R
 import com.outsource.danding.qingdaoic.base.BaseActivity
 import com.outsource.danding.qingdaoic.ui.fragment.AuditApplyFragment
+import com.outsource.danding.qingdaoic.ui.fragment.AuditHistoryFragment
 import com.outsource.danding.qingdaoic.widget.TabFragmentPagerAdapter
 import kotlinx.android.synthetic.main.activity_audit.*
 
@@ -27,7 +28,7 @@ class AuditActivity : BaseActivity() {
 
     private fun initView(){
 
-        fragments= mutableListOf(AuditApplyFragment(),AuditApplyFragment())
+        fragments= mutableListOf(AuditApplyFragment(),AuditHistoryFragment())
         adapter= TabFragmentPagerAdapter(supportFragmentManager,fragments)
         view_pager.adapter=adapter
         view_pager.setCurrentItem(0,true)

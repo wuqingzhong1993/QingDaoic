@@ -49,6 +49,14 @@ interface  ApiService{
 
     @FormUrlEncoded
     @Headers("Accept-Encoding:application/json")
+    @POST("m_getHistoryList.do")
+    fun getAuditHistoryList(@Field("personId") personId:String,@Field("pageNum") pageNum: String): Observable<JsonObject>
+
+
+
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
     @POST("m_getApplyInfoList.do")
     fun getAuditApplyList(@Field("personId") personId:String,@Field("pageNum") pageNum: String): Observable<JsonObject>
 
@@ -68,6 +76,16 @@ interface  ApiService{
     @Headers("Accept-Encoding:application/json")
     @POST("do_saveByOffice.do")
     fun commit(@FieldMap map: Map<String, String> ):Observable<JsonObject>
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("do_saveByOffice.do")
+    fun saveBusinessApply(map: HashMap<String, String>): Observable<JsonObject>
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("do_saveByOffice.do")
+    fun saveConferenceApply(map: HashMap<String, String>): Observable<JsonObject>
 
 }
 
