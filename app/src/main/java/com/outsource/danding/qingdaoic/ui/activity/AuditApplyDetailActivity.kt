@@ -2,14 +2,16 @@ package com.outsource.danding.qingdaoic.ui.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.ArrayAdapter
 import com.google.gson.Gson
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.R
+import com.outsource.danding.qingdaoic.app.QdApplication
 import com.outsource.danding.qingdaoic.base.BaseActivity
-import com.outsource.danding.qingdaoic.bean.ApplyInfo
-import com.outsource.danding.qingdaoic.bean.AuditOffice
-import com.outsource.danding.qingdaoic.bean.AuditRecord
+import com.outsource.danding.qingdaoic.bean.*
 import com.outsource.danding.qingdaoic.net.HttpClient
 import com.outsource.danding.qingdaoic.widget.AuditOfficeAdapter
 import com.outsource.danding.qingdaoic.widget.AuditRecordAdapter
@@ -25,6 +27,9 @@ class AuditApplyDetailActivity : BaseActivity() {
     private var officeAdapter:AuditOfficeAdapter?=null
     private var recordList:MutableList<AuditRecord>?=null
     private var recordAdapter:AuditRecordAdapter?=null
+    private var kemuList:MutableList<Kemu>?=null
+    private var kemuNameList:MutableList<String>?=null
+    private var kemuAdapter:ArrayAdapter<String>?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +46,14 @@ class AuditApplyDetailActivity : BaseActivity() {
         recordList= mutableListOf()
         recordAdapter=AuditRecordAdapter(this,recordList!!)
         lt_record.adapter=recordAdapter
+
+        kemuList= mutableListOf()
+        kemuNameList= mutableListOf()
+        kemuAdapter= ArrayAdapter(this, android.R.layout.simple_spinner_item, kemuNameList)
+        kemuAdapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        sp_dept.adapter=kemuAdapter
+
+
 
         initListener()
         getApplyInfoDetail()
@@ -81,6 +94,26 @@ class AuditApplyDetailActivity : BaseActivity() {
                         tv_createTime.text=data.get("createTime").toString()
                         tv_expendDetail.text=data.get("expendType").toString().replace("\"","")+"详细列表"
 
+                        //kemuList
+                        kemuList?.clear()
+                        kemuNameList?.clear()
+                        if(data.get("kemuList")!=null&&data.getAsJsonArray("kemuList")!=null)
+                        {
+                            val list=data.getAsJsonArray("kemuList")
+                            if(list!=null&&list.size()>0)
+                            {
+                                val  gson= Gson()
+                                for(ob in list)
+                                {
+                                    val kemu: Kemu = gson.fromJson(ob, Kemu::class.java)
+                                    kemuList?.add(kemu)
+                                    kemuNameList?.add(kemu.indexName)
+                                }
+                                kemuAdapter?.notifyDataSetChanged()
+
+                            }
+                        }
+
                         officeList?.clear()
 
                         //办公费
@@ -101,20 +134,27 @@ class AuditApplyDetailActivity : BaseActivity() {
 
                         //审核记录
                         recordList?.clear()
-                        if(data.get("recordList")!=null&&data.getAsJsonArray("recordList")!=null)
-                        {
-                            val list=data.getAsJsonArray("recordList")
-                            if(list!=null&&list.size()>0)
+                        when (data.get("recordList")){
+                            is JsonArray->
                             {
-                                val  gson= Gson()
-                                for(ob in list)
+                                val list=data.getAsJsonArray("recordList")
+                                if(list!=null&&list.size()>0)
                                 {
-                                    val record: AuditRecord = gson.fromJson(ob, AuditRecord::class.java)
-                                    recordList?.add(record)
+                                    val  gson= Gson()
+                                    for(ob in list)
+                                    {
+                                        val record: AuditRecord = gson.fromJson(ob, AuditRecord::class.java)
+                                        recordList?.add(record)
+                                    }
+                                    recordAdapter?.notifyDataSetChanged()
                                 }
-                                recordAdapter?.notifyDataSetChanged()
+                            }
+                            else ->
+                            {
+                                Log.d("","")
                             }
                         }
+
 
 
                     }

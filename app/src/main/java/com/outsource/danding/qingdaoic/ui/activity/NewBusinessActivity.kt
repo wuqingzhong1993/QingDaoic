@@ -41,6 +41,7 @@ class NewBusinessActivity : BaseActivity() , OfficeAdapter.OnDeleteListener{
     var expendType:String?=null
     var zhichuList:MutableList<ZhiChu>?=null
     var isLoan:String?=null
+    var loanReason:String?=null
 
     lateinit var officeAdapter: OfficeAdapter
     var officeList:MutableList<BusinessOffice>?=null
@@ -176,13 +177,34 @@ class NewBusinessActivity : BaseActivity() , OfficeAdapter.OnDeleteListener{
 
         })
 
+        et_loanReason.addTextChangedListener(object:TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_loanReason.text.toString()!="")
+                {
+                    loanReason=et_loanReason.text.toString()
+                }
+            }
+        })
+
         rg_isLoan.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId)
             {
                 R.id.yes->
+                {
                     isLoan="0"
+                    ll_loanReason.visibility=View.VISIBLE
+                }
                 R.id.no->
+                {
                     isLoan="1"
+                    ll_loanReason.visibility=View.GONE
+                }
             }
         }
 
