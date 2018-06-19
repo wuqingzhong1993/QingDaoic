@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.outsource.danding.qingdaoic.R;
 import com.outsource.danding.qingdaoic.base.BaseActivity
 import com.outsource.danding.qingdaoic.base.BaseTabActivity
+import com.outsource.danding.qingdaoic.ui.fragment.AuditFragment
 import com.outsource.danding.qingdaoic.ui.fragment.HomeFragment
 import com.outsource.danding.qingdaoic.ui.fragment.MineFragment
 import com.outsource.danding.qingdaoic.util.GlideImageLoader
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.main_title_bar.*
 class MainActivity : BaseTabActivity() {
 
 
-    override fun getFragmentClasses()= arrayOf(HomeFragment::class.java,HomeFragment::class.java,MineFragment::class.java)
+    override fun getFragmentClasses()= arrayOf(HomeFragment::class.java,AuditFragment::class.java,MineFragment::class.java)
 
     override fun getStrings(): Array<String> = arrayOf("申请","审核","我的")
 
@@ -48,6 +49,12 @@ class MainActivity : BaseTabActivity() {
                 0 ->{
                     true
                 }
+                1->{
+                    true
+                }
+                2->{
+                    true
+                }
                 else -> {
                     true
                 }
@@ -62,6 +69,10 @@ class MainActivity : BaseTabActivity() {
         when (position) {
             0 -> {
                 title = getString(R.string.tab_home)
+                toolbar.visibility = View.GONE
+            }
+            1->{
+                title=getString(R.string.tab_audit)
                 toolbar.visibility = View.GONE
             }
             2 ->{

@@ -8,6 +8,7 @@ import com.outsource.danding.qingdaoic.bean.City;
 import com.outsource.danding.qingdaoic.bean.Department;
 import com.outsource.danding.qingdaoic.bean.Person;
 import com.outsource.danding.qingdaoic.bean.Province;
+import com.outsource.danding.qingdaoic.bean.ZhiChu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class QdApplication extends Application {
     private List<Province> provinces;
     private List<City> cities;
     private List<Person> persons;
+    private List<ZhiChu> zhiChuList;
 
 
     @Override
@@ -31,6 +33,7 @@ public class QdApplication extends Application {
         mInstance.provinces=new ArrayList<>();
         mInstance.persons=new ArrayList<>();
         mInstance.cities=new ArrayList<>();
+        mInstance.zhiChuList=new ArrayList<>();
     }
 
     public static void  setDepartments(List<Department> deps)
@@ -78,6 +81,16 @@ public class QdApplication extends Application {
         }
         mInstance=new QdApplication();
         mInstance.departmentList=new ArrayList<>();
+        return null;
+    }
+
+    public static List<ZhiChu> getZhiChuList(){
+        if(mInstance!=null)
+        {
+            return mInstance.zhiChuList;
+        }
+        mInstance=new QdApplication();
+        mInstance.zhiChuList=new ArrayList<>();
         return null;
     }
 

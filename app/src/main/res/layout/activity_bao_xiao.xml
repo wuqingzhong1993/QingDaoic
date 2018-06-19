@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.outsource.danding.qingdaoic.ui.activity.ConferenceActivity">
+    tools:context="com.outsource.danding.qingdaoic.ui.activity.BaoXiaoActivity">
 
 
-    <include layout="@layout/business_title_bar" />
+<include layout="@layout/business_title_bar" />
 
     <LinearLayout
         android:id="@+id/ll_tabs"

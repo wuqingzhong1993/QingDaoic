@@ -12,4 +12,8 @@
     <string name="end_date">结束日期</string>
     <string name="begin">开始</string>
     <string name="end">结束</string>
+    <string name="report_date">报告时间</string>
+    <string name="jc_time">就餐时间</string>
+    <string name="leave_date">离开时间</string>
+    <string name="tab_audit">审核</string>
 </resources>

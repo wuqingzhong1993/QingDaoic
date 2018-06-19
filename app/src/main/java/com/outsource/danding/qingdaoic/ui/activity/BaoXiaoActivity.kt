@@ -19,7 +19,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.item_list_business.view.*
 
-class ConferenceActivity : BaseListActivity<ApplyInfo>() {
+class BaoXiaoActivity : BaseListActivity<ApplyInfo>() {
 
     override fun loadData() {
         enableRefresh(true)
@@ -32,16 +32,17 @@ class ConferenceActivity : BaseListActivity<ApplyInfo>() {
 
 
     override fun setContentView(layoutResID: Int) {
-        super.setContentView(R.layout.activity_conference)
-        title="会议"
+        super.setContentView(R.layout.activity_bao_xiao)
+        title="报销"
         initListener()
     }
+
 
     private fun initListener(){
 
     }
 
-    override fun getView(parent: ViewGroup?, viewType: Int): View = layoutInflater.inflate(R.layout.item_list_conference, parent, false)
+    override fun getView(parent: ViewGroup?, viewType: Int): View = layoutInflater.inflate(R.layout.item_list_baoxiao, parent, false)
 
     override fun bindDataToView(holder: FNAdapter.MyViewHolder?, position: Int) {
 
@@ -99,11 +100,10 @@ class ConferenceActivity : BaseListActivity<ApplyInfo>() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.menu_add) {
-            val intent = Intent(this,NewConferenceActivity::class.java)
+            val intent = Intent(this,NewBaoXiaoActivity::class.java)
             jumpToActivity(intent)
         }
         return super.onOptionsItemSelected(item)
     }
-
 
 }

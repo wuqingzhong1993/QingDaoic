@@ -19,7 +19,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.item_list_business.view.*
 
-class ConferenceActivity : BaseListActivity<ApplyInfo>() {
+class CultivateActivity : BaseListActivity<ApplyInfo>() {
 
     override fun loadData() {
         enableRefresh(true)
@@ -30,10 +30,9 @@ class ConferenceActivity : BaseListActivity<ApplyInfo>() {
         super.onCreate(savedInstanceState)
     }
 
-
     override fun setContentView(layoutResID: Int) {
-        super.setContentView(R.layout.activity_conference)
-        title="会议"
+        super.setContentView(R.layout.activity_cultivate)
+        title="培训"
         initListener()
     }
 
@@ -41,7 +40,8 @@ class ConferenceActivity : BaseListActivity<ApplyInfo>() {
 
     }
 
-    override fun getView(parent: ViewGroup?, viewType: Int): View = layoutInflater.inflate(R.layout.item_list_conference, parent, false)
+    override fun getView(parent: ViewGroup?, viewType: Int): View = layoutInflater.inflate(R.layout.item_list_cultivate, parent, false)
+
 
     override fun bindDataToView(holder: FNAdapter.MyViewHolder?, position: Int) {
 
@@ -56,6 +56,7 @@ class ConferenceActivity : BaseListActivity<ApplyInfo>() {
         intent= Intent(this,NewCultivateActivity::class.java)
         startActivity(intent)
     }
+
 
     private fun getApplyInfoList()
     {
@@ -99,11 +100,9 @@ class ConferenceActivity : BaseListActivity<ApplyInfo>() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.menu_add) {
-            val intent = Intent(this,NewConferenceActivity::class.java)
+            val intent = Intent(this,NewCultivateActivity::class.java)
             jumpToActivity(intent)
         }
         return super.onOptionsItemSelected(item)
     }
-
-
 }

@@ -368,6 +368,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/ll_conference"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
@@ -405,6 +406,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/ll_cultivate"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
@@ -461,6 +463,7 @@
                         >
 
                         <LinearLayout
+                            android:id="@+id/ll_jd"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
@@ -498,6 +501,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/ll_go_abroad"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
@@ -535,6 +539,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/ll_baoxiao"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"

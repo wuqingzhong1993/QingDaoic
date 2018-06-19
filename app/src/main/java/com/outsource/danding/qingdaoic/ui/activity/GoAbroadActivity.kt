@@ -17,9 +17,10 @@ import com.outsource.danding.qingdaoic.net.HttpClient
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.item_list_business.view.*
+import kotlinx.android.synthetic.main.item_list_go_abroad.view.*
 
-class ConferenceActivity : BaseListActivity<ApplyInfo>() {
+class GoAbroadActivity : BaseListActivity<ApplyInfo>() {
+
 
     override fun loadData() {
         enableRefresh(true)
@@ -30,10 +31,9 @@ class ConferenceActivity : BaseListActivity<ApplyInfo>() {
         super.onCreate(savedInstanceState)
     }
 
-
     override fun setContentView(layoutResID: Int) {
-        super.setContentView(R.layout.activity_conference)
-        title="会议"
+        super.setContentView(R.layout.activity_go_abroad)
+        title="因公出国(境)"
         initListener()
     }
 
@@ -41,7 +41,7 @@ class ConferenceActivity : BaseListActivity<ApplyInfo>() {
 
     }
 
-    override fun getView(parent: ViewGroup?, viewType: Int): View = layoutInflater.inflate(R.layout.item_list_conference, parent, false)
+    override fun getView(parent: ViewGroup?, viewType: Int): View = layoutInflater.inflate(R.layout.item_list_go_abroad, parent, false)
 
     override fun bindDataToView(holder: FNAdapter.MyViewHolder?, position: Int) {
 
@@ -56,6 +56,7 @@ class ConferenceActivity : BaseListActivity<ApplyInfo>() {
         intent= Intent(this,NewCultivateActivity::class.java)
         startActivity(intent)
     }
+
 
     private fun getApplyInfoList()
     {
@@ -99,11 +100,10 @@ class ConferenceActivity : BaseListActivity<ApplyInfo>() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.menu_add) {
-            val intent = Intent(this,NewConferenceActivity::class.java)
+            val intent = Intent(this,NewGoAbroadActivity::class.java)
             jumpToActivity(intent)
         }
         return super.onOptionsItemSelected(item)
     }
-
 
 }
