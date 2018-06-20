@@ -23,6 +23,8 @@ public class QdApplication extends Application {
     private List<Person> persons;
     private List<ZhiChu> zhiChuList;
 
+    private String cookie;
+
 
     @Override
     public void onCreate() {
@@ -92,6 +94,24 @@ public class QdApplication extends Application {
         mInstance=new QdApplication();
         mInstance.zhiChuList=new ArrayList<>();
         return null;
+    }
+
+    public static String getCookie(){
+        if(mInstance!=null)
+        {
+            return mInstance.cookie;
+        }
+        mInstance=new QdApplication();
+        return null;
+    }
+
+    public static void setCookie(String cookie){
+        if(mInstance==null)
+        {
+            mInstance=new QdApplication();
+        }
+        mInstance.cookie=cookie;
+
     }
 
 

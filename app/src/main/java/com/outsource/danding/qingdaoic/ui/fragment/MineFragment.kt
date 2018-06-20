@@ -8,6 +8,8 @@ import com.outsource.danding.qingdaoic.base.BaseFragment
 import com.outsource.danding.qingdaoic.net.HttpClient
 import com.outsource.danding.qingdaoic.ui.activity.AuditByOperatorActivity
 import com.outsource.danding.qingdaoic.ui.activity.MainActivity
+import com.outsource.danding.qingdaoic.ui.activity.MyShenQingActivity
+import com.outsource.danding.qingdaoic.ui.activity.PasswordModifyActivity
 import com.outsource.danding.qingdaoic.util.GlideImageLoader
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -35,6 +37,15 @@ class MineFragment : BaseFragment() {
 
     private fun initListener(){
 
+        ll_shenQing.setOnClickListener {
+            val intent = Intent(activity, MyShenQingActivity::class.java)
+            jumpToActivity(intent)
+        }
+
+        ll_config.setOnClickListener {
+            val intent = Intent(activity, PasswordModifyActivity::class.java)
+            jumpToActivity(intent)
+        }
 
     }
 
