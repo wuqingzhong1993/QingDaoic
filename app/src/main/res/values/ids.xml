@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="tag_number"></item>
+    <item type="id" name="tag_amount"></item>
+    <item type="id" name="tag_view"></item>
+</resources>
