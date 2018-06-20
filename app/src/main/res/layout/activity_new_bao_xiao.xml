@@ -113,13 +113,107 @@
 
             </LinearLayout>
 
-           <ListView
-               android:layout_marginTop="10dp"
-               android:layout_marginEnd="4dp"
-               android:id="@+id/lt_receipt"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="#fff"
+                android:layout_marginTop="10dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="项目:"
+                        android:drawableLeft="@drawable/ic_star_red_24"
+                        android:textColor="#444"
+                        android:textSize="17sp"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:text="单据张数:"
+                        android:layout_marginEnd="0dp"
+                        android:drawableLeft="@drawable/ic_star_red_24"
+                        android:textColor="#444"
+                        android:textSize="17sp"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="start"
+                        android:layout_weight="1"
+                        android:layout_marginStart="4dp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="金额(元)"
+                            android:drawableLeft="@drawable/ic_star_red_24"
+                            android:textColor="#444"
+                            android:textSize="17sp"
+                            />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="start"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text="操作"
+                            android:textColor="#444"
+                            android:textSize="17sp"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ListView
+                    android:layout_marginEnd="0dp"
+                    android:id="@+id/lt_receipt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+            </RelativeLayout>
 
 
             <android.support.constraint.ConstraintLayout
@@ -173,7 +267,7 @@
                     >
 
                     <TextView
-                        android:id="@+id/tv_number"
+                        android:id="@+id/tv_receipt_number"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -184,7 +278,7 @@
                         android:textSize="17sp" />
 
                     <TextView
-                        android:id="@+id/tv_amount"
+                        android:id="@+id/tv_receipt_amount"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"

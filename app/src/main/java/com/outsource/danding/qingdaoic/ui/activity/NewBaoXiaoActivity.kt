@@ -2,9 +2,12 @@ package com.outsource.danding.qingdaoic.ui.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.R
@@ -20,8 +23,10 @@ import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_new_bao_xiao.*
+import kotlinx.android.synthetic.main.item_list_audit_apply.*
 
-class NewBaoXiaoActivity : BaseActivity(), DatePickerFragment.OnDateSetListener {
+class NewBaoXiaoActivity : BaseActivity(), DatePickerFragment.OnDateSetListener ,
+        ReceiptAdapter.OnDeleteListener {
 
     private  lateinit var mTarget: View
 
@@ -29,6 +34,10 @@ class NewBaoXiaoActivity : BaseActivity(), DatePickerFragment.OnDateSetListener 
 
     lateinit var receiptAdapter: ReceiptAdapter
     var receiptList:MutableList<Receipt>?=null
+    var receiptAmount:Int=0
+    var receiptNumber:Int=0
+    private var amountMap:MutableMap<Int,Int> = mutableMapOf()
+    private var numberMap:MutableMap<Int,Int> = mutableMapOf()
 
 
     var budgetAmount:String ?=null
@@ -84,6 +93,9 @@ class NewBaoXiaoActivity : BaseActivity(), DatePickerFragment.OnDateSetListener 
         receiptAdapter= ReceiptAdapter(this,receiptList!!)
         lt_receipt.adapter=receiptAdapter
 
+        amountMap= mutableMapOf()
+        numberMap= mutableMapOf()
+
 
         initListener()
     }
@@ -110,6 +122,8 @@ class NewBaoXiaoActivity : BaseActivity(), DatePickerFragment.OnDateSetListener 
             params.height = totalHeight + (lt_receipt.getDividerHeight() * (receiptAdapter.count -1))
             lt_receipt.layoutParams=params
         }
+
+        lt_receipt.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom -> onNotify(null,null) }
 
         //todo 设置删除项的回调
 
@@ -171,4 +185,50 @@ class NewBaoXiaoActivity : BaseActivity(), DatePickerFragment.OnDateSetListener 
 
         }
     }
+
+    override fun onDelete() {
+        var totalHeight=0
+        for(i in receiptList!!.indices)
+        {
+            val itemView = receiptAdapter.getView(i, null, lt_receipt)
+            itemView.measure(0,0)
+            totalHeight+=itemView.measuredHeight
+        }
+        var params: ViewGroup.LayoutParams  = lt_receipt.getLayoutParams();
+        params.height = totalHeight + (lt_receipt.getDividerHeight() * (receiptAdapter.count -1))
+        lt_receipt.layoutParams=params
+
+    }
+
+    /**
+     * todo 将通知整合成按下标进行组织的形式
+     */
+    fun onNotify(number:Int?,amount:Int?) {
+
+        if(lt_receipt.childCount>0)
+        {
+            receiptAmount=0
+            receiptNumber=0
+            for(i in 0  until  lt_receipt.childCount)
+            {
+                val j=i
+                if(lt_receipt.getChildAt(i)==null)
+                {
+                    continue;
+                }
+                val container=lt_receipt.getChildAt(i)!! as LinearLayout
+                val et_number= container.findViewById<EditText>(R.id.et_number)
+                if(et_number.text.toString()!="")
+                {
+                    receiptNumber+=et_number.text.toString().toInt()
+                }
+            }
+
+            tv_receipt_number.text=receiptNumber.toString()
+            tv_receipt_amount.text=receiptAmount.toString()
+        }
+
+    }
+
+
 }

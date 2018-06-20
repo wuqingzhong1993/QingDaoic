@@ -258,7 +258,10 @@ class AuditApplyDetailActivity : BaseActivity() {
                             }
                         }
 
-                        scrollView.post(Runnable { scrollView.fullScroll(ScrollView.FOCUS_UP) })
+                        scrollView.postDelayed(
+                                Runnable {
+                                    //scrollView.fullScroll(ScrollView.FOCUS_UP)
+                                },2000)
 
 
 
