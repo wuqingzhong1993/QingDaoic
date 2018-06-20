@@ -91,40 +91,40 @@ class AuditApplyDetailActivity : BaseActivity() {
     }
 
     private fun checkApplyPassed() {
-        HttpClient.instance.checkApplyPassed(taskId!!,expendId!!,reason!!, kemuName!!,
-                kemuId!!,basis!!)
-                .bindToLifecycle(this)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    json: JsonObject ->
-                    val data=json.getAsJsonObject("data")
-
-                    cancelProgressDialog()
-
-
-                }, {
-                    e: Throwable ->
-                    cancelProgressDialog()
-                })
+//        HttpClient.instance.checkApplyPassed(taskId!!,expendId!!,reason!!, kemuName!!,
+//                kemuId!!,basis!!)
+//                .bindToLifecycle(this)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe({
+//                    json: JsonObject ->
+//                    val data=json.getAsJsonObject("data")
+//
+//                    cancelProgressDialog()
+//
+//
+//                }, {
+//                    e: Throwable ->
+//                    cancelProgressDialog()
+//                })
 
     }
     private fun checkApplyNotPassed() {
-        HttpClient.instance.checkApplyNotPassed(taskId!!,expendId!!,reason!!,basis!!)
-                .bindToLifecycle(this)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    json: JsonObject ->
-                    val data=json.getAsJsonObject("data")
-
-                    cancelProgressDialog()
-
-
-                }, {
-                    e: Throwable ->
-                    cancelProgressDialog()
-                })
+//        HttpClient.instance.checkApplyNotPassed(taskId!!,expendId!!,reason!!,basis!!)
+//                .bindToLifecycle(this)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe({
+//                    json: JsonObject ->
+//                    val data=json.getAsJsonObject("data")
+//
+//                    cancelProgressDialog()
+//
+//
+//                }, {
+//                    e: Throwable ->
+//                    cancelProgressDialog()
+//                })
 
     }
 

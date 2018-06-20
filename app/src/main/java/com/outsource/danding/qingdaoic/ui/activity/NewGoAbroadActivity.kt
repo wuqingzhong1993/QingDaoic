@@ -57,7 +57,7 @@ class NewGoAbroadActivity : BaseActivity(), DatePickerFragment.OnDateSetListener
         }
         val adapter: ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_spinner_item, departmentNames)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        sp_dept.adapter=adapter
+        //sp_dept.adapter=adapter
 
         initListener()
     }
@@ -237,24 +237,24 @@ class NewGoAbroadActivity : BaseActivity(), DatePickerFragment.OnDateSetListener
     }
 
     private fun saveGoAbroadApply(flag: String) {
-        HttpClient.instance.saveGoAbroadApply(flag!!,expendType!!,departName!!, isLoan!!,
-                loanReason!!,budgetAmount!!,remark!!, cashContent!!,
-                groupName!!,groupUnit!!,colonel!!,groupNum!!,visitingCountry!!,
-                visitingDay!!,budgetAmount!!,ht_money!!,zs_money!!,
-                hs_money!!,jt_money!!,qt_money!!)
-                .bindToLifecycle(this)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    json: JsonObject ->
-                    val data=json.getAsJsonObject("data")
-
-                    cancelProgressDialog()
-
-                }, {
-                    e: Throwable ->
-                    cancelProgressDialog()
-                })
+//        HttpClient.instance.saveGoAbroadApply(flag!!,expendType!!,departName!!, isLoan!!,
+//                loanReason!!,budgetAmount!!,remark!!, cashContent!!,
+//                groupName!!,groupUnit!!,colonel!!,groupNum!!,visitingCountry!!,
+//                visitingDay!!,budgetAmount!!,ht_money!!,zs_money!!,
+//                hs_money!!,jt_money!!,qt_money!!)
+//                .bindToLifecycle(this)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe({
+//                    json: JsonObject ->
+//                    val data=json.getAsJsonObject("data")
+//
+//                    cancelProgressDialog()
+//
+//                }, {
+//                    e: Throwable ->
+//                    cancelProgressDialog()
+//                })
     }
 
     fun pickDate(v: View) {
