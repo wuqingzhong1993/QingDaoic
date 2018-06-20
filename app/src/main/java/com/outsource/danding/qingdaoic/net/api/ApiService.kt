@@ -95,12 +95,17 @@ interface  ApiService{
     @FormUrlEncoded
     @Headers("Accept-Encoding:application/json")
     @POST("m_getApplyInfoCheck.do")
-    abstract fun checkApplyPassed(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
+    fun checkApplyPassed(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
 
     @FormUrlEncoded
     @Headers("Accept-Encoding:application/json")
     @POST("m_getApplyInfoCheck_no.do")
-    abstract fun checkApplyNotPassed(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
+    fun checkApplyNotPassed(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("m_out_apply_add.do")
+    fun saveTravelApply(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
 
 
 }

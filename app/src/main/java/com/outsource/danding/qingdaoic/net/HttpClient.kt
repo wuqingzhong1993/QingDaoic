@@ -347,8 +347,16 @@ class HttpClient private constructor() {
         map.put("basis",basis)
         return apiService.checkApplyNotPassed(map)
     }
-
-    fun saveGoAbroadApply(flag: String, expendType: Any, departName: Any, loan: Any, loanReason: Any, budgetAmount: String, remark: Any, cashContent: Any, groupName: String, groupUnit: String, colonel: String, groupNum: String, visitingCountry: String, visitingDay: String, budgetAmount1: String, ht_money: String, zs_money: String, hs_money: Any, jt_money: String, qt_money: String): Any {
+    /**
+     * 出国申请审核
+     * zy20180619
+     */
+    fun saveGoAbroadApply(flag: String, expendType: String, departName: String, loan: String,
+                          loanReason: String, budgetAmount: String, remark: String, cashContent: String,
+                          groupName: String, groupUnit: String, colonel: String, groupNum: String,
+                          visitingCountry: String, visitingDay: String, budgetAmount1: String,
+                          ht_money: String, zs_money: String, hs_money: Any, jt_money: String,
+                          qt_money: String): Observable<JsonObject> {
         val map = HashMap<String,String>()
 
 //        map.put("personId", this.personId!!)
@@ -362,6 +370,29 @@ class HttpClient private constructor() {
 //        map.put("cashContent",cashContent)
 
         return apiService.checkApplyNotPassed(map)
+
+    }
+    /**
+     * 差旅费申请审核
+     * zy20180620
+     */
+    fun saveTravelApply(flag: String, internalId: String, internalName: String, applyDeptId: String,
+                        applyDeptName: String, isLoan: String, loanReason: String,
+                        officeList: String): Observable<JsonObject>{
+        val map = HashMap<String,String>()
+
+        map.put("personId", this.personId!!)
+        map.put("flag",flag)
+        map.put("internalId",internalId)
+        map.put("internalName",internalName)
+        map.put("applyDeptId",applyDeptId)
+
+        map.put("applyDeptName",applyDeptName)
+        map.put("isLoan",isLoan)
+        map.put("loanReason",loanReason)
+        map.put("officeList",officeList)
+
+        return apiService.saveTravelApply(map)
 
     }
 

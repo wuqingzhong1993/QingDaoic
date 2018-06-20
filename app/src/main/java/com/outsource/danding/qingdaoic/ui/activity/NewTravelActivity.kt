@@ -15,12 +15,10 @@ import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.R
 import com.outsource.danding.qingdaoic.app.QdApplication
 import com.outsource.danding.qingdaoic.base.BaseActivity
-import com.outsource.danding.qingdaoic.bean.City
-import com.outsource.danding.qingdaoic.bean.Department
-import com.outsource.danding.qingdaoic.bean.Person
-import com.outsource.danding.qingdaoic.bean.Province
+import com.outsource.danding.qingdaoic.bean.*
 import com.outsource.danding.qingdaoic.net.HttpClient
 import com.outsource.danding.qingdaoic.ui.fragment.DatePickerFragment
+import com.outsource.danding.qingdaoic.widget.OfficeAdapter
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -29,6 +27,18 @@ import kotlinx.android.synthetic.main.activity_new_travel.*
 class NewTravelActivity : BaseActivity(),DatePickerFragment.OnDateSetListener {
 
     private  lateinit var mTarget:View
+
+    var internalId:String?=null
+    var internalName:String?=null
+    var applyDeptId:String?=null
+    var applyDeptName:String?=null
+    var isLoan:String?=null
+    var loanReason:String?=null
+    lateinit var officeAdapter: OfficeAdapter
+    var officeList:String?=null
+   // var officeList:MutableList<BusinessOffice>?=null
+
+
     var fare:String ?=null
     var hotel:String?=null
     var w_number:String?=null
@@ -110,6 +120,12 @@ class NewTravelActivity : BaseActivity(),DatePickerFragment.OnDateSetListener {
     }
 
     private fun initListener() {
+        btn_commit.setOnClickListener {
+            saveTravelApply("0")
+        }
+        btn_temp_save.setOnClickListener {
+            saveTravelApply("1")
+        }
 
         //车船费
         et_fare.addTextChangedListener( object:TextWatcher{
@@ -237,6 +253,27 @@ class NewTravelActivity : BaseActivity(),DatePickerFragment.OnDateSetListener {
                         type="04"
             }
         }
+
+    }
+    private fun saveTravelApply(flag:String) {
+        HttpClient.instance.saveTravelApply(flag!!,internalId!!,internalName!!, applyDeptId!!,
+                applyDeptName!!,isLoan!!,loanReason!!,
+                officeList!!)
+                .bindToLifecycle(this)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    json: JsonObject ->
+                    val data=json.getAsJsonObject("data")
+
+                    cancelProgressDialog()
+
+
+                }, {
+                    e: Throwable ->
+                    cancelProgressDialog()
+                })
+
 
     }
 
