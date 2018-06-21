@@ -7,11 +7,17 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.R
 import com.outsource.danding.qingdaoic.app.QdApplication
 import com.outsource.danding.qingdaoic.base.BaseActivity
 import com.outsource.danding.qingdaoic.bean.Department
+import com.outsource.danding.qingdaoic.net.HttpClient
 import com.outsource.danding.qingdaoic.ui.fragment.DatePickerFragment
+import com.trello.rxlifecycle2.kotlin.bindToLifecycle
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_new_conference.*
 import kotlinx.android.synthetic.main.activity_new_go_abroad.*
 import org.w3c.dom.Text
 
@@ -51,12 +57,18 @@ class NewGoAbroadActivity : BaseActivity(), DatePickerFragment.OnDateSetListener
         }
         val adapter: ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_spinner_item, departmentNames)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        sp_dept.adapter=adapter
+        //sp_dept.adapter=adapter
 
         initListener()
     }
 
     private fun initListener() {
+        btn_commit.setOnClickListener {
+            saveGoAbroadApply("0")
+        }
+        btn_temp_save.setOnClickListener {
+            saveGoAbroadApply("1")
+        }
         et_budgetAmount.addTextChangedListener(object :TextWatcher{
             override fun afterTextChanged(s: Editable?) {
             }
@@ -221,7 +233,28 @@ class NewGoAbroadActivity : BaseActivity(), DatePickerFragment.OnDateSetListener
                 }
             }
         })
+        
+    }
 
+    private fun saveGoAbroadApply(flag: String) {
+//        HttpClient.instance.saveGoAbroadApply(flag!!,expendType!!,departName!!, isLoan!!,
+//                loanReason!!,budgetAmount!!,remark!!, cashContent!!,
+//                groupName!!,groupUnit!!,colonel!!,groupNum!!,visitingCountry!!,
+//                visitingDay!!,budgetAmount!!,ht_money!!,zs_money!!,
+//                hs_money!!,jt_money!!,qt_money!!)
+//                .bindToLifecycle(this)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe({
+//                    json: JsonObject ->
+//                    val data=json.getAsJsonObject("data")
+//
+//                    cancelProgressDialog()
+//
+//                }, {
+//                    e: Throwable ->
+//                    cancelProgressDialog()
+//                })
     }
 
     fun pickDate(v: View) {

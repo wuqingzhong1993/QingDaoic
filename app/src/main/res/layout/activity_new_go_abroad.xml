@@ -194,8 +194,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:hint="请输入组团单位"
-                    android:layout_weight="1"
-                    android:enabled="false" />
+                    android:layout_weight="1"/>
 
             </LinearLayout>
 
@@ -534,8 +533,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:hint="请输入来客数"
-                android:layout_weight="1"
-                android:enabled="false" />
+                android:layout_weight="1"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -553,8 +551,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:hint="请输入陪客数"
-                android:layout_weight="1"
-                android:enabled="false" />
+                android:layout_weight="1"/>
 
         </LinearLayout>
 
@@ -585,8 +582,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:hint="请输入公函号"
-                android:layout_weight="1"
-                android:enabled="false" />
+                android:layout_weight="1"/>
 
         </LinearLayout>
 
@@ -618,8 +614,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:hint="请输入来宾单位"
-                android:layout_weight="1"
-                android:enabled="false" />
+                android:layout_weight="1"/>
 
         </LinearLayout>
 
@@ -652,8 +647,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:hint="请输入来宾姓名职务"
-                android:layout_weight="1"
-                android:enabled="false" />
+                android:layout_weight="1"/>
 
         </LinearLayout>
 
@@ -685,8 +679,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:hint="请输入公务活动内容"
-                android:layout_weight="1"
-                android:enabled="false" />
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -769,8 +762,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:hint="请输入就餐地点"
-                android:layout_weight="1"
-                android:enabled="false" />
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -801,8 +793,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="35dp"
                 android:hint="请输入住宿地点"
-                android:layout_weight="1"
-                android:enabled="false" />
+                android:layout_weight="1"/>
 
         </LinearLayout>
 
@@ -833,8 +824,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="35dp"
                 android:hint="请输入住宿天数"
-                android:layout_weight="1"
-                android:enabled="false" />
+                android:layout_weight="1"/>
 
         </LinearLayout>
 
@@ -914,8 +904,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:hint="请输入住宿费用"
-                android:layout_weight="1"
-                android:enabled="false" />
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -947,8 +936,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:hint="请输入伙食费用"
-                android:layout_weight="1"
-                android:enabled="false" />
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -980,8 +968,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:hint="请输入其他费用"
-                android:layout_weight="1"
-                android:enabled="false" />
+                android:layout_weight="1"/>
 
         </LinearLayout>
 
@@ -1042,8 +1029,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="65dp"
-                android:layout_weight="1"
-                android:enabled="false" />
+                android:layout_weight="1"/>
 
         </LinearLayout>
 

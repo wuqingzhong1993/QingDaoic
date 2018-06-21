@@ -197,7 +197,6 @@
 
                 <EditText
                     android:id="@+id/et_loanReason"
-                    android:enabled="false"
                     android:layout_marginStart="30dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -263,7 +262,6 @@
 
                 <EditText
                     android:id="@+id/et_remark"
-                    android:enabled="false"
                     android:layout_marginStart="65dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -322,6 +320,7 @@
                     android:background="#00f">
 
                     <TextView
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="提交"
@@ -330,6 +329,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/btn_temp_save"
                     android:padding="10dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

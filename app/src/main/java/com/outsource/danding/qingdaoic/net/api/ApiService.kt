@@ -89,6 +89,33 @@ interface  ApiService{
     @POST("m_getshenQingInfoList.do")
     fun getshenQingInfoList(@Field("personId") personId:String,@Field("pageNum") pageNum: String): Observable<JsonObject>
 
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("do_saveByOffice.do")
+    fun saveConferenceApply(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("do_saveZjBaoxiao.do")
+    fun saveBaoXiaoApply(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("m_getApplyInfoCheck.do")
+    fun checkApplyPassed(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("m_getApplyInfoCheck_no.do")
+    fun checkApplyNotPassed(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("m_out_apply_add.do")
+    fun saveTravelApply(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
+
+
 }
 
 

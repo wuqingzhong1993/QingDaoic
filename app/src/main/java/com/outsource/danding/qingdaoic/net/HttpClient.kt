@@ -25,6 +25,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import org.json.JSONObject
 import okhttp3.RequestBody
+import kotlin.collections.AbstractList
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
@@ -172,6 +173,66 @@ class HttpClient private constructor() {
     }
 
     /**
+     * 办公申请添加页面——提交0,暂存1
+     * zy20180619
+     */
+    fun saveBusinessApply( flag:String,expendType:String,applyDeptName:String, isLoan:String,
+                  loanReason:String,budgetAmount:String,remark:String,cashContent:String,
+                  officeList: String):Observable<JsonObject>{
+
+        val map = HashMap<String,String>()
+        map.put("personId", this.personId!!)
+        map.put("flag",flag)
+        map.put("expendType",expendType)
+        map.put("applyDeptName",applyDeptName)
+        map.put("isLoan",isLoan)
+        map.put("loanReason",loanReason)
+        map.put("budgetAmount",budgetAmount)
+        map.put("remark",remark)
+        map.put("cashContent",cashContent)
+        map.put("officeList",officeList)
+
+        return apiService.saveBusinessApply(map)
+
+    }
+    /**
+     * 会议申请添加页面——提交0,暂存1
+     * zy20180619
+     */
+    fun saveConferenceApply(flag:String,expendType:String,applyDeptName:String, isLoan:String,
+                            loanReason:String,budgetAmount:String,remark:String,cashContent:String,
+                            meetingName:String,meetingTime:String,trainEnd:String,trainReport:String,trainLeave:String,
+                            meetingCategory:String,meetingPlace:String,estimatedNum:String,staffNum:String,
+                            meetingBudget:String,meetingReason:String):Observable<JsonObject>{
+
+        val map = HashMap<String,String>()
+        map.put("personId", this.personId!!)
+        map.put("flag",flag)
+        map.put("expendType",expendType)
+        map.put("applyDeptName",applyDeptName)
+        map.put("isLoan",isLoan)
+        map.put("loanReason",loanReason)
+        map.put("budgetAmount",budgetAmount)
+        map.put("remark",remark)
+        map.put("cashContent",cashContent)
+
+        map.put("meetingName",meetingName)
+        map.put("meetingTime",meetingTime)
+        map.put("trainEnd",trainEnd)
+        map.put("trainReport",trainReport)
+        map.put("loanReason",loanReason)
+        map.put("trainLeave",trainLeave)
+        map.put("meetingCategory",meetingCategory)
+        map.put("meetingPlace",meetingPlace)
+        map.put("estimatedNum",estimatedNum)
+        map.put("staffNum",staffNum)
+        map.put("meetingBudget",meetingBudget)
+        map.put("meetingReason",meetingReason)
+
+        return apiService.saveBusinessApply(map)
+    }
+
+    /**
      * 计算金额
      */
     fun getMoney(city:String, province:String, personIds:MutableList<String>, outStartDate:String,
@@ -260,6 +321,111 @@ class HttpClient private constructor() {
                     .readTimeout(20, TimeUnit.SECONDS)
                     .build()
         }
+    }
+    /**
+     * 直接报销申请添加页面——提交0,暂存1
+     * zy20180619
+     */
+    fun saveBaoXiaoApply(flag: String, applyDeptId: String, applyDeptName: String, internalId: String, internalName: String,
+                         reason: String, sumNum: String, sumAmount: String, reimbList: String,
+                         zzList:String, expendType: String, expendId: String, offcard: String,
+                         cash: String): Observable<JsonObject> {
+        val map = HashMap<String,String>()
+        map.put("personId", this.personId!!)
+        map.put("applyDeptId",applyDeptId)
+        map.put("applyDeptName",applyDeptName)
+        map.put("internalId",internalId)
+        map.put("internalName",internalName)
+        map.put("reason",reason)
+        map.put("sumNum",sumNum)
+        map.put("sumAmount",sumAmount)
+        map.put("reimbList",reimbList)
+        map.put("zzList",zzList)
+        map.put("expendType",expendType)
+        map.put("expendId",expendId)
+        map.put("offcard",offcard)
+        map.put("cash",cash)
+        return apiService.saveBaoXiaoApply(map)
+
+    }
+    /**
+     * 普通申请审核--通过
+     * zy20180619
+     */
+    fun checkApplyPassed(taskId: String, expendId: String, reason: String, kemuName: String , kemuId: String,
+                         basis:String ): Observable<JsonObject>  {
+        val map = HashMap<String,String>()
+        map.put("personId", this.personId!!)
+        map.put("taskId",taskId)
+        map.put("expendId",expendId)
+        map.put("reason",reason)
+        map.put("kemuName",kemuName)
+        map.put("kemuId",kemuId)
+        map.put("basis",basis)
+        return apiService.checkApplyPassed(map)
+    }
+
+    /**
+     * 普通申请审核--不通过
+     * zy20180619
+     */
+    fun checkApplyNotPassed(taskId: String, expendId: String, reason: String,
+                         basis:String ): Observable<JsonObject>  {
+        val map = HashMap<String,String>()
+        map.put("personId", this.personId!!)
+        map.put("taskId",taskId)
+        map.put("expendId",expendId)
+        map.put("reason",reason)
+        map.put("basis",basis)
+        return apiService.checkApplyNotPassed(map)
+    }
+    /**
+     * 出国申请审核
+     * zy20180619
+     */
+    fun saveGoAbroadApply(flag: String, expendType: String, departName: String, loan: String,
+                          loanReason: String, budgetAmount: String, remark: String, cashContent: String,
+                          groupName: String, groupUnit: String, colonel: String, groupNum: String,
+                          visitingCountry: String, visitingDay: String, budgetAmount1: String,
+                          ht_money: String, zs_money: String, hs_money: Any, jt_money: String,
+                          qt_money: String): Observable<JsonObject> {
+        val map = HashMap<String,String>()
+
+//        map.put("personId", this.personId!!)
+//        map.put("flag",flag)
+//        map.put("expendType",expendType)
+//        map.put("applyDeptName",applyDeptName)
+//        map.put("isLoan",isLoan)
+//        map.put("loanReason",loanReason)
+//        map.put("budgetAmount",budgetAmount)
+//        map.put("remark",remark)
+//        map.put("cashContent",cashContent)
+
+        return apiService.checkApplyNotPassed(map)
+
+    }
+    /**
+     * 差旅费申请审核
+     * zy20180620
+     */
+    fun saveTravelApply(flag: String, internalId: String, internalName: String, applyDeptId: String,
+                        applyDeptName: String, isLoan: String, loanReason: String,
+                        officeList: String): Observable<JsonObject>{
+        val map = HashMap<String,String>()
+
+        map.put("personId", this.personId!!)
+        map.put("flag",flag)
+        map.put("internalId",internalId)
+        map.put("internalName",internalName)
+        map.put("applyDeptId",applyDeptId)
+
+        map.put("applyDeptName",applyDeptName)
+        map.put("isLoan",isLoan)
+        map.put("loanReason",loanReason)
+        map.put("officeList",officeList)
+
+        return apiService.saveTravelApply(map)
+
     }
 
 

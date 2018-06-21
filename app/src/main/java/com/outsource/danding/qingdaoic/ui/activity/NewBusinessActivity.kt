@@ -3,6 +3,7 @@ package com.outsource.danding.qingdaoic.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import com.google.gson.JsonObject
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -15,16 +16,26 @@ import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.R
 import com.outsource.danding.qingdaoic.app.QdApplication
 import com.outsource.danding.qingdaoic.base.BaseActivity
+import com.outsource.danding.qingdaoic.net.HttpClient
+import com.trello.rxlifecycle2.kotlin.bindToLifecycle
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_new_business.*
+import com.outsource.danding.qingdaoic.bean.ZhiChu
 import com.outsource.danding.qingdaoic.bean.BusinessOffice
 import com.outsource.danding.qingdaoic.bean.Department
 import com.outsource.danding.qingdaoic.bean.Receipt
+<<<<<<< HEAD
 import com.outsource.danding.qingdaoic.bean.ZhiChu
 import com.outsource.danding.qingdaoic.net.HttpClient
+=======
+>>>>>>> 26e0bbd7c9773cd40396bce5ad8b1cf91d59c3ff
 import com.outsource.danding.qingdaoic.widget.OfficeAdapter
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_new_business.*
+
 import org.w3c.dom.Text
 
 
@@ -86,7 +97,6 @@ class NewBusinessActivity : BaseActivity() , OfficeAdapter.OnDeleteListener{
     }
 
     private fun initListener() {
-
         sp_dept?.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
@@ -136,6 +146,7 @@ class NewBusinessActivity : BaseActivity() , OfficeAdapter.OnDeleteListener{
         et_remark.addTextChangedListener(object :TextWatcher{
             override fun afterTextChanged(s: Editable?) {
             }
+
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -201,6 +212,37 @@ class NewBusinessActivity : BaseActivity() , OfficeAdapter.OnDeleteListener{
         }
 
 
+<<<<<<< HEAD
+=======
+        btn_commit.setOnClickListener {
+            saveBusinessApply("0")
+        }
+        btn_temp_save.setOnClickListener {
+            saveBusinessApply("1")
+        }
+
+    }
+
+    private fun saveBusinessApply(flag:String) {
+        HttpClient.instance.saveBusinessApply(flag!!,expendType!!,departName!!, isLoan!!,
+                loanReason!!,budgetAmount!!,remark!!, cashContent!!,
+                officeList?.toString()!!)
+                .bindToLifecycle(this)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    json: JsonObject ->
+                    val data=json.getAsJsonObject("data")
+
+                    cancelProgressDialog()
+
+
+                }, {
+                    e: Throwable ->
+                    cancelProgressDialog()
+                })
+
+>>>>>>> 26e0bbd7c9773cd40396bce5ad8b1cf91d59c3ff
 
     }
 

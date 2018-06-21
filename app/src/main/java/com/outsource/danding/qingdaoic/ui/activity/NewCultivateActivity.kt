@@ -9,6 +9,7 @@ import com.outsource.danding.qingdaoic.R
 import com.outsource.danding.qingdaoic.app.QdApplication
 import com.outsource.danding.qingdaoic.base.BaseActivity
 import com.outsource.danding.qingdaoic.bean.Department
+import com.outsource.danding.qingdaoic.bean.ZhiChu
 import com.outsource.danding.qingdaoic.net.HttpClient
 import com.outsource.danding.qingdaoic.ui.fragment.DatePickerFragment
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
@@ -48,8 +49,11 @@ class NewCultivateActivity : BaseActivity() , DatePickerFragment.OnDateSetListen
 
     private fun initListener() {
 
-        ll_commit.setOnClickListener { v->
+        btn_commit.setOnClickListener { v->
             commit()
+        }
+        btn_temp_save.setOnClickListener{
+            saveCultivateApply("1")
         }
         ll_trainTime.setOnClickListener { v->
             pickDate(tv_trainTime)
@@ -63,6 +67,10 @@ class NewCultivateActivity : BaseActivity() , DatePickerFragment.OnDateSetListen
         ll_trainLeave.setOnClickListener { v->
             pickDate(tv_trainLeave)
         }
+
+    }
+
+    private fun saveCultivateApply(flage: String) {
 
     }
 

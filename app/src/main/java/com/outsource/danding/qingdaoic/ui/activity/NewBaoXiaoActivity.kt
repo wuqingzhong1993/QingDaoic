@@ -9,14 +9,19 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.R
 import com.outsource.danding.qingdaoic.app.QdApplication
 import com.outsource.danding.qingdaoic.base.BaseActivity
 import com.outsource.danding.qingdaoic.bean.Department
 import com.outsource.danding.qingdaoic.bean.Receipt
 import com.outsource.danding.qingdaoic.bean.ZhiChu
+import com.outsource.danding.qingdaoic.net.HttpClient
 import com.outsource.danding.qingdaoic.ui.fragment.DatePickerFragment
 import com.outsource.danding.qingdaoic.widget.ReceiptAdapter
+import com.trello.rxlifecycle2.kotlin.bindToLifecycle
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_new_bao_xiao.*
 import kotlinx.android.synthetic.main.item_list_audit_apply.*
 
@@ -33,6 +38,22 @@ class NewBaoXiaoActivity : BaseActivity(), DatePickerFragment.OnDateSetListener 
     var receiptNumber:Int=0
     private var amountMap:MutableMap<Int,Int> = mutableMapOf()
     private var numberMap:MutableMap<Int,Int> = mutableMapOf()
+
+
+    var budgetAmount:String ?=null
+    var applyDeptId:String?= null
+    var applyDeptName:String?= null
+    var internalId:String?= null
+    var internalName:String?= null
+    var reason:String?= null
+    var sumNum:String?= null
+    var sumAmount:String?= null
+    var reimbList:MutableList<String>?= null
+    var zzList:MutableList<String>?=null
+    var expendType:String?= null
+    var expendId:String?= null
+    var offcard:String?= null
+    var cash:String?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,7 +101,12 @@ class NewBaoXiaoActivity : BaseActivity(), DatePickerFragment.OnDateSetListener 
     }
 
     private fun initListener() {
-
+        btn_commit.setOnClickListener {
+            saveBaoXiaoApply("0")
+        }
+        btn_temp_save.setOnClickListener{
+            saveBaoXiaoApply("1")
+        }
 
         img_add.setOnClickListener {
             receiptList?.add(Receipt("","0","0"))
@@ -102,6 +128,25 @@ class NewBaoXiaoActivity : BaseActivity(), DatePickerFragment.OnDateSetListener 
         //todo 设置删除项的回调
 
 
+    }
+
+    private fun saveBaoXiaoApply(flag: String) {
+        HttpClient.instance.saveBaoXiaoApply(flag!!,applyDeptId!!,applyDeptName!!, internalId!!,
+                internalName!!,reason!!,sumNum!!, sumAmount!!,
+                reimbList.toString()!!,zzList.toString()!!,expendType!!,expendId!!,offcard!!,cash!!)
+                .bindToLifecycle(this)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    json: JsonObject ->
+                    val data=json.getAsJsonObject("data")
+
+                    cancelProgressDialog()
+
+                }, {
+                    e: Throwable ->
+                    cancelProgressDialog()
+                })
     }
 
     fun pickDate(v: View) {
