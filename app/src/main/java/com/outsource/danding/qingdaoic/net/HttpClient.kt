@@ -284,6 +284,7 @@ class HttpClient private constructor() {
     }
 
 
+
     /**
      * 获取个人资产
      */
@@ -291,6 +292,7 @@ class HttpClient private constructor() {
 
         return apiService.getDoZCList(this.personId!!,pageNum)
     }
+
 
 
     fun getshenQingInfoList():Observable<JsonObject>{
@@ -334,6 +336,7 @@ class HttpClient private constructor() {
         val map = HashMap<String,String>()
         map.put("personId", this.personId!!)
         map.put("applyDeptId",applyDeptId)
+        map.put("flag",flag)
         map.put("applyDeptName",applyDeptName)
         map.put("internalId",internalId)
         map.put("internalName",internalName)
@@ -380,18 +383,20 @@ class HttpClient private constructor() {
         map.put("basis",basis)
         return apiService.checkApplyNotPassed(map)
     }
+
+
     /**
-     * 出国申请审核
+     * 出国申请添加页面——提交0,暂存1
      * zy20180619
      */
-    fun saveGoAbroadApply(flag: String, expendType: String, departName: String, loan: String,
-                          loanReason: String, budgetAmount: String, remark: String, cashContent: String,
-                          groupName: String, groupUnit: String, colonel: String, groupNum: String,
-                          visitingCountry: String, visitingDay: String, budgetAmount1: String,
-                          ht_money: String, zs_money: String, hs_money: Any, jt_money: String,
-                          qt_money: String): Observable<JsonObject> {
-        val map = HashMap<String,String>()
-
+//    fun saveGoAbroadApply(flag: String, expendType: String, applyDeptName: String, isLoan: String,
+//                          loanReason: String, budgetAmount: String, remark: String, cashContent: String,
+//                          groupName: String, groupUnit: String, colonel: String, groupNum: String,
+//                          visitingCountry: String, visitingDay: String, budgetAmount1: String,
+//                          ht_money: String, zs_money: String, hs_money: String, jt_money: String,
+//                          qt_money: String): Observable<JsonObject> {
+//        val map = HashMap<String,String>()
+//
 //        map.put("personId", this.personId!!)
 //        map.put("flag",flag)
 //        map.put("expendType",expendType)
@@ -401,12 +406,27 @@ class HttpClient private constructor() {
 //        map.put("budgetAmount",budgetAmount)
 //        map.put("remark",remark)
 //        map.put("cashContent",cashContent)
+//
+//        map.put("groupName",groupName)
+//        map.put("groupUnit",groupUnit)
+//        map.put("colonel",colonel)
+//        map.put("groupNum",groupNum)
+//        map.put("visitingCountry",visitingCountry)
+//        map.put("visitingDay",visitingDay)
+//        map.put("budgetAmount1",budgetAmount1)
+//        map.put("ht_money",ht_money)
+//        map.put("zs_money",zs_money)
+//        map.put("hs_money",hs_money)
+//        map.put("jt_money",jt_money)
+//        map.put("qt_money",qt_money)
+//
+//        return apiService.saveGoAbroadApply(map)
+//
+//    }
 
-        return apiService.checkApplyNotPassed(map)
 
-    }
     /**
-     * 差旅费申请审核
+     * 差旅费申请添加页面——提交0,暂存1
      * zy20180620
      */
     fun saveTravelApply(flag: String, internalId: String, internalName: String, applyDeptId: String,
@@ -427,6 +447,36 @@ class HttpClient private constructor() {
 
         return apiService.saveTravelApply(map)
 
+    }
+
+    fun saveCultivateApply(flag: String, expendType: String, applyDeptName: String, isLoan: String,
+                           loanReason: String, budgetAmount: String, remark: String,
+                            trainName: String, trainTime: String,
+                           trainEnd: String, trainReport: String, trainLeave: String, trainPlace: String,
+                           trainNum: String, trainStaffNum: String, trainBudget: String,
+                           trainObject: String):  Observable<JsonObject> {
+        val map = HashMap<String,String>()
+        map.put("personId", this.personId!!)
+        map.put("flag",flag)
+        map.put("expendType",expendType)
+        map.put("applyDeptName",applyDeptName)
+        map.put("isLoan",isLoan)
+        map.put("loanReason",loanReason)
+        map.put("budgetAmount",budgetAmount)
+        map.put("remark",remark)
+
+        map.put("trainName", trainName)
+        map.put("trainTime",trainTime)
+        map.put("trainEnd",trainEnd)
+        map.put("trainReport",trainReport)
+        map.put("trainLeave",trainLeave)
+        map.put("trainPlace",trainPlace)
+        map.put("trainNum",trainNum)
+        map.put("trainStaffNum",trainStaffNum)
+        map.put("trainBudget",trainBudget)
+        map.put("trainObject",trainObject)
+
+        return apiService.saveCultivateActivity(map)
     }
 
 

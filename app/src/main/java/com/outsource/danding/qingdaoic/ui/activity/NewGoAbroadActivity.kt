@@ -237,7 +237,7 @@ class NewGoAbroadActivity : BaseActivity(), DatePickerFragment.OnDateSetListener
     }
 
     private fun saveGoAbroadApply(flag: String) {
-//        HttpClient.instance.saveGoAbroadApply(flag!!,expendType!!,departName!!, isLoan!!,
+//        HttpClient.instance.saveGoAbroadApply(flag!!,expendType!!,applyDeptName!!, isLoan!!,
 //                loanReason!!,budgetAmount!!,remark!!, cashContent!!,
 //                groupName!!,groupUnit!!,colonel!!,groupNum!!,visitingCountry!!,
 //                visitingDay!!,budgetAmount!!,ht_money!!,zs_money!!,

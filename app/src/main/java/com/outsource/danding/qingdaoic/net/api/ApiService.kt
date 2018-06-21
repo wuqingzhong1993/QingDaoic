@@ -123,6 +123,12 @@ interface  ApiService{
     fun getPassCheck(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
 
 
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("do_saveByOffice.do")
+    fun saveCultivateActivity(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
+
+
 
 }
 
