@@ -4,11 +4,14 @@ package com.outsource.danding.qingdaoic.app;
 import android.app.Application;
 import android.content.Context;
 
+import com.imnjh.imagepicker.PickerConfig;
+import com.imnjh.imagepicker.SImagePicker;
 import com.outsource.danding.qingdaoic.bean.City;
 import com.outsource.danding.qingdaoic.bean.Department;
 import com.outsource.danding.qingdaoic.bean.Person;
 import com.outsource.danding.qingdaoic.bean.Province;
 import com.outsource.danding.qingdaoic.bean.ZhiChu;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +27,9 @@ public class QdApplication extends Application {
     private List<ZhiChu> zhiChuList;
 
 
+    private String cookie;
+
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -34,6 +40,9 @@ public class QdApplication extends Application {
         mInstance.persons=new ArrayList<>();
         mInstance.cities=new ArrayList<>();
         mInstance.zhiChuList=new ArrayList<>();
+
+
+
     }
 
     public static void  setDepartments(List<Department> deps)
@@ -92,6 +101,32 @@ public class QdApplication extends Application {
         mInstance=new QdApplication();
         mInstance.zhiChuList=new ArrayList<>();
         return null;
+    }
+
+    public static String getCookie(){
+        if(mInstance!=null)
+        {
+            return mInstance.cookie;
+        }
+        mInstance=new QdApplication();
+        return null;
+    }
+
+    public static void setCookie(String cookie){
+        if(mInstance==null)
+        {
+            mInstance=new QdApplication();
+        }
+        mInstance.cookie=cookie;
+
+    }
+
+
+
+    public static QdApplication getInstance(){
+        if(mInstance==null)
+            mInstance=new QdApplication();
+        return mInstance;
     }
 
 

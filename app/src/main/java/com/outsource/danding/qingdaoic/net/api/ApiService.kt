@@ -82,6 +82,14 @@ interface  ApiService{
     @POST("do_saveByOffice.do")
     fun saveBusinessApply(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
 
+
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("m_getshenQingInfoList.do")
+    fun getshenQingInfoList(@Field("personId") personId:String,@Field("pageNum") pageNum: String): Observable<JsonObject>
+
+
     @FormUrlEncoded
     @Headers("Accept-Encoding:application/json")
     @POST("do_saveByOffice.do")

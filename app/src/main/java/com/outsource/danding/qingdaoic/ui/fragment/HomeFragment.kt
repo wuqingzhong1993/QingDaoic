@@ -30,7 +30,7 @@ class HomeFragment:BaseFragment() {
         initView()
         initListener()
         initApplyAdd()
-
+        getUserInfo()
     }
 
     private fun initView(){
@@ -80,7 +80,26 @@ class HomeFragment:BaseFragment() {
             activity?.startActivityForResult(intent,0)
         }
 
+    }
 
+    private fun getUserInfo()
+    {
+        HttpClient.instance.getUserInfo()
+                .bindToLifecycle(this)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+
+                .subscribe({
+                    json: JsonObject ->
+
+
+                    val data= json.getAsJsonObject("data")
+
+
+                }, {
+                    e: Throwable ->
+                    cancelProgressDialog()
+                })
     }
 
     private fun initApplyAdd()

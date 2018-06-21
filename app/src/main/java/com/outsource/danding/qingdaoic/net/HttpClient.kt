@@ -267,6 +267,36 @@ class HttpClient private constructor() {
         return apiService.commit(map)
     }
 
+
+    fun saveBusinessApply( flag:String,expendType:String,applyDeptName:String, isLoan:String,
+                           loanReason:String?,budgetAmount:String?,remark:String?,cashContent:String?,
+                           officeList: String):Observable<JsonObject>{
+
+        val map = HashMap<String,String>()
+        map.put("personId", this.personId!!)
+        map.put("flag",flag)
+        map.put("expendType",expendType)
+        map.put("applyDeptName",applyDeptName)
+        map.put("isLoan",isLoan)
+        if(loanReason!=null)
+            map.put("loanReason",loanReason)
+        if(budgetAmount!=null)
+            map.put("budgetAmount",budgetAmount)
+        if(remark!=null)
+            map.put("remark",remark)
+        if(cashContent!=null)
+            map.put("cashContent",cashContent)
+        map.put("officeList",officeList)
+
+        return apiService.saveBusinessApply(map)
+
+    }
+
+    fun getshenQingInfoList():Observable<JsonObject>{
+        return apiService.getshenQingInfoList(this.personId!!,"1")
+    }
+
+
     /**
      * 初始化OKHttpClient,设置缓存,设置超时时间,设置打印日志,设置UA拦截器
      */
@@ -281,6 +311,8 @@ class HttpClient private constructor() {
                     .protocols(Collections.singletonList(Protocol.HTTP_1_1))
                     .cache(cache)
                     .addInterceptor(HeaderInterceptor())
+                    .addInterceptor(CookieInterceptor())
+                    .addInterceptor(CookieAddInterceptor())
                     .addInterceptor(interceptor)
                     .addNetworkInterceptor(CacheInterceptor())
                     .retryOnConnectionFailure(true)
@@ -508,6 +540,46 @@ class HttpClient private constructor() {
             return chain.proceed(originalRequest)
         }
     }
+
+    //获取cookie头
+    private inner class CookieInterceptor:Interceptor{
+        override fun intercept(chain: Interceptor.Chain?): Response {
+            val originalResponse = chain?.proceed(chain?.request())
+            if(originalResponse?.headers("Set-Cookie")!=null)
+            {
+                val cookieBuffer = StringBuffer()
+                for(header in originalResponse.headers("Set-Cookie"))
+                {
+                    val cookieArray = header.split(";")
+                    val cookie=cookieArray[0]
+                    cookieBuffer.append(cookie).append(";")
+                }
+                if(!cookieBuffer.isEmpty())//cookie不为空
+                {
+                    QdApplication.setCookie(cookieBuffer.toString())
+                }
+
+            }
+            return originalResponse!!
+        }
+    }
+
+    //添加cookie
+    private inner class CookieAddInterceptor:Interceptor{
+        override fun intercept(chain: Interceptor.Chain?): Response {
+
+            val builder = chain?.request()?.newBuilder()
+            if(QdApplication.getCookie()!=null)
+            {
+                builder?.addHeader("Set-Cookie", QdApplication.getCookie())
+            }
+
+            return chain?.proceed(builder?.build())!!
+        }
+    }
+
+
+
 
     companion object {
 

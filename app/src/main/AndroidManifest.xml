@@ -44,7 +44,9 @@
         <activity android:name=".ui.activity.BaoXiaoActivity" />
         <activity android:name=".ui.activity.NewBaoXiaoActivity" />
         <activity android:name=".ui.activity.AuditActivity" />
-        <activity android:name=".ui.activity.AuditApplyDetailActivity"></activity>
+        <activity android:name=".ui.activity.AuditApplyDetailActivity" />
+        <activity android:name=".ui.activity.MyShenQingActivity" />
+        <activity android:name=".ui.activity.PasswordModifyActivity"></activity>
     </application>
 
 </manifest>
