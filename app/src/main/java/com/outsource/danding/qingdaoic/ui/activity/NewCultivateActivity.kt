@@ -2,8 +2,12 @@ package com.outsource.danding.qingdaoic.ui.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.R
 import com.outsource.danding.qingdaoic.app.QdApplication
@@ -22,6 +26,22 @@ class NewCultivateActivity : BaseActivity() , DatePickerFragment.OnDateSetListen
     private  lateinit var mTarget: View
 
     private var passIsShow = false
+
+    var expendType:String="14"
+    var applyDeptName:String?=null
+    var isLoan:String?=null
+    var loanReason:String?=null
+    var budgetAmount:String?=null
+    var remark:String?=null
+    var trainName:String?=null
+    var trainPlace:String?=null
+    var trainNum:String?=null
+    var trainStaffNum:String?=null
+    var trainBudget:String?=null
+
+    var trainObject:String?=null
+
+    var departments:MutableList<Department>?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,12 +69,61 @@ class NewCultivateActivity : BaseActivity() , DatePickerFragment.OnDateSetListen
 
     private fun initListener() {
 
-        btn_commit.setOnClickListener { v->
-            commit()
+        btn_commit.setOnClickListener {
+           // commit()
+            saveCultivateApply("1")
         }
         btn_temp_save.setOnClickListener{
             saveCultivateApply("1")
         }
+        sp_dept?.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                applyDeptName=departments?.get(position)?.deptName
+            }
+        }
+        rg_isLoan.setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId)
+            {
+                R.id.yes->
+                {
+                    isLoan="0"
+                    ll_loanReason.visibility=View.VISIBLE
+                }
+                R.id.no->
+                {
+                    isLoan="1"
+                    ll_loanReason.visibility=View.GONE
+                }
+            }
+        }
+        et_loanReason.addTextChangedListener(object: TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_loanReason.text.toString()!="")
+                {
+                    loanReason=et_loanReason.text.toString()
+                }
+            }
+        })
+        et_remark.addTextChangedListener(object :TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_remark.text.toString()!="")
+                {
+                    remark=et_remark.text.toString()
+                }
+            }
+
+        })
+
         ll_trainTime.setOnClickListener { v->
             pickDate(tv_trainTime)
         }
@@ -67,10 +136,78 @@ class NewCultivateActivity : BaseActivity() , DatePickerFragment.OnDateSetListen
         ll_trainLeave.setOnClickListener { v->
             pickDate(tv_trainLeave)
         }
+        et_trainPlace.addTextChangedListener(object :TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_trainPlace.text.toString()!="")
+                {
+                    trainPlace=et_trainPlace.text.toString()
+                }
+            }
+        })
+        et_trainBudget.addTextChangedListener(object :TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_trainBudget.text.toString()!="")
+                {
+                    trainBudget=et_trainBudget.text.toString()
+                }
+            }
+        })
+        et_trainNum.addTextChangedListener(object :TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_trainNum.text.toString()!="")
+                {
+                    trainNum=et_trainNum.text.toString()
+                }
+            }
+        })
+        et_trainStaffNum.addTextChangedListener(object :TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_trainStaffNum.text.toString()!=""){
+                    trainStaffNum=et_trainStaffNum.text.toString()
+                }
+            }
+        })
+
 
     }
 
-    private fun saveCultivateApply(flage: String) {
+    private fun saveCultivateApply(flag: String) {
+        HttpClient.instance.saveCultivateApply(flag!!,expendType!!,applyDeptName!!, isLoan!!,
+                loanReason!!,budgetAmount!!,remark!!,
+                trainName!!,tv_trainTime.text.toString()!!,tv_trainEnd.text.toString()!!, tv_trainReport.text.toString()!!,
+                tv_trainLeave.text.toString()!!,trainPlace!!,trainNum!!, trainStaffNum!!,
+                trainBudget!!,trainObject!!)
+                .bindToLifecycle(this)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    json: JsonObject ->
+                    val data=json.getAsJsonObject("data")
+
+                    cancelProgressDialog()
+
+
+                }, {
+                    e: Throwable ->
+                    cancelProgressDialog()
+                })
 
     }
 
@@ -113,7 +250,34 @@ class NewCultivateActivity : BaseActivity() , DatePickerFragment.OnDateSetListen
     }
 
     override fun onDateSet(year: Int, month: Int, day: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        var month = month
+        var dateStr:String?=null
+        if(mTarget!=null)
+        {
+            when(mTarget)
+            {
+                is TextView ->
+                {
+                    var monthStr:String?=null
+                    if(month+1>=10)
+                        monthStr=""+(month+1)
+                    else
+                        monthStr="0"+(month+1)
+                    var dayStr:String?=null
+                    if(day>=10)
+                        dayStr=""+day
+                    else
+                        dayStr="0"+day
+                    dateStr=year.toString() + "-" + monthStr + "-" + dayStr
+                    (mTarget as TextView).text=dateStr
+
+                }
+                else -> {
+                }
+            }
+
+
+        }
     }
 
 

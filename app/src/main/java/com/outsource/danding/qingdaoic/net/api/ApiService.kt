@@ -107,6 +107,16 @@ interface  ApiService{
     @POST("m_out_apply_add.do")
     fun saveTravelApply(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
 
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("do_saveByOffice.do")
+    fun saveGoAbroadApply(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("do_saveByOffice.do")
+    fun saveCultivateActivity(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
+
 
 }
 
