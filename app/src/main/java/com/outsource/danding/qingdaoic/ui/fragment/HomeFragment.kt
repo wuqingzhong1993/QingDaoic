@@ -92,9 +92,14 @@ class HomeFragment:BaseFragment() {
                 .subscribe({
                     json: JsonObject ->
 
-
                     val data= json.getAsJsonObject("data")
+                    if(data!=null)
+                    {
+                        val  gson=Gson()
+                        val userINfo:UserInfo = gson.fromJson(data,UserInfo::class.java)
+                        QdApplication.setUserInfo(userINfo)
 
+                    }
 
                 }, {
                     e: Throwable ->

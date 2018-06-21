@@ -2,8 +2,7 @@ package com.outsource.danding.qingdaoic.net
 
 import android.os.Build
 import android.text.TextUtils
-import com.google.gson.Gson
-import com.google.gson.JsonObject
+import com.google.gson.*
 import com.outsource.danding.qingdaoic.app.QdApp
 import com.outsource.danding.qingdaoic.app.QdApplication
 import com.outsource.danding.qingdaoic.net.api.ApiConstants
@@ -86,6 +85,18 @@ class HttpClient private constructor() {
     fun getUserInfo():Observable<JsonObject>{
 
         return apiService.getUserInfo(this.personId!!)
+    }
+
+    /**
+     * 修改个人信息
+     */
+    fun getPassCheck(oldPass:String,newPass:String,qurenPass:String):Observable<JsonObject>{
+        val map = HashMap<String,String>()
+        map.put("personId", this.personId!!)
+        map.put("oldPass", oldPass)
+        map.put("newPass", newPass)
+        map.put("qurenPass",qurenPass)
+        return apiService.getPassCheck(map )
     }
 
     /**
@@ -190,7 +201,12 @@ class HttpClient private constructor() {
         map.put("budgetAmount",budgetAmount)
         map.put("remark",remark)
         map.put("cashContent",cashContent)
-        map.put("officeList",officeList)
+        val gson=Gson()
+        var ob:JsonObject= JsonObject()
+        val dataList:JsonArray= JsonParser().parse(officeList).asJsonArray
+        ob.add("dataList",dataList)
+        gson.toJson(ob)
+        map.put("officeList",ob.toString())
 
         return apiService.saveBusinessApply(map)
 
@@ -268,29 +284,14 @@ class HttpClient private constructor() {
     }
 
 
-    fun saveBusinessApply( flag:String,expendType:String,applyDeptName:String, isLoan:String,
-                           loanReason:String?,budgetAmount:String?,remark:String?,cashContent:String?,
-                           officeList: String):Observable<JsonObject>{
+    /**
+     * 获取个人资产
+     */
+    fun getDoZCList( pageNum:String):Observable<JsonObject>{
 
-        val map = HashMap<String,String>()
-        map.put("personId", this.personId!!)
-        map.put("flag",flag)
-        map.put("expendType",expendType)
-        map.put("applyDeptName",applyDeptName)
-        map.put("isLoan",isLoan)
-        if(loanReason!=null)
-            map.put("loanReason",loanReason)
-        if(budgetAmount!=null)
-            map.put("budgetAmount",budgetAmount)
-        if(remark!=null)
-            map.put("remark",remark)
-        if(cashContent!=null)
-            map.put("cashContent",cashContent)
-        map.put("officeList",officeList)
-
-        return apiService.saveBusinessApply(map)
-
+        return apiService.getDoZCList(this.personId!!,pageNum)
     }
+
 
     fun getshenQingInfoList():Observable<JsonObject>{
         return apiService.getshenQingInfoList(this.personId!!,"1")
@@ -527,7 +528,7 @@ class HttpClient private constructor() {
             val builder = chain?.request()?.newBuilder()
             if(QdApplication.getCookie()!=null)
             {
-                builder?.addHeader("Set-Cookie", QdApplication.getCookie())
+                builder?.addHeader("Cookie", QdApplication.getCookie())
             }
 
             return chain?.proceed(builder?.build())!!

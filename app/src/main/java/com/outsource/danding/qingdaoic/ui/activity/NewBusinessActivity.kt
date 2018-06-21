@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.R
@@ -40,7 +41,7 @@ class NewBusinessActivity : BaseActivity() , OfficeAdapter.OnDeleteListener{
     var expendType:String?=null
     var zhichuList:MutableList<ZhiChu>?=null
     var isLoan:String="1"
-    var loanReason:String?=null
+    var loanReason:String=""
 
     lateinit var officeAdapter: OfficeAdapter
     var officeList:MutableList<BusinessOffice>?=null
@@ -225,7 +226,7 @@ class NewBusinessActivity : BaseActivity() , OfficeAdapter.OnDeleteListener{
         val officeJson= Gson().toJson(officeList!!)
 
 
-        HttpClient.instance.saveBusinessApply(flag!!,expendType!!,departName!!, isLoan!!,
+        HttpClient.instance.saveBusinessApply(flag,expendType!!,departName!!, isLoan,
                 loanReason!!,budgetAmount!!,remark!!, cashContent!!,
                 officeJson)
                 .bindToLifecycle(this)
@@ -234,10 +235,16 @@ class NewBusinessActivity : BaseActivity() , OfficeAdapter.OnDeleteListener{
                 .subscribe({
                     json: JsonObject ->
                     val data=json.getAsJsonObject("data")
-
+                    if(data!=null&&data.get("result")!=null)
+                    {
+                        if(data.get("result") as Int==1)
+                        {
+                            Toast.makeText(this,"提交成功",Toast.LENGTH_SHORT).show()
+                        }else{
+                            Toast.makeText(this,"提交失败",Toast.LENGTH_SHORT).show()
+                        }
+                    }
                     cancelProgressDialog()
-
-
                 }, {
                     e: Throwable ->
                     cancelProgressDialog()

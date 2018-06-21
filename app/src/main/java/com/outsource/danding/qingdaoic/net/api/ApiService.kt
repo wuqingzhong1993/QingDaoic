@@ -53,13 +53,15 @@ interface  ApiService{
     fun getAuditHistoryList(@Field("personId") personId:String,@Field("pageNum") pageNum: String): Observable<JsonObject>
 
 
-
-
     @FormUrlEncoded
     @Headers("Accept-Encoding:application/json")
     @POST("m_getApplyInfoList.do")
     fun getAuditApplyList(@Field("personId") personId:String,@Field("pageNum") pageNum: String): Observable<JsonObject>
 
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("m_getdozcList.do")
+    fun getDoZCList(@Field("personId") personId:String,@Field("pageNum") pageNum: String): Observable<JsonObject>
 
 
     @FormUrlEncoded
@@ -114,6 +116,12 @@ interface  ApiService{
     @Headers("Accept-Encoding:application/json")
     @POST("m_out_apply_add.do")
     fun saveTravelApply(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("m_getPassCheck.do")
+    fun getPassCheck(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
+
 
 
 }

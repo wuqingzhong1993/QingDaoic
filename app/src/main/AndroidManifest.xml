@@ -46,7 +46,9 @@
         <activity android:name=".ui.activity.AuditActivity" />
         <activity android:name=".ui.activity.AuditApplyDetailActivity" />
         <activity android:name=".ui.activity.MyShenQingActivity" />
-        <activity android:name=".ui.activity.PasswordModifyActivity"></activity>
+        <activity android:name=".ui.activity.PasswordModifyActivity" />
+        <activity android:name=".ui.activity.MyAssetActivity" />
+        <activity android:name=".ui.activity.MyAssetDetailActivity"></activity>
     </application>
 
 </manifest>

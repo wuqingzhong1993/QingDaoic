@@ -6,10 +6,7 @@ import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.R
 import com.outsource.danding.qingdaoic.base.BaseFragment
 import com.outsource.danding.qingdaoic.net.HttpClient
-import com.outsource.danding.qingdaoic.ui.activity.AuditByOperatorActivity
-import com.outsource.danding.qingdaoic.ui.activity.MainActivity
-import com.outsource.danding.qingdaoic.ui.activity.MyShenQingActivity
-import com.outsource.danding.qingdaoic.ui.activity.PasswordModifyActivity
+import com.outsource.danding.qingdaoic.ui.activity.*
 import com.outsource.danding.qingdaoic.util.GlideImageLoader
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -44,6 +41,11 @@ class MineFragment : BaseFragment() {
 
         ll_config.setOnClickListener {
             val intent = Intent(activity, PasswordModifyActivity::class.java)
+            jumpToActivity(intent)
+        }
+
+        ll_assets.setOnClickListener {
+            val intent = Intent(activity, MyAssetActivity::class.java)
             jumpToActivity(intent)
         }
 

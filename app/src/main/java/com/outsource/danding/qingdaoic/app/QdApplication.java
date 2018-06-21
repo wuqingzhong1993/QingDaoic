@@ -10,6 +10,7 @@ import com.outsource.danding.qingdaoic.bean.City;
 import com.outsource.danding.qingdaoic.bean.Department;
 import com.outsource.danding.qingdaoic.bean.Person;
 import com.outsource.danding.qingdaoic.bean.Province;
+import com.outsource.danding.qingdaoic.bean.UserInfo;
 import com.outsource.danding.qingdaoic.bean.ZhiChu;
 
 
@@ -25,9 +26,10 @@ public class QdApplication extends Application {
     private List<City> cities;
     private List<Person> persons;
     private List<ZhiChu> zhiChuList;
-
+    private UserInfo userInfo;
 
     private String cookie;
+
 
 
     @Override
@@ -121,6 +123,23 @@ public class QdApplication extends Application {
 
     }
 
+    public static void setUserInfo(UserInfo userInfo)
+    {
+        if(mInstance==null)
+        {
+            mInstance=new QdApplication();
+        }
+        mInstance.userInfo=userInfo;
+    }
+
+    public static UserInfo getUserInfo(){
+        if(mInstance==null)
+        {
+            mInstance=new QdApplication();
+            return null;
+        }
+        return mInstance.userInfo;
+    }
 
 
     public static QdApplication getInstance(){
