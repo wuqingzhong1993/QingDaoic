@@ -268,30 +268,6 @@ class HttpClient private constructor() {
     }
 
 
-    fun saveBusinessApply( flag:String,expendType:String,applyDeptName:String, isLoan:String,
-                           loanReason:String?,budgetAmount:String?,remark:String?,cashContent:String?,
-                           officeList: String):Observable<JsonObject>{
-
-        val map = HashMap<String,String>()
-        map.put("personId", this.personId!!)
-        map.put("flag",flag)
-        map.put("expendType",expendType)
-        map.put("applyDeptName",applyDeptName)
-        map.put("isLoan",isLoan)
-        if(loanReason!=null)
-            map.put("loanReason",loanReason)
-        if(budgetAmount!=null)
-            map.put("budgetAmount",budgetAmount)
-        if(remark!=null)
-            map.put("remark",remark)
-        if(cashContent!=null)
-            map.put("cashContent",cashContent)
-        map.put("officeList",officeList)
-
-        return apiService.saveBusinessApply(map)
-
-    }
-
     fun getshenQingInfoList():Observable<JsonObject>{
         return apiService.getshenQingInfoList(this.personId!!,"1")
     }

@@ -45,7 +45,8 @@ class MyShenQingActivity : BaseListActivity<ShenQing>() {
     override fun bindDataToView(holder: FNAdapter.MyViewHolder?, position: Int) {
 
         holder!!.itemView.tv_internalName.text = mList[position].internalName
-        holder!!.itemView.tv_sumAmount.text ="$"+ mList[position].sumAmount.toString()
+        if(mList[position].sumAmount!=null)
+            holder!!.itemView.tv_sumAmount.text ="$"+ mList[position].sumAmount?.toString()
         holder!!.itemView.tv_expendType.text = mList[position].expendType
         holder!!.itemView.tv_applyDeptName.text = mList[position].applyDeptName
         holder!!.itemView.tv_createTime.text=mList[position].createTime
