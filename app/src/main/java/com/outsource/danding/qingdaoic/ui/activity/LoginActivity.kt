@@ -76,7 +76,7 @@ class LoginActivity : BaseActivity() {
      * 账户4: 处长1 1
      */
     private fun login(username: String, password: String) {
-        HttpClient.instance.login("会计", "1")
+        HttpClient.instance.login("经办人1", "1")
                 .bindToLifecycle(this)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

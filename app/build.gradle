@@ -50,6 +50,8 @@ dependencies {
     kapt 'com.jakewharton:butterknife-compiler:8.8.1'
     kapt 'com.github.bumptech.glide:compiler:4.7.1'
     compile 'com.youth.banner:banner:1.4.10'
+    compile 'com.github.martin90s:ImagePicker:v1.3.2'
+
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
