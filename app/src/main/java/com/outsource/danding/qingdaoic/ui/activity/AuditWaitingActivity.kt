@@ -63,13 +63,17 @@ class AuditWaitingActivity : BaseListActivity<AuditWaiting>() {
     override fun getView(parent: ViewGroup?, viewType: Int): View = layoutInflater.inflate(R.layout.item_list_audit_waiting, parent, false)
 
     override fun bindDataToView(holder: FNAdapter.MyViewHolder?, position: Int) {
-        holder!!.itemView.audit_type.text = mList[position].type
-        holder!!.itemView.audit_price.text = mList[position].price
-        holder!!.itemView.audit_date.text=mList[position].taskId
+        holder!!.itemView.tv_type.text = mList[position].type
+        holder!!.itemView.tv_content.text = mList[position].content
+
     }
 
     override fun onItemClick(holder: FNAdapter.MyViewHolder?, position: Int) {
-       intent=Intent(this,BasicInfoActivity::class.java)
+//       intent=Intent(this,BasicInfoActivity::class.java)
+//        startActivity(intent)
+
+        val intent= Intent(activity, AuditApplyDetailActivity::class.java)
+        intent.putExtra("expendId",mList[position].tableId)
         startActivity(intent)
     }
 

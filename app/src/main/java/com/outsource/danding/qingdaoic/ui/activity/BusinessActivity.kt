@@ -13,6 +13,7 @@ import com.outsource.danding.qingdaoic.R
 import com.outsource.danding.qingdaoic.base.BaseListActivity
 import com.outsource.danding.qingdaoic.base.FNAdapter
 import com.outsource.danding.qingdaoic.bean.ApplyInfo
+import com.outsource.danding.qingdaoic.bean.BusinessInfo
 import com.outsource.danding.qingdaoic.net.HttpClient
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -20,7 +21,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.item_list_business.view.*
 import java.util.*
 
-class BusinessActivity : BaseListActivity<ApplyInfo>() {
+class BusinessActivity : BaseListActivity<BusinessInfo>() {
 
 
     override fun loadData() {
@@ -48,22 +49,34 @@ class BusinessActivity : BaseListActivity<ApplyInfo>() {
 
     override fun bindDataToView(holder: FNAdapter.MyViewHolder?, position: Int) {
 
-        holder!!.itemView.internal_name.text = mList[position].internalName
-        holder!!.itemView.budget_amount.text ="$"+ mList[position].budgetAmount.toString()
+
+        holder!!.itemView.budget_amount.text ="$"+ mList[position].budgetAmount
         holder!!.itemView.expend_type.text = mList[position].expendType
         holder!!.itemView.state.text = mList[position].state
         holder!!.itemView.create_time.text=mList[position].createTime
     }
 
     override fun onItemClick(holder: FNAdapter.MyViewHolder?, position: Int) {
-        intent= Intent(this,BasicInfoActivity::class.java)
-        startActivity(intent)
+
+        when(mList[position].expendType)
+        {
+            "办公费","\"办公费\""->{
+                intent= Intent(this,BusinessDetailActivity::class.java)
+                intent.putExtra("expendId",mList[position].expendId)
+                startActivity(intent)
+            }
+            else->{
+
+            }
+        }
+
+
     }
 
 
     private fun getApplyInfoList()
     {
-        HttpClient.instance.getApplyInfoList()
+        HttpClient.instance.getshenQingInfoList()
                 .bindToLifecycle(this)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -81,7 +94,7 @@ class BusinessActivity : BaseListActivity<ApplyInfo>() {
                             val  gson= Gson()
                             for(ob in list)
                             {
-                                val applyInfo: ApplyInfo = gson.fromJson(ob, ApplyInfo::class.java)
+                                val applyInfo: BusinessInfo = gson.fromJson(ob, BusinessInfo::class.java)
                                 mList.add(applyInfo)
                             }
                         }
