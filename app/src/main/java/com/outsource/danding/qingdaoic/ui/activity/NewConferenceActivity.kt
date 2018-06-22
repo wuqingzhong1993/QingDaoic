@@ -34,7 +34,7 @@ class NewConferenceActivity : BaseActivity(), DatePickerFragment.OnDateSetListen
 //    var meetingTime:String?=null
     private var passIsShow = false
 
-    var budgetAmount:String ?=null
+    var budgetAmount:String="0"
     var cashContent:String?=null
     var remark:String?=null
     var applyDeptName:String?=null
@@ -48,7 +48,7 @@ class NewConferenceActivity : BaseActivity(), DatePickerFragment.OnDateSetListen
     var meetingPlace:String?=null
     var estimatedNum:String?=null
     var staffNum:String?=null
-    var meetingBudget:String?=null
+    var meetingBudget:String="0"
     var meetingReason:String?=null
 
     var departments:MutableList<Department>?=null
