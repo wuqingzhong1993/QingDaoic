@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import android.widget.Toast
 import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.R
 import com.outsource.danding.qingdaoic.app.QdApplication
@@ -36,25 +37,23 @@ class NewConferenceActivity : BaseActivity(), DatePickerFragment.OnDateSetListen
     var budgetAmount:String ?=null
     var cashContent:String?=null
     var remark:String?=null
-    var departments:MutableList<Department>?=null
-    var departName:String?=null
+    var applyDeptName:String?=null
     var expendType:String="13"
     var zhichuList:MutableList<ZhiChu>?=null
-    var isLoan:String?=null
+    var isLoan:String="1"
     var loanReason:String?=null
 
     var meetingName:String?=null
-    var meetingTime:String?=null
-    var trainEnd:String?=null
-    var trainReport:String?=null
-    var trainLeave:String?=null
     var meetingCategory:String?=null
     var meetingPlace:String?=null
     var estimatedNum:String?=null
     var staffNum:String?=null
     var meetingBudget:String?=null
     var meetingReason:String?=null
-    
+
+    var departments:MutableList<Department>?=null
+    var departmentNames:MutableList<String>?=null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_conference)
@@ -66,11 +65,11 @@ class NewConferenceActivity : BaseActivity(), DatePickerFragment.OnDateSetListen
         title="会议申请"
 
         //初始化单位的adapter
-        val departments:MutableList<Department> = QdApplication.getDepartments()
-        val departmentNames= mutableListOf<String>()
-        for(department in departments)
+        departments= QdApplication.getDepartments()
+        departmentNames= mutableListOf<String>()
+        for(department in departments!!)
         {
-            departmentNames.add(department.deptName)
+            departmentNames?.add(department.deptName)
         }
         val adapter: ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_spinner_item, departmentNames)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -90,24 +89,189 @@ class NewConferenceActivity : BaseActivity(), DatePickerFragment.OnDateSetListen
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                departName=departments?.get(position)?.deptName
+                applyDeptName=departments?.get(position)?.deptName
             }
         }
+        tv_meetingTime.setOnClickListener { v->
+            pickDate(tv_meetingTime)
+        }
+        tv_trainEnd.setOnClickListener{ v->
+            pickDate(tv_trainEnd)
+        }
+        tv_trainReport.setOnClickListener { v->
+            pickDate(tv_trainReport)
+        }
+        tv_trainLeave.setOnClickListener { v->
+            pickDate(tv_trainLeave)
+        }
+        rg_isLoan.setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId)
+            {
+                R.id.yes->
+                {
+                    isLoan="0"
+                    ll_loanReason.visibility=View.VISIBLE
+                }
+                R.id.no->
+                {
+                    isLoan="1"
+                    ll_loanReason.visibility=View.GONE
+                }
+            }
+        }
+        et_loanReason.addTextChangedListener(object: TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_loanReason.text.toString()!="")
+                {
+                    loanReason=et_loanReason.text.toString()
+                }
+            }
+        })
+//        et_remark.addTextChangedListener(object :TextWatcher{
+//            override fun afterTextChanged(s: Editable?) {
+//            }
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//            }
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                if(et_remark.text.toString()!="")
+//                {
+//                    remark=et_remark.text.toString()
+//                }
+//            }
+//
+//        })
+        et_meetingName.addTextChangedListener(object :TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_meetingName.text.toString()!=""){
+                    meetingName=et_meetingName.text.toString()
+                }
+            }
+        })
+        et_meetingCategory.addTextChangedListener(object :TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_meetingCategory.text.toString()!=""){
+                    meetingCategory=et_meetingCategory.text.toString()
+                }
+            }
+        })
+        et_meetingPlace.addTextChangedListener(object :TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_meetingPlace.text.toString()!=""){
+                    meetingPlace=et_meetingPlace.text.toString()
+                }
+            }
+        })
+        et_estimatedNum.addTextChangedListener(object :TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_estimatedNum.text.toString()!=""){
+                    estimatedNum=et_estimatedNum.text.toString()
+                }
+            }
+        })
+
+        et_staffNum.addTextChangedListener(object :TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_staffNum.text.toString()!=""){
+                    staffNum=et_staffNum.text.toString()
+                }
+            }
+        })
+        et_meetingReason.addTextChangedListener(object :TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_meetingReason.text.toString()!=""){
+                    meetingReason=et_meetingReason.text.toString()
+                }
+            }
+        })
+//        et_meetingBudget.addTextChangedListener(object :TextWatcher{
+//            override fun afterTextChanged(s: Editable?) {
+//            }
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//            }
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                if(et_meetingBudget.text.toString()!=""){
+//                    meetingBudget=et_meetingBudget.text.toString()
+//                }
+//            }
+//        })
+//        et_budgetAmount.addTextChangedListener(object :TextWatcher{
+//            override fun afterTextChanged(s: Editable?) {
+//            }
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//            }
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                if(et_budgetAmount.text.toString()!=""){
+//                    budgetAmount=et_budgetAmount.text.toString()
+//                }
+//            }
+//        })
+
     }
 
     private fun saveConferenceApply(flag: String) {
-        HttpClient.instance.saveConferenceApply(flag!!,expendType!!,departName!!, isLoan!!,
-                loanReason!!,budgetAmount!!,remark!!, cashContent!!,
-                meetingName!!,meetingTime!!,trainEnd!!,trainReport!!,trainLeave!!,
+        HttpClient.instance.saveConferenceApply(flag!!,expendType!!,applyDeptName!!, isLoan!!,
+                loanReason,budgetAmount,remark,
+                meetingName!!,tv_meetingTime.text.toString()!!,tv_trainEnd.text.toString()!!,
+                tv_trainReport.text.toString()!!,tv_trainLeave.text.toString()!!,
                 meetingCategory!!,meetingPlace!!,estimatedNum!!,staffNum!!,
-                meetingBudget!!,meetingReason!!)
+                meetingBudget,meetingReason)
                 .bindToLifecycle(this)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     json: JsonObject ->
                     val data=json.getAsJsonObject("data")
+                    if(data!=null&&data.get("result")!=null)
+                    {
+                        if(flag=="0"){
+                            if(data.get("result").toString()=="1")
+                            {
+                                Toast.makeText(this,"提交成功", Toast.LENGTH_SHORT).show()
+                            }else{
+                                Toast.makeText(this,"提交失败", Toast.LENGTH_SHORT).show()
+                            }
+                        }else{
+                            if(data.get("result").toString()=="1")
+                            {
+                                Toast.makeText(this, "暂存成功", Toast.LENGTH_SHORT).show()
+                            }else{
+                                Toast.makeText(this, "暂存失败", Toast.LENGTH_SHORT).show()
+                            }
+                        }
 
+                    }
                     cancelProgressDialog()
 
                 }, {
@@ -149,14 +313,6 @@ class NewConferenceActivity : BaseActivity(), DatePickerFragment.OnDateSetListen
                 else -> {
                 }
             }
-
-            when(mTarget.id)
-            {
-                R.id.tv_meetingTime->
-                    meetingTime=dateStr
-
-            }
-
         }
     }
 

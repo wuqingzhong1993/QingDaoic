@@ -7,10 +7,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.DatePicker
-import android.widget.TextView
+import android.widget.*
+import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.R
 import com.outsource.danding.qingdaoic.R.id.et_w_number
@@ -257,16 +255,36 @@ class NewTravelActivity : BaseActivity(),DatePickerFragment.OnDateSetListener {
 
     }
     private fun saveTravelApply(flag:String) {
+        val officeJson= Gson().toJson(officeList!!)
+
         HttpClient.instance.saveTravelApply(flag!!,internalId!!,internalName!!, applyDeptId!!,
-                applyDeptName!!,isLoan!!,loanReason!!,
-                officeList!!)
+                applyDeptName!!,isLoan!!,loanReason,
+                officeJson!!)
                 .bindToLifecycle(this)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     json: JsonObject ->
                     val data=json.getAsJsonObject("data")
+                    if(data!=null&&data.get("result")!=null)
+                    {
+                        if(flag=="0"){
+                            if(data.get("result").toString()=="1")
+                            {
+                                Toast.makeText(this,"提交成功", Toast.LENGTH_SHORT).show()
+                            }else{
+                                Toast.makeText(this,"提交失败", Toast.LENGTH_SHORT).show()
+                            }
+                        }else{
+                            if(data.get("result").toString()=="1")
+                            {
+                                Toast.makeText(this, "暂存成功", Toast.LENGTH_SHORT).show()
+                            }else{
+                                Toast.makeText(this, "暂存失败", Toast.LENGTH_SHORT).show()
+                            }
+                        }
 
+                    }
                     cancelProgressDialog()
 
 
