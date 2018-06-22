@@ -216,10 +216,10 @@ class HttpClient private constructor() {
      * zy20180619
      */
     fun saveConferenceApply(flag:String,expendType:String,applyDeptName:String, isLoan:String,
-                            loanReason:String,budgetAmount:String,remark:String,cashContent:String,
+                            loanReason:String?,budgetAmount:String?,remark:String?,
                             meetingName:String,meetingTime:String,trainEnd:String,trainReport:String,trainLeave:String,
                             meetingCategory:String,meetingPlace:String,estimatedNum:String,staffNum:String,
-                            meetingBudget:String,meetingReason:String):Observable<JsonObject>{
+                            meetingBudget:String?,meetingReason:String?):Observable<JsonObject>{
 
         val map = HashMap<String,String>()
         map.put("personId", this.personId!!)
@@ -227,24 +227,31 @@ class HttpClient private constructor() {
         map.put("expendType",expendType)
         map.put("applyDeptName",applyDeptName)
         map.put("isLoan",isLoan)
-        map.put("loanReason",loanReason)
-        map.put("budgetAmount",budgetAmount)
-        map.put("remark",remark)
-        map.put("cashContent",cashContent)
+        if(loanReason!=null){
+            map.put("loanReason",loanReason)
+        }
+        if(budgetAmount!=null){
+            map.put("budgetAmount",budgetAmount)
+        }
+        if(remark!=null){
+            map.put("remark",remark)
+        }
 
         map.put("meetingName",meetingName)
         map.put("meetingTime",meetingTime)
         map.put("trainEnd",trainEnd)
         map.put("trainReport",trainReport)
-        map.put("loanReason",loanReason)
         map.put("trainLeave",trainLeave)
         map.put("meetingCategory",meetingCategory)
         map.put("meetingPlace",meetingPlace)
         map.put("estimatedNum",estimatedNum)
         map.put("staffNum",staffNum)
-        map.put("meetingBudget",meetingBudget)
-        map.put("meetingReason",meetingReason)
-
+        if(meetingBudget!=null){
+            map.put("meetingBudget",meetingBudget)
+        }
+        if(meetingReason!=null){
+            map.put("meetingReason",meetingReason)
+        }
         return apiService.saveBusinessApply(map)
     }
 
@@ -430,7 +437,7 @@ class HttpClient private constructor() {
      * zy20180620
      */
     fun saveTravelApply(flag: String, internalId: String, internalName: String, applyDeptId: String,
-                        applyDeptName: String, isLoan: String, loanReason: String,
+                        applyDeptName: String, isLoan: String, loanReason: String?,
                         officeList: String): Observable<JsonObject>{
         val map = HashMap<String,String>()
 
@@ -442,7 +449,9 @@ class HttpClient private constructor() {
 
         map.put("applyDeptName",applyDeptName)
         map.put("isLoan",isLoan)
-        map.put("loanReason",loanReason)
+        if(loanReason!=null){
+            map.put("loanReason",loanReason)
+        }
         map.put("officeList",officeList)
 
         return apiService.saveTravelApply(map)
