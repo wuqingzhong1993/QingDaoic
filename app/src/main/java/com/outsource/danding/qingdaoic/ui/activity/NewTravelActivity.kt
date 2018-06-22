@@ -13,6 +13,7 @@ import android.widget.DatePicker
 import android.widget.TextView
 import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.R
+import com.outsource.danding.qingdaoic.R.id.et_w_number
 import com.outsource.danding.qingdaoic.app.QdApplication
 import com.outsource.danding.qingdaoic.base.BaseActivity
 import com.outsource.danding.qingdaoic.bean.*

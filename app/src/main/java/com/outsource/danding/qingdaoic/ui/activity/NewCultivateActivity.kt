@@ -8,8 +8,10 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import android.widget.Toast
 import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.R
+import com.outsource.danding.qingdaoic.R.id.ll_trainTime
 import com.outsource.danding.qingdaoic.app.QdApplication
 import com.outsource.danding.qingdaoic.base.BaseActivity
 import com.outsource.danding.qingdaoic.bean.Department
@@ -29,7 +31,7 @@ class NewCultivateActivity : BaseActivity() , DatePickerFragment.OnDateSetListen
 
     var expendType:String="14"
     var applyDeptName:String?=null
-    var isLoan:String?=null
+    var isLoan:String="1"
     var loanReason:String?=null
     var budgetAmount:String?=null
     var remark:String?=null
@@ -42,6 +44,7 @@ class NewCultivateActivity : BaseActivity() , DatePickerFragment.OnDateSetListen
     var trainObject:String?=null
 
     var departments:MutableList<Department>?=null
+    var departmentNames:MutableList<String>?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,11 +56,12 @@ class NewCultivateActivity : BaseActivity() , DatePickerFragment.OnDateSetListen
         title="培训费申请"
 
         //初始化单位的adapter
-        val departments:MutableList<Department> = QdApplication.getDepartments()
-        val departmentNames= mutableListOf<String>()
-        for(department in departments)
+        departments = QdApplication.getDepartments()
+
+        departmentNames= mutableListOf<String>()
+        for(department in departments!!)
         {
-            departmentNames.add(department.deptName)
+            departmentNames?.add(department.deptName)
         }
         val adapter: ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_spinner_item, departmentNames)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -71,7 +75,7 @@ class NewCultivateActivity : BaseActivity() , DatePickerFragment.OnDateSetListen
 
         btn_commit.setOnClickListener {
            // commit()
-            saveCultivateApply("1")
+            saveCultivateApply("0")
         }
         btn_temp_save.setOnClickListener{
             saveCultivateApply("1")
@@ -123,7 +127,19 @@ class NewCultivateActivity : BaseActivity() , DatePickerFragment.OnDateSetListen
             }
 
         })
+        et_train_name.addTextChangedListener(object :TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
 
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_train_name.text.toString()!=""){
+                    trainName=et_train_name.text.toString()
+                }
+            }
+        })
         ll_trainTime.setOnClickListener { v->
             pickDate(tv_trainTime)
         }
@@ -157,6 +173,7 @@ class NewCultivateActivity : BaseActivity() , DatePickerFragment.OnDateSetListen
                 if(et_trainBudget.text.toString()!="")
                 {
                     trainBudget=et_trainBudget.text.toString()
+                    budgetAmount=trainBudget
                 }
             }
         })
@@ -184,13 +201,23 @@ class NewCultivateActivity : BaseActivity() , DatePickerFragment.OnDateSetListen
                 }
             }
         })
-
+        et_train_object.addTextChangedListener(object :TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_train_object.text.toString()!=""){
+                    trainObject=et_train_object.text.toString()
+                }
+            }
+        })
 
     }
 
     private fun saveCultivateApply(flag: String) {
         HttpClient.instance.saveCultivateApply(flag!!,expendType!!,applyDeptName!!, isLoan!!,
-                loanReason!!,budgetAmount!!,remark!!,
+                loanReason,budgetAmount!!,remark,
                 trainName!!,tv_trainTime.text.toString()!!,tv_trainEnd.text.toString()!!, tv_trainReport.text.toString()!!,
                 tv_trainLeave.text.toString()!!,trainPlace!!,trainNum!!, trainStaffNum!!,
                 trainBudget!!,trainObject!!)
@@ -200,9 +227,26 @@ class NewCultivateActivity : BaseActivity() , DatePickerFragment.OnDateSetListen
                 .subscribe({
                     json: JsonObject ->
                     val data=json.getAsJsonObject("data")
+                    if(data!=null&&data.get("result")!=null)
+                    {
+                        if(flag=="0"){
+                            if(data.get("result").toString()=="1")
+                            {
+                                Toast.makeText(this,"提交成功", Toast.LENGTH_SHORT).show()
+                            }else{
+                                Toast.makeText(this,"提交失败", Toast.LENGTH_SHORT).show()
+                            }
+                        }else{
+                            if(data.get("result").toString()=="1")
+                            {
+                                Toast.makeText(this, "暂存成功", Toast.LENGTH_SHORT).show()
+                            }else{
+                                Toast.makeText(this, "暂存失败", Toast.LENGTH_SHORT).show()
+                            }
+                        }
 
+                    }
                     cancelProgressDialog()
-
 
                 }, {
                     e: Throwable ->
