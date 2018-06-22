@@ -159,7 +159,7 @@ class HttpClient private constructor() {
      * 获取审核申请列表
      */
     fun getAuditApplyList():Observable<JsonObject>{
-        return apiService.getApplyInfoList(this.personId!!,"1")
+        return apiService.getApplyInfoList(this.personId!!,"2")
     }
 
     /**
@@ -296,7 +296,7 @@ class HttpClient private constructor() {
 
 
     fun getshenQingInfoList():Observable<JsonObject>{
-        return apiService.getshenQingInfoList(this.personId!!,"1")
+        return apiService.getshenQingInfoList(this.personId!!,"2")
     }
 
 

@@ -48,7 +48,8 @@
         <activity android:name=".ui.activity.MyShenQingActivity" />
         <activity android:name=".ui.activity.PasswordModifyActivity" />
         <activity android:name=".ui.activity.MyAssetActivity" />
-        <activity android:name=".ui.activity.MyAssetDetailActivity"></activity>
+        <activity android:name=".ui.activity.MyAssetDetailActivity" />
+        <activity android:name=".ui.activity.BusinessDetailActivity"></activity>
     </application>
 
 </manifest>

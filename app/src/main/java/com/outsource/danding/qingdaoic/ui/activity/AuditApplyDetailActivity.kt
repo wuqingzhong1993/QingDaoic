@@ -146,7 +146,7 @@ class AuditApplyDetailActivity : BaseActivity() {
                         tv_number.text=data.get("number").toString()
                         tv_applyDeptName.text=data.get("applyDeptName").toString()
                         tv_expendType.text=data.get("expendType").toString()
-                        tv_createName.text=data.get("createName").toString()
+                        tv_createName.text=data.get("createName").toString().replace("\"","")
                         tv_budgetAmount.text=data.get("budgetAmount").toString()
                         if(data.get("isLoan") != null)
                         {
@@ -155,7 +155,7 @@ class AuditApplyDetailActivity : BaseActivity() {
                             else
                                 tv_isLoan.text="否"
                         }
-                        tv_createTime.text=data.get("createTime").toString()
+                        tv_createTime.text=data.get("createTime").toString().replace("\"","")
                         tv_expendDetail.text=data.get("expendType").toString().replace("\"","")+"详细列表"
 
                         //kemuList
@@ -221,6 +221,45 @@ class AuditApplyDetailActivity : BaseActivity() {
                                     officeList?.add(office)
                                 }
                                 officeAdapter?.notifyDataSetChanged()
+                            }
+                        }
+
+                        if(data.get("expendType")!=null)
+                        {
+                            when(data.get("expendType").toString())
+                            {
+                                "培训费","\"培训费\""->{
+
+                                    ll_trainTime.visibility=View.VISIBLE
+                                    tv_trainTime.text=data.get("trainTime").toString().replace("\"","")
+
+                                    ll_trainEnd.visibility= View.VISIBLE
+                                    tv_trainEnd.text=data.get("trainEnd").toString().replace("\"","")
+
+                                    ll_trainReport.visibility=View.VISIBLE
+                                    tv_trainReport.text=data.get("trainReport").toString().replace("\"","")
+
+                                    ll_trainLeave.visibility=View.VISIBLE
+                                    tv_trainLeave.text=data.get("trainLeave").toString().replace("\"","")
+
+                                    ll_trainPlace.visibility=View.VISIBLE
+                                    tv_trainPlace.text=data.get("trainPlace").toString().replace("\"","")
+
+                                    ll_trainBudget.visibility=View.VISIBLE
+                                    tv_trainBudget.text=data.get("trainBudget").toString().replace("\"","")
+
+                                    ll_trainNum.visibility=View.VISIBLE
+                                    tv_trainNum.text=data.get("trainNum").toString().replace("\"","")
+
+                                    ll_trainStaffNum.visibility=View.VISIBLE
+                                    tv_trainStaffNum.text=data.get("trainStaffNum").toString().replace("\"","")
+                                }
+                                "会议费","\"会议费\""->{
+
+                                }
+                                else->{
+
+                                }
                             }
                         }
 
