@@ -450,7 +450,7 @@ class HttpClient private constructor() {
     }
 
     fun saveCultivateApply(flag: String, expendType: String, applyDeptName: String, isLoan: String,
-                           loanReason: String, budgetAmount: String, remark: String,
+                           loanReason: String?, budgetAmount: String, remark: String?,
                             trainName: String, trainTime: String,
                            trainEnd: String, trainReport: String, trainLeave: String, trainPlace: String,
                            trainNum: String, trainStaffNum: String, trainBudget: String,
@@ -461,9 +461,13 @@ class HttpClient private constructor() {
         map.put("expendType",expendType)
         map.put("applyDeptName",applyDeptName)
         map.put("isLoan",isLoan)
-        map.put("loanReason",loanReason)
+        if(loanReason!=null){
+            map.put("loanReason",loanReason)
+        }
         map.put("budgetAmount",budgetAmount)
-        map.put("remark",remark)
+        if(remark!=null){
+            map.put("remark",remark)
+        }
 
         map.put("trainName", trainName)
         map.put("trainTime",trainTime)

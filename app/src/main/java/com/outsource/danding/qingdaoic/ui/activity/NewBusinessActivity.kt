@@ -198,6 +198,9 @@ class NewBusinessActivity : BaseActivity() , OfficeAdapter.OnDeleteListener{
         }
 
         btn_commit.setOnClickListener {
+            saveBusinessApply("0")
+        }
+        btn_temp_save.setOnClickListener {
             saveBusinessApply("1")
         }
 
@@ -237,12 +240,21 @@ class NewBusinessActivity : BaseActivity() , OfficeAdapter.OnDeleteListener{
                     val data=json.getAsJsonObject("data")
                     if(data!=null&&data.get("result")!=null)
                     {
-                        if(data.get("result") as Int==1)
-                        {
-                            Toast.makeText(this,"提交成功",Toast.LENGTH_SHORT).show()
-                        }else{
-                            Toast.makeText(this,"提交失败",Toast.LENGTH_SHORT).show()
-                        }
+                       if(flag.equals(0)){
+                           if(data.get("result") as Int==1)
+                           {
+                               Toast.makeText(this,"提交成功",Toast.LENGTH_SHORT).show()
+                           }else{
+                               Toast.makeText(this,"提交失败",Toast.LENGTH_SHORT).show()
+                           }
+                       }else{
+                           if(data.get("result") as Int==1)
+                           {
+                               Toast.makeText(this,"暂存成功",Toast.LENGTH_SHORT).show()
+                           }else{
+                               Toast.makeText(this,"暂存失败",Toast.LENGTH_SHORT).show()
+                           }
+                       }
                     }
                     cancelProgressDialog()
                 }, {

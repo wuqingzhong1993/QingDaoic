@@ -204,7 +204,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     android:layout_weight="1"
-                    android:enabled="false"
                     android:hint="@string/begin_date"
                     android:textColor="#000"
                     android:textSize="15sp" />
@@ -395,8 +394,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:hint="请输入培训地点"
-                android:layout_weight="1"
-                android:enabled="false" />
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -427,8 +425,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:hint="请输入培训班预算"
-                android:layout_weight="1"
-                android:enabled="false" />
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -460,8 +457,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:hint="请输入预计参训人数"
-                android:layout_weight="1"
-                android:enabled="false" />
+                android:layout_weight="1"/>
 
         </LinearLayout>
 
@@ -492,12 +488,43 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:hint="请输入工作人数"
-                android:layout_weight="1"
-                android:enabled="false" />
+                android:layout_weight="1" />
 
         </LinearLayout>
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="4dp"
+            android:paddingEnd="20dp"
+            android:paddingStart="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="培训对象\n及理由: "
+                android:textColor="#444"
+                android:textSize="17sp"
+                android:drawableLeft="@drawable/ic_star_red_24"
+                />
+
+
+            <EditText
+                android:id="@+id/et_train_object"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="37dp"
+                android:layout_weight="1"
+                android:hint="请输入培训对象及理由"
+                />
+
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -523,8 +550,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="65dp"
-                android:layout_weight="1"
-                android:enabled="false" />
+                android:layout_weight="1"/>
 
         </LinearLayout>
 
