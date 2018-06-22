@@ -1,9 +1,14 @@
 package com.outsource.danding.qingdaoic.widget;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Path;
+import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -12,36 +17,72 @@ import com.outsource.danding.qingdaoic.R;
 
 public class AuditOfficeView extends LinearLayout {
 
-    private TextView tv_name;
-    private TextView tv_standard;
-    private TextView tv_univalent;
-    private TextView tv_number;
-    private TextView tv_money;
+    private float roundLayoutRadius = 14f;
+    private Path roundPath;
+    private RectF rectF;
 
-    public AuditOfficeView(Context context) {
+
+    private EditText et_name;
+    private EditText et_standard;
+    private EditText et_univalent;
+    private EditText et_number;
+    private EditText et_money;
+    private EditText et_remarks;
+    private TextView tv_delete;
+    private int mPosition;
+    private View mView;
+
+    public AuditOfficeView(Context context,int position) {
         super(context);
-        LayoutInflater.from(context).inflate(R.layout.adapter_audit_office,this);
-        tv_name=findViewById(R.id.tv_name);
-        tv_standard=findViewById(R.id.tv_standard);
-        tv_univalent=findViewById(R.id.tv_univalent);
-        tv_number=findViewById(R.id.tv_number);
-        tv_money=findViewById(R.id.tv_money);
+        mView=  LayoutInflater.from(context).inflate(R.layout.view_apply_office,this);
+        et_name=findViewById(R.id.et_name);
+        et_standard=findViewById(R.id.et_standard);
+        et_univalent=findViewById(R.id.et_univalent);
+        et_number=findViewById(R.id.et_number);
+        et_money=findViewById(R.id.et_money);
+        et_remarks=findViewById(R.id.et_remarks);
+        tv_delete=findViewById(R.id.tv_delete);
+        mPosition=position;
         initListener();
+        init();
     }
 
-    public AuditOfficeView(Context context, AttributeSet attrs) {
+    public AuditOfficeView(Context context, int position, AttributeSet attrs) {
         super(context, attrs);
-        LayoutInflater.from(context).inflate(R.layout.adapter_audit_office,this);
-        tv_name=findViewById(R.id.tv_name);
-        tv_standard=findViewById(R.id.tv_standard);
-        tv_univalent=findViewById(R.id.tv_univalent);
-        tv_number=findViewById(R.id.tv_number);
-        tv_money=findViewById(R.id.tv_money);
+        mView= LayoutInflater.from(context).inflate(R.layout.view_apply_office,this);
+        et_name=findViewById(R.id.et_name);
+        et_standard=findViewById(R.id.et_standard);
+        et_univalent=findViewById(R.id.et_univalent);
+        et_number=findViewById(R.id.et_number);
+        et_money=findViewById(R.id.et_money);
+        et_remarks=findViewById(R.id.et_remarks);
+        mPosition=position;
+        initListener();
+        init();
     }
+
+
 
     public void initListener(){
 
+
+        //删除监听
+        tv_delete.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
+
+    private void init(){
+        setWillNotDraw(false);
+        roundPath = new Path();
+        rectF = new RectF();
+        //mView.setBackgroundDrawable( getResources().getDrawable(R.drawable.border_radius_10));
+
+    }
+
 
     /**
      * 设置数据
@@ -49,23 +90,27 @@ public class AuditOfficeView extends LinearLayout {
 
     public void setName(String name)
     {
-        tv_name.setText(name);
+        et_name.setText(name);
     }
     public void setMoney(String money)
     {
-        tv_money.setText(money);
+        et_money.setText(money);
     }
     public void setStandard(String standard)
     {
-        tv_standard.setText(standard);
+        et_standard.setText(standard);
     }
     public void setNumber(String number)
     {
-        tv_number.setText(number);
+        et_number.setText(number);
     }
     public void setUnivalent(String univalent)
     {
-        tv_univalent.setText(univalent);
+        et_univalent.setText(univalent);
+    }
+    public void setRemarks(String remarks)
+    {
+        et_remarks.setText(remarks);
     }
 
 

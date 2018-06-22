@@ -89,11 +89,11 @@ class BusinessDetailActivity : BaseActivity() {
 
                                 ll_office.visibility= View.VISIBLE
                                 val  gson= Gson()
-                                for(ob in list)
+                                for((index,ob) in list.withIndex())
                                 {
                                     val office: AuditOffice = gson.fromJson(ob, AuditOffice::class.java)
                                     officeList?.add(office)
-                                    var officeView:AuditOfficeView= AuditOfficeView(this)
+                                    var officeView:AuditOfficeView= AuditOfficeView(this,index)
                                     ll_office.addView(officeView)
                                     var layoutParams = officeView.layoutParams
                                     layoutParams.width=LinearLayout.LayoutParams.MATCH_PARENT
@@ -104,6 +104,7 @@ class BusinessDetailActivity : BaseActivity() {
                                     officeView.setNumber(office.number)
                                     officeView.setStandard(office.standard)
                                     officeView.setUnivalent(office.univalent)
+                                    officeView.setRemarks(office.remarks)
 
 
                                 }

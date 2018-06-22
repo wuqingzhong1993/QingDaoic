@@ -296,7 +296,7 @@ class HttpClient private constructor() {
 
 
     fun getshenQingInfoList():Observable<JsonObject>{
-        return apiService.getshenQingInfoList(this.personId!!,"2")
+        return apiService.getshenQingInfoList(this.personId!!,"3")
     }
 
 
