@@ -157,6 +157,8 @@ class AuditBaoxiaoApplyDetailActivity : BaseActivity() {
                         tv_reason.text=data.get("reason").toString().replace("\"","")
                         tv_sumNum.text=data.get("sumNum").toString()
                         tv_internalName.text=data.get("internalName").toString().replace("\"","")
+                        tv_cash.text=data.get("cash").toString().replace("\"","")
+                        tv_offCard.text=data.get("offCard").toString()
 
                         //图片
                         if(data.get("photoList")!=null&&data.getAsJsonArray("photoList")!=null)
