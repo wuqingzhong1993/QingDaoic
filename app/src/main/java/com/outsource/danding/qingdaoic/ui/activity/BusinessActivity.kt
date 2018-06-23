@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.R
@@ -18,6 +19,7 @@ import com.outsource.danding.qingdaoic.net.HttpClient
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_business_detail.*
 import kotlinx.android.synthetic.main.item_list_business.view.*
 import java.util.*
 
@@ -32,6 +34,7 @@ class BusinessActivity : BaseListActivity<BusinessInfo>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun setContentView(layoutResID: Int) {
@@ -61,6 +64,11 @@ class BusinessActivity : BaseListActivity<BusinessInfo>() {
         when(mList[position].expendType)
         {
             "办公费","\"办公费\""->{
+                intent= Intent(this,BusinessDetailActivity::class.java)
+                intent.putExtra("expendId",mList[position].expendId)
+                startActivity(intent)
+            }
+            "培训费","\"培训费\""->{
                 intent= Intent(this,BusinessDetailActivity::class.java)
                 intent.putExtra("expendId",mList[position].expendId)
                 startActivity(intent)

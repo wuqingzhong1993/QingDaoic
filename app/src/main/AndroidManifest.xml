@@ -49,7 +49,9 @@
         <activity android:name=".ui.activity.PasswordModifyActivity" />
         <activity android:name=".ui.activity.MyAssetActivity" />
         <activity android:name=".ui.activity.MyAssetDetailActivity" />
-        <activity android:name=".ui.activity.BusinessDetailActivity"></activity>
+        <activity android:name=".ui.activity.BusinessDetailActivity" />
+        <activity android:name=".ui.activity.BaoXiaoAuditActivity"></activity>
+        <activity android:name=".ui.activity.AuditBaoxiaoApplyDetailActivity"/>
     </application>
 
 </manifest>

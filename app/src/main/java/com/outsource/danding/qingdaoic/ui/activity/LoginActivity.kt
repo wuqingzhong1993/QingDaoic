@@ -79,6 +79,7 @@ class LoginActivity : BaseActivity() {
      * 新加账户1 : 陈琳 1 -> 申请
      * 新加账户2:  马云蔚 1 -> 审核
      * 新加账户3:  admin tpsoft
+     * 新加账户4:  刘雪青  1 -> 审核
      */
     private fun login(username: String, password: String) {
         HttpClient.instance.login("陈琳", "1")

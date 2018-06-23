@@ -6,12 +6,14 @@ import android.content.Context;
 
 import com.imnjh.imagepicker.PickerConfig;
 import com.imnjh.imagepicker.SImagePicker;
+import com.outsource.danding.qingdaoic.R;
 import com.outsource.danding.qingdaoic.bean.City;
 import com.outsource.danding.qingdaoic.bean.Department;
 import com.outsource.danding.qingdaoic.bean.Person;
 import com.outsource.danding.qingdaoic.bean.Province;
 import com.outsource.danding.qingdaoic.bean.UserInfo;
 import com.outsource.danding.qingdaoic.bean.ZhiChu;
+import com.outsource.danding.qingdaoic.widget.GlideImageLoader;
 
 
 import java.util.ArrayList;
@@ -43,7 +45,10 @@ public class QdApplication extends Application {
         mInstance.cities=new ArrayList<>();
         mInstance.zhiChuList=new ArrayList<>();
 
-
+        SImagePicker.init(new PickerConfig.Builder().setAppContext(this)
+                .setImageLoader(new GlideImageLoader())
+                .setToolbaseColor(getResources().getColor(R.color.colorPrimary))
+                .build());
 
     }
 

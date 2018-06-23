@@ -79,28 +79,50 @@
 
             </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_office"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            android:padding="4dp"
-            android:paddingEnd="0dp"
-            android:paddingStart="0dp"
-            >
+            <LinearLayout
+                android:id="@+id/ll_office"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:padding="4dp"
+                android:paddingEnd="0dp"
+                android:paddingStart="0dp"
+                >
 
 
-        </LinearLayout>
+            </LinearLayout>
 
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="#fff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:paddingEnd="20dp"
+                android:paddingStart="10dp">
+
+                <ImageView
+                    android:id="@+id/img_add"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_add_circle_black_32"
+                    />
+
+            </android.support.constraint.ConstraintLayout>
 
             <LinearLayout
+                android:id="@+id/ll_save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:padding="10dp"
-                android:layout_margin="4dp"
+                android:layout_margin="10dp"
                 android:background="#fff"
                 >
 
@@ -108,13 +130,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="修改保存"
-                    android:textSize="20sp"
-                    android:textColor="#444"
+                    android:textSize="18sp"
+                    android:textColor="#555"
                     />
 
             </LinearLayout>
-
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -251,6 +271,28 @@
                     android:divider="@null" >
 
                 </ListView>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:background="#fff"
+                >
+
+                <TextView
+                    android:id="@+id/audit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="提交审核"
+                    android:textSize="18sp"
+                    android:textColor="#2269d4"
+                    />
 
             </LinearLayout>
 
