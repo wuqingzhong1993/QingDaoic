@@ -5,6 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +14,15 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.outsource.danding.qingdaoic.OnItemIndexDelete;
 import com.outsource.danding.qingdaoic.R;
+import com.outsource.danding.qingdaoic.bean.AuditOffice;
 
 
-public class AuditOfficeView extends LinearLayout {
+import java.util.List;
+
+
+public class AuditOfficeView extends LinearLayout implements OnItemIndexDelete{
 
 
 
@@ -28,9 +35,11 @@ public class AuditOfficeView extends LinearLayout {
     private EditText et_remarks;
     private TextView tv_delete;
     private int mPosition;
+    private Context mContext;
     private View mView;
+    private List<AuditOffice> mOffices;
 
-    public AuditOfficeView(Context context,int position) {
+    public AuditOfficeView(Context context,int position)  {
         super(context);
         mView=  LayoutInflater.from(context).inflate(R.layout.view_apply_office,this);
         et_name=findViewById(R.id.et_name);
@@ -41,6 +50,7 @@ public class AuditOfficeView extends LinearLayout {
         et_remarks=findViewById(R.id.et_remarks);
         tv_delete=findViewById(R.id.tv_delete);
         mPosition=position;
+        mContext=context;
         initListener();
         init();
     }
@@ -55,6 +65,7 @@ public class AuditOfficeView extends LinearLayout {
         et_money=findViewById(R.id.et_money);
         et_remarks=findViewById(R.id.et_remarks);
         mPosition=position;
+        mContext=context;
         initListener();
         init();
     }
@@ -63,12 +74,66 @@ public class AuditOfficeView extends LinearLayout {
 
     public void initListener(){
 
+        et_number.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(mOffices.get(mPosition)!=null)
+                {
+                    mOffices.get(mPosition).setNumber(et_number.getText().toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        et_standard.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(mOffices.get(mPosition)!=null)
+                    mOffices.get(mPosition).setStandard(et_standard.getText().toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        et_univalent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(mOffices.get(mPosition)!=null)
+                    mOffices.get(mPosition).setUnivalent(et_univalent.getText().toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
 
         //删除监听
         tv_delete.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                try {
+                    OnItemDelete callback = (OnItemDelete) mContext;
+                    callback.onDelete(mPosition);
+                } catch (ClassCastException e) {
+                    throw new ClassCastException(mContext.toString() + " must implement OnDateSetListener");
+                }
             }
         });
     }
@@ -109,7 +174,33 @@ public class AuditOfficeView extends LinearLayout {
 
 
 
+    @Override
+    public void onItemIndexDelete(int position) {
+        if(mPosition>position)
+            mPosition--;
+    }
 
+
+    /**
+     * 删除接口回调
+     */
+    public interface OnItemDelete{
+        // method to be implemented in activity
+        void onDelete(int position);
+    }
+
+    /**
+     * 设置position
+     */
+    public void setPosition(int position)
+    {
+        this.mPosition=position;
+    }
+
+    public void setDataSource(List<AuditOffice> offices)
+    {
+        mOffices=offices;
+    }
 
 
 

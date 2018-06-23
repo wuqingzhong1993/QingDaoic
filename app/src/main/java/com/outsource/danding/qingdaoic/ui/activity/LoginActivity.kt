@@ -82,7 +82,7 @@ class LoginActivity : BaseActivity() {
      * 新加账户4:  刘雪青  1 -> 审核
      */
     private fun login(username: String, password: String) {
-        HttpClient.instance.login("刘雪青", "1")
+        HttpClient.instance.login("陈琳", "1")
                 .bindToLifecycle(this)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

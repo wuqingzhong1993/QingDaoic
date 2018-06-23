@@ -12,6 +12,7 @@ import android.widget.LinearLayout
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import com.outsource.danding.qingdaoic.OnItemIndexDelete
 import com.outsource.danding.qingdaoic.R
 import com.outsource.danding.qingdaoic.base.BaseActivity
 import com.outsource.danding.qingdaoic.bean.AuditOffice
@@ -26,13 +27,18 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_business_detail.*
 
 
-class BusinessDetailActivity : BaseActivity() {
+class BusinessDetailActivity : BaseActivity() , AuditOfficeView.OnItemDelete {
+
 
     private var passIsShow = false
     private var officeList:MutableList<AuditOffice>?=null
     private var photoList:MutableList<Photo>?=null
     private var recordList:MutableList<AuditRecord>?=null
     private var recordAdapter: AuditRecordAdapter?=null
+    private var observerList:MutableList<OnItemIndexDelete>?=null
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +59,8 @@ class BusinessDetailActivity : BaseActivity() {
 
         photoList= mutableListOf()
 
+        observerList= mutableListOf()
+
         initListener()
         getBusinessInfoDetail()
     }
@@ -61,8 +69,30 @@ class BusinessDetailActivity : BaseActivity() {
     private fun initListener() {
 
 
+        ll_save.setOnClickListener {
+
+        }
+
+
         img_add.setOnClickListener {
 
+            val office =AuditOffice("","","","","","0","0","")
+            officeList?.add(office)
+            val officeView= AuditOfficeView(this,officeList!!.size-1)
+            ll_office.addView(officeView)
+            officeView.setDataSource(officeList)//绑定数据源
+            observerList?.add(officeView)//添加监听者
+
+            var layoutParams = officeView.layoutParams
+            layoutParams.width=LinearLayout.LayoutParams.MATCH_PARENT
+            layoutParams.height=LinearLayout.LayoutParams.WRAP_CONTENT
+            officeView.layoutParams=layoutParams
+            officeView.setName(office.name)
+            officeView.setMoney(office.money)
+            officeView.setNumber(office.number)
+            officeView.setStandard(office.standard)
+            officeView.setUnivalent(office.univalent)
+            officeView.setRemarks(office.remarks)
         }
     }
 
@@ -114,8 +144,11 @@ class BusinessDetailActivity : BaseActivity() {
                                 {
                                     val office: AuditOffice = gson.fromJson(ob, AuditOffice::class.java)
                                     officeList?.add(office)
-                                    var officeView:AuditOfficeView= AuditOfficeView(this,index)
+                                    var officeView= AuditOfficeView(this,index)
                                     ll_office.addView(officeView)
+                                    officeView.setDataSource(officeList)//绑定数据源
+                                    observerList?.add(officeView)//添加监听者
+
                                     var layoutParams = officeView.layoutParams
                                     layoutParams.width=LinearLayout.LayoutParams.MATCH_PARENT
                                     layoutParams.height=LinearLayout.LayoutParams.WRAP_CONTENT
@@ -126,7 +159,6 @@ class BusinessDetailActivity : BaseActivity() {
                                     officeView.setStandard(office.standard)
                                     officeView.setUnivalent(office.univalent)
                                     officeView.setRemarks(office.remarks)
-
 
                                 }
                             }
@@ -176,5 +208,16 @@ class BusinessDetailActivity : BaseActivity() {
                     e: Throwable ->
                     cancelProgressDialog()
                 })
+    }
+
+
+    override fun onDelete(position: Int) {
+        ll_office.removeViewAt(position)
+        officeList?.removeAt(position)
+        observerList?.removeAt(position)
+        for(observer in observerList!!)
+        {
+            observer.onItemIndexDelete(position)
+        }
     }
 }

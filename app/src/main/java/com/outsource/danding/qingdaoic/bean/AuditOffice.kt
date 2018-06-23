@@ -1,8 +1,8 @@
 package com.outsource.danding.qingdaoic.bean
 
 
-data class AuditOffice(val officeId:String, val expendId:String,val name:String,
-                       val standard:String,val univalent:String,val number:String,
-                       val money:String,val remarks:String) {
+data class AuditOffice(val officeId:String, val expendId:String,var name:String,
+                       var standard:String,var univalent:String,var number:String,
+                       var money:String,var remarks:String) {
 
 }

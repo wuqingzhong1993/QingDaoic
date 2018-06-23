@@ -44,6 +44,8 @@ class AuditBaoxiaoApplyDetailActivity : BaseActivity() {
 
     private fun initView(){
 
+        title="报销详情"
+
         officeList= mutableListOf()
         officeAdapter= BaoxiaoOfficeAdapter(this, officeList!!)
         lt_dataList.adapter=officeAdapter
