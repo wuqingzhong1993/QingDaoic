@@ -34,7 +34,7 @@ class NewConferenceActivity : BaseActivity(), DatePickerFragment.OnDateSetListen
 //    var meetingTime:String?=null
     private var passIsShow = false
 
-    var budgetAmount:String="0"
+    var budgetAmount:String?=null
     var cashContent:String?=null
     var remark:String?=null
     var applyDeptName:String?=null
@@ -48,7 +48,7 @@ class NewConferenceActivity : BaseActivity(), DatePickerFragment.OnDateSetListen
     var meetingPlace:String?=null
     var estimatedNum:String?=null
     var staffNum:String?=null
-    var meetingBudget:String="0"
+    var meetingBudget:String?=null
     var meetingReason:String?=null
 
     var departments:MutableList<Department>?=null
@@ -215,32 +215,23 @@ class NewConferenceActivity : BaseActivity(), DatePickerFragment.OnDateSetListen
                 }
             }
         })
-//        et_meetingBudget.addTextChangedListener(object :TextWatcher{
-//            override fun afterTextChanged(s: Editable?) {
-//            }
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//            }
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                if(et_meetingBudget.text.toString()!=""){
-//                    meetingBudget=et_meetingBudget.text.toString()
-//                }
-//            }
-//        })
-//        et_budgetAmount.addTextChangedListener(object :TextWatcher{
-//            override fun afterTextChanged(s: Editable?) {
-//            }
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//            }
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                if(et_budgetAmount.text.toString()!=""){
-//                    budgetAmount=et_budgetAmount.text.toString()
-//                }
-//            }
-//        })
+        et_meetingBudget.addTextChangedListener(object :TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_meetingBudget.text.toString()!=""){
+                    meetingBudget=et_meetingBudget.text.toString()
+                    budgetAmount=meetingBudget
+
+                }
+            }
+        })
 
     }
 
-    private fun saveConferenceApply(flag: String) {
+    private fun saveConferenceApply(flag: String) {1
         HttpClient.instance.saveConferenceApply(flag!!,expendType!!,applyDeptName!!, isLoan!!,
                 loanReason,budgetAmount,remark,
                 meetingName!!,tv_meetingTime.text.toString()!!,tv_trainEnd.text.toString()!!,
