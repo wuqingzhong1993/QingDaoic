@@ -1,10 +1,6 @@
 package com.outsource.danding.qingdaoic.widget;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Path;
-import android.graphics.RectF;
-import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -17,12 +13,12 @@ import android.widget.TextView;
 import com.outsource.danding.qingdaoic.OnItemIndexDelete;
 import com.outsource.danding.qingdaoic.R;
 import com.outsource.danding.qingdaoic.bean.AuditOffice;
-
+import com.outsource.danding.qingdaoic.bean.BusinessOffice;
 
 import java.util.List;
 
 
-public class AuditOfficeView extends LinearLayout implements OnItemIndexDelete{
+public class BusinessOfficeView extends LinearLayout implements OnItemIndexDelete{
 
 
 
@@ -37,9 +33,9 @@ public class AuditOfficeView extends LinearLayout implements OnItemIndexDelete{
     private int mPosition;
     private Context mContext;
     private View mView;
-    private List<AuditOffice> mOffices;
+    private List<BusinessOffice> mOffices;
 
-    public AuditOfficeView(Context context,int position)  {
+    public BusinessOfficeView(Context context, int position)  {
         super(context);
         mView=  LayoutInflater.from(context).inflate(R.layout.view_apply_office,this);
         et_name=findViewById(R.id.et_name);
@@ -55,7 +51,7 @@ public class AuditOfficeView extends LinearLayout implements OnItemIndexDelete{
         init();
     }
 
-    public AuditOfficeView(Context context, int position, AttributeSet attrs) {
+    public BusinessOfficeView(Context context, int position, AttributeSet attrs) {
         super(context, attrs);
         mView= LayoutInflater.from(context).inflate(R.layout.view_apply_office,this);
         et_name=findViewById(R.id.et_name);
@@ -230,7 +226,7 @@ public class AuditOfficeView extends LinearLayout implements OnItemIndexDelete{
         this.mPosition=position;
     }
 
-    public void setDataSource(List<AuditOffice> offices)
+    public void setDataSource(List<BusinessOffice> offices)
     {
         mOffices=offices;
     }

@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.outsource.danding.qingdaoic.OnItemIndexDelete
 import com.outsource.danding.qingdaoic.R
 import com.outsource.danding.qingdaoic.app.QdApplication
 import com.outsource.danding.qingdaoic.base.BaseActivity
@@ -21,6 +22,7 @@ import com.outsource.danding.qingdaoic.bean.Department
 import com.outsource.danding.qingdaoic.bean.Receipt
 import com.outsource.danding.qingdaoic.bean.ZhiChu
 import com.outsource.danding.qingdaoic.net.HttpClient
+import com.outsource.danding.qingdaoic.widget.BusinessOfficeView
 import com.outsource.danding.qingdaoic.widget.OfficeAdapter
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -29,7 +31,7 @@ import kotlinx.android.synthetic.main.activity_new_business.*
 import org.w3c.dom.Text
 
 
-class NewBusinessActivity : BaseActivity() , OfficeAdapter.OnDeleteListener{
+class NewBusinessActivity : BaseActivity() , BusinessOfficeView.OnItemDelete{
 
     private var passIsShow = false
 
@@ -43,8 +45,10 @@ class NewBusinessActivity : BaseActivity() , OfficeAdapter.OnDeleteListener{
     var isLoan:String="1"
     var loanReason:String=""
 
-    lateinit var officeAdapter: OfficeAdapter
+
     var officeList:MutableList<BusinessOffice>?=null
+    private var observerList:MutableList<OnItemIndexDelete>?=null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +58,7 @@ class NewBusinessActivity : BaseActivity() , OfficeAdapter.OnDeleteListener{
 
     private fun initView() {
         title="多种申请"
+        officeList= mutableListOf()
 
         //初始化单位的adapter
         departments = QdApplication.getDepartments()
@@ -78,10 +83,10 @@ class NewBusinessActivity : BaseActivity() , OfficeAdapter.OnDeleteListener{
         zhichuAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         sp_zhichu.adapter=zhichuAdapter
 
+        //添加新的办公数据
+        addOffice()
+        //officeList= mutableListOf(BusinessOffice("","","","","",""))
 
-        officeList= mutableListOf(BusinessOffice("","","","","",""))
-        officeAdapter= OfficeAdapter(this,officeList!!)
-        lt_office.adapter=officeAdapter
 
         initListener()
     }
@@ -183,18 +188,7 @@ class NewBusinessActivity : BaseActivity() , OfficeAdapter.OnDeleteListener{
 
 
         img_add.setOnClickListener {
-            officeList?.add(BusinessOffice("","0","0","","",""))
-            officeAdapter.notifyDataSetChanged()
-            var totalHeight=0
-            for(i in officeList!!.indices)
-            {
-                val itemView = officeAdapter.getView(i, null, lt_office)
-                itemView.measure(0,0)
-                totalHeight+=itemView.measuredHeight
-            }
-            var params: ViewGroup.LayoutParams  = lt_office.getLayoutParams();
-            params.height = totalHeight + (lt_office.getDividerHeight() * (officeAdapter.count -1))
-            lt_office.layoutParams=params
+            addOffice()
         }
 
         btn_commit.setOnClickListener {
@@ -204,25 +198,26 @@ class NewBusinessActivity : BaseActivity() , OfficeAdapter.OnDeleteListener{
             saveBusinessApply("1")
         }
 
+    }
 
+    private fun addOffice(){
+        val office =BusinessOffice("","","","","0","")
+        officeList?.add(office)
+        val officeView= BusinessOfficeView(this,officeList!!.size-1)
+        ll_office.addView(officeView)
+        officeView.setDataSource(officeList)//绑定数据源
+        observerList?.add(officeView)//添加监听者
 
+        officeView.setName(office.name)
+        officeView.setMoney(office.money)
+        officeView.setNumber(office.number)
+        officeView.setStandard(office.standard)
+        officeView.setUnivalent(office.univalent)
+        officeView.setRemarks(office.remarks)
     }
 
 
 
-    override fun onDelete()
-    {
-        var totalHeight=0
-        for(i in officeList!!.indices)
-        {
-            val itemView = officeAdapter.getView(i, null, lt_office)
-            itemView.measure(0,0)
-            totalHeight+=itemView.measuredHeight
-        }
-        var params: ViewGroup.LayoutParams  = lt_office.getLayoutParams();
-        params.height = totalHeight + (lt_office.getDividerHeight() * (officeAdapter.count -1))
-        lt_office.layoutParams=params
-    }
 
     private fun saveBusinessApply(flag:String) {
 
@@ -262,7 +257,16 @@ class NewBusinessActivity : BaseActivity() , OfficeAdapter.OnDeleteListener{
                     cancelProgressDialog()
                 })
 
+    }
 
+    override fun onDelete(position: Int) {
+        ll_office.removeViewAt(position)
+        officeList?.removeAt(position)
+        observerList?.removeAt(position)
+        for(observer in observerList!!)
+        {
+            observer.onItemIndexDelete(position)
+        }
     }
 
 
