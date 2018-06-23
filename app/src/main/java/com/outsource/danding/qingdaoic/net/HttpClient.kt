@@ -219,7 +219,7 @@ class HttpClient private constructor() {
                             loanReason:String?,budgetAmount:String?,remark:String?,
                             meetingName:String,meetingTime:String,trainEnd:String,trainReport:String,trainLeave:String,
                             meetingCategory:String,meetingPlace:String,estimatedNum:String,staffNum:String,
-                            meetingBudget:String?,meetingReason:String?):Observable<JsonObject>{
+                            meetingBudget:String,meetingReason:String?):Observable<JsonObject>{
 
         val map = HashMap<String,String>()
         map.put("personId", this.personId!!)
@@ -246,9 +246,7 @@ class HttpClient private constructor() {
         map.put("meetingPlace",meetingPlace)
         map.put("estimatedNum",estimatedNum)
         map.put("staffNum",staffNum)
-        if(meetingBudget!=null){
-            map.put("meetingBudget",meetingBudget)
-        }
+        map.put("meetingBudget",meetingBudget)
         if(meetingReason!=null){
             map.put("meetingReason",meetingReason)
         }
