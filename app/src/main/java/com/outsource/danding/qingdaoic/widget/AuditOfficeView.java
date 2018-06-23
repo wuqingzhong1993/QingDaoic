@@ -17,9 +17,7 @@ import com.outsource.danding.qingdaoic.R;
 
 public class AuditOfficeView extends LinearLayout {
 
-    private float roundLayoutRadius = 14f;
-    private Path roundPath;
-    private RectF rectF;
+
 
 
     private EditText et_name;
@@ -77,10 +75,6 @@ public class AuditOfficeView extends LinearLayout {
 
     private void init(){
         setWillNotDraw(false);
-        roundPath = new Path();
-        rectF = new RectF();
-        //mView.setBackgroundDrawable( getResources().getDrawable(R.drawable.border_radius_10));
-
     }
 
 

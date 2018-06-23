@@ -16,6 +16,7 @@ import com.outsource.danding.qingdaoic.R
 import com.outsource.danding.qingdaoic.base.BaseActivity
 import com.outsource.danding.qingdaoic.bean.AuditOffice
 import com.outsource.danding.qingdaoic.bean.AuditRecord
+import com.outsource.danding.qingdaoic.bean.Photo
 import com.outsource.danding.qingdaoic.net.HttpClient
 import com.outsource.danding.qingdaoic.widget.AuditOfficeView
 import com.outsource.danding.qingdaoic.widget.AuditRecordAdapter
@@ -29,6 +30,7 @@ class BusinessDetailActivity : BaseActivity() {
 
     private var passIsShow = false
     private var officeList:MutableList<AuditOffice>?=null
+    private var photoList:MutableList<Photo>?=null
     private var recordList:MutableList<AuditRecord>?=null
     private var recordAdapter: AuditRecordAdapter?=null
 
@@ -49,7 +51,7 @@ class BusinessDetailActivity : BaseActivity() {
         lt_record.adapter=recordAdapter
 
 
-
+        photoList= mutableListOf()
 
         initListener()
         getBusinessInfoDetail()
@@ -59,6 +61,9 @@ class BusinessDetailActivity : BaseActivity() {
     private fun initListener() {
 
 
+        img_add.setOnClickListener {
+
+        }
     }
 
     private fun getBusinessInfoDetail(){
@@ -77,6 +82,22 @@ class BusinessDetailActivity : BaseActivity() {
                     {
                         tv_cashContent.text=data.get("cashContent").toString()
                         tv_remark.text=data.get("remark")?.toString()
+
+
+                        //图片
+                        if(data.get("photoList")!=null&&data.getAsJsonArray("photoList")!=null)
+                        {
+                            val list=data.getAsJsonArray("photoList")
+                            if(list!=null&&list.size()>0)
+                            {
+                                val  gson= Gson()
+                                for((index,ob) in list.withIndex())
+                                {
+                                    val photo: Photo = gson.fromJson(ob, Photo::class.java)
+                                    photoList?.add(photo )
+                                }
+                            }
+                        }
 
                         //办公费
                         officeList?.clear()
@@ -108,9 +129,6 @@ class BusinessDetailActivity : BaseActivity() {
 
 
                                 }
-
-
-
                             }
                         }
 

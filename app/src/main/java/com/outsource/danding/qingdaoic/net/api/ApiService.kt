@@ -30,6 +30,10 @@ interface  ApiService{
     @POST("m_getApplyInfoDetail.do")
     fun getApplyInfoDetail(@Field("personId") personId:String,@Field("expendId") expendId:String): Observable<JsonObject>
 
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("m_getBaoxiaoDetail.do")
+    fun getBaoxiaoDetail(@Field("personId") personId:String,@Field("reimbId") reimbId:String): Observable<JsonObject>
 
 
     @FormUrlEncoded
@@ -51,6 +55,16 @@ interface  ApiService{
     @Headers("Accept-Encoding:application/json")
     @POST("m_getHistoryList.do")
     fun getAuditHistoryList(@Field("personId") personId:String,@Field("pageNum") pageNum: String): Observable<JsonObject>
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("m_getBaoxiaoInfoList.do")
+    fun getBaoxiaoInfoList(@Field("personId") personId:String,@Field("pageNum") pageNum: String): Observable<JsonObject>
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("m_getdoBaoXiaoHistoryList.do")
+    fun getBaoxiaoHistoryList(@Field("personId") personId:String,@Field("pageNum") pageNum: String): Observable<JsonObject>
 
 
     @FormUrlEncoded

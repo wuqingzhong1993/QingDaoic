@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.outsource.danding.qingdaoic.ui.activity.AuditApplyDetailActivity"
+    tools:context="com.outsource.danding.qingdaoic.ui.activity.AuditBaoxiaoApplyDetailActivity"
     >
 
 
@@ -26,63 +26,6 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:background="#fff"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="12dp"
-                android:paddingEnd="20dp"
-                android:paddingStart="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="支出科目:"
-                    android:textColor="#444"
-                    android:textSize="17sp" />
-
-
-                <Spinner
-                    android:id="@+id/sp_dept"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="37dp"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:background="#fff"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                android:paddingEnd="20dp"
-                android:paddingStart="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="申请编号:"
-                    android:textColor="#444"
-                    android:textSize="17sp" />
-
-                <TextView
-                    android:id="@+id/tv_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:textColor="#444"
-                    android:textSize="17sp" />
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -142,7 +85,6 @@
 
             </LinearLayout>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -188,20 +130,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="预算金额:"
+                    android:text="金额总数:"
                     android:textColor="#444"
                     android:textSize="17sp" />
 
                 <TextView
-                    android:id="@+id/tv_budgetAmount"
+                    android:id="@+id/tv_sumAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="41dp"
-                    android:textColor="#444"
+                    android:textColor="#dc3d3a"
                     android:textSize="17sp" />
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -218,37 +159,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="是否借款:"
-                    android:textColor="#444"
-                    android:textSize="17sp" />
-
-                <TextView
-                    android:id="@+id/tv_isLoan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="41dp"
-                    android:textColor="#444"
-                    android:textSize="17sp" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:background="#fff"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                android:paddingEnd="20dp"
-                android:paddingStart="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="申请理由:"
+                    android:text="报销事由:"
                     android:textColor="#444"
                     android:textSize="17sp" />
 
@@ -256,11 +167,41 @@
                     android:id="@+id/tv_reason"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="41dp"
+                    android:layout_marginStart="40dp"
                     android:textColor="#444"
                     android:textSize="17sp" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="#fff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:paddingEnd="20dp"
+                android:paddingStart="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="单据总数:"
+                    android:textColor="#444"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/tv_sumNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:textColor="#444"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -290,6 +231,38 @@
                     android:textSize="17sp" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="#fff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:paddingEnd="20dp"
+                android:paddingStart="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="支出科目:"
+                    android:textColor="#444"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/tv_internalName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:textColor="#444"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
+
+
+
 
             <LinearLayout
                 android:id="@+id/ll_trainTime"
@@ -497,8 +470,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:textAlignment="center"
                     android:text="预计参训\n人数:"
+                    android:textAlignment="center"
                     android:textColor="#444"
                     android:textSize="17sp" />
 
@@ -530,8 +503,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:textAlignment="center"
                     android:text="工作人数:"
+                    android:textAlignment="center"
                     android:textColor="#444"
                     android:textSize="17sp" />
 
@@ -550,50 +523,48 @@
                 android:id="@+id/ll_travelList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="20dp"
                 android:layout_marginEnd="4dp"
+                android:layout_marginTop="20dp"
                 android:background="#fff"
-                android:visibility="gone"
-                >
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     android:padding="4dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:padding="4dp"
                         android:text="差旅列表"
                         android:textColor="#222"
-                        android:padding="4dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="4dp"
-                        android:textSize="18sp"/>
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="parent" />
+
                     <ImageView
                         android:id="@+id/img_travel_collapse"
-                        android:padding="4dp"
-                        app:layout_constraintEnd_toEndOf="parent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_keyboard_arrow_down_black_32"/>
+                        android:padding="4dp"
+                        android:src="@drawable/ic_keyboard_arrow_down_black_32"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
                 </android.support.constraint.ConstraintLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#eee"/>
+                    android:background="#eee" />
 
                 <ListView
                     android:id="@+id/lt_travelList"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
-
+                    android:layout_height="wrap_content" />
 
 
             </LinearLayout>
@@ -607,89 +578,62 @@
                 android:background="#fff"
                 android:orientation="vertical"
                 android:padding="4dp"
-                android:paddingEnd="0dp"
-                android:paddingStart="0dp"
                 android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/tv_expendDetail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#4808c9"
-                        android:textSize="22sp"
-                        />
+                        android:textColor="#0f58a8"
+                        android:textSize="22sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:background="#ddd"
-                    >
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textAlignment="center"
                         android:text="名称"
-                        android:textSize="16sp"
-                        />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:textAlignment="center"
-                        android:text="规格"
-                        android:textSize="16sp"
-                        />
+                        android:textSize="16sp" />
 
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textAlignment="center"
-                        android:text="单价"
-                        android:textSize="16sp"
-                        />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textAlignment="center"
                         android:text="数量"
-                        android:textSize="16sp"
-                        />
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
 
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textAlignment="center"
                         android:text="金额"
-                        android:textSize="16sp"
-                        />
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
                 <ListView
-                    android:layout_marginTop="2dp"
-                    android:layout_marginEnd="4dp"
                     android:id="@+id/lt_dataList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
+                    android:layout_marginTop="2dp" />
 
             </LinearLayout>
 
@@ -709,51 +653,50 @@
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
                         android:text="审核记录"
                         android:textColor="#222"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="4dp"
-                        android:textSize="18sp"/>
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="parent" />
+
                     <ImageView
-                        app:layout_constraintEnd_toEndOf="parent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_keyboard_arrow_down_black_32"/>
+                        android:src="@drawable/ic_keyboard_arrow_down_black_32"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
                 </android.support.constraint.ConstraintLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#ccc"/>
+                    android:background="#ccc" />
 
                 <ListView
                     android:id="@+id/lt_record"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:divider="@null" >
+                    android:divider="@null">
 
                 </ListView>
 
             </LinearLayout>
 
 
-
             <LinearLayout
                 android:id="@+id/ll_collapse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/border_radius_10"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/border_radius_10"
                 android:gravity="center_vertical"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -761,21 +704,19 @@
                     android:layout_marginStart="20dp"
                     android:text="附件"
                     android:textColor="#820"
-                    android:textSize="15sp"
-                    />
+                    android:textSize="15sp" />
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="6dp"
-                    >
+                    android:padding="6dp">
 
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        app:layout_constraintRight_toRightOf="parent"
                         android:layout_marginEnd="20dp"
-                        android:src="@drawable/ic_keyboard_arrow_down_black_32"/>
+                        android:src="@drawable/ic_keyboard_arrow_down_black_32"
+                        app:layout_constraintRight_toRightOf="parent" />
 
                 </android.support.constraint.ConstraintLayout>
             </LinearLayout>
@@ -784,9 +725,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
 
                 <LinearLayout
@@ -794,41 +734,40 @@
                     android:layout_width="0dp"
                     android:layout_height="90dp"
                     android:layout_weight="1"
-                    android:background="#fff"
-                    >
+                    android:background="#fff">
 
                     <ImageView
                         android:id="@+id/img_country"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/r1"/>
+                        android:src="@drawable/r1" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="90dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="1"
-                    android:background="#fff"
-                    android:layout_marginStart="10dp">
+                    android:background="#fff">
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="90dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="1"
-                    android:background="#fff"
-                    android:layout_marginStart="10dp">
+                    android:background="#fff">
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="90dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="1"
-                    android:background="#fff"
-                    android:layout_marginStart="10dp">
+                    android:background="#fff">
 
                 </LinearLayout>
 

@@ -44,7 +44,7 @@ class AuditFragment : BaseFragment() {
 
 
         ll_audit_baoxiao.setOnClickListener {
-            val intent: Intent = Intent(this.activity, TravelActivity::class.java)
+            val intent: Intent = Intent(this.activity, BaoXiaoAuditActivity::class.java)
             activity?.startActivityForResult(intent,0)
         }
 

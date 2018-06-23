@@ -116,8 +116,14 @@ class HttpClient private constructor() {
      * 获取审核项详情
      */
     fun getApplyInfoDetail(expendId:String):Observable<JsonObject>{
-
         return apiService.getApplyInfoDetail(this.personId!!,expendId)
+    }
+
+    /**
+     * 获取报销审核详情
+     */
+    fun getBaoxiaoDetail(reimbId:String):Observable<JsonObject>{
+        return apiService.getBaoxiaoDetail(this.personId!!,reimbId)
     }
 
 
@@ -159,7 +165,7 @@ class HttpClient private constructor() {
      * 获取审核申请列表
      */
     fun getAuditApplyList():Observable<JsonObject>{
-        return apiService.getApplyInfoList(this.personId!!,"2")
+        return apiService.getApplyInfoList(this.personId!!,"1")
     }
 
     /**
@@ -167,6 +173,20 @@ class HttpClient private constructor() {
      */
     fun getAuditHistoryList():Observable<JsonObject>{
         return apiService.getAuditHistoryList(this.personId!!,"1")
+    }
+
+    /**
+     * 获取审核报销申请的列表
+     */
+    fun getBaoxiaoInfoList():Observable<JsonObject>{
+        return apiService.getBaoxiaoInfoList(this.personId!!,"1")
+    }
+
+    /**
+     * 获取审核报销历史的列表
+     */
+    fun getBaoxiaoHistoryList():Observable<JsonObject>{
+        return apiService.getBaoxiaoHistoryList(this.personId!!,"1")
     }
 
     /**
@@ -303,7 +323,7 @@ class HttpClient private constructor() {
 
 
     fun getshenQingInfoList():Observable<JsonObject>{
-        return apiService.getshenQingInfoList(this.personId!!,"3")
+        return apiService.getshenQingInfoList(this.personId!!,"2")
     }
 
 
