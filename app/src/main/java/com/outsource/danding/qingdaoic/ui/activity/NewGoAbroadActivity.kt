@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import android.widget.Toast
 import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.R
 import com.outsource.danding.qingdaoic.app.QdApplication
@@ -17,7 +19,6 @@ import com.outsource.danding.qingdaoic.ui.fragment.DatePickerFragment
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_new_conference.*
 import kotlinx.android.synthetic.main.activity_new_go_abroad.*
 import org.w3c.dom.Text
 
@@ -35,11 +36,16 @@ class NewGoAbroadActivity : BaseActivity(), DatePickerFragment.OnDateSetListener
     var visitingDay:String?=null
     var ht_money:String?=null
     var zs_money:String?=null
+    var hs_money:String?=null
     var jt_money:String?=null
     var qt_money:String?=null
 
-
-
+    var expendType:String="22"
+    var applyDeptName:String?=null
+    var isLoan:String="1"
+    var loanReason:String?=null
+    var departments:MutableList<Department>?=null
+    var departmentNames:MutableList<String>?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,15 +55,15 @@ class NewGoAbroadActivity : BaseActivity(), DatePickerFragment.OnDateSetListener
 
     private fun initView(){
         //初始化单位的adapter
-        val departments:MutableList<Department> = QdApplication.getDepartments()
-        val departmentNames= mutableListOf<String>()
-        for(department in departments)
+        departments= QdApplication.getDepartments()
+        departmentNames= mutableListOf<String>()
+        for(department in departments!!)
         {
-            departmentNames.add(department.deptName)
+            departmentNames?.add(department.deptName)
         }
         val adapter: ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_spinner_item, departmentNames)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        //sp_dept.adapter=adapter
+        sp_dept.adapter=adapter
 
         initListener()
     }
@@ -188,6 +194,20 @@ class NewGoAbroadActivity : BaseActivity(), DatePickerFragment.OnDateSetListener
                 }
             }
         })
+        et_hs_money.addTextChangedListener(object:TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_hs_money.text.toString()!="")
+                {
+                    hs_money=et_hs_money.text.toString()
+                }
+            }
+        })
 
         et_zs_money.addTextChangedListener(object:TextWatcher{
             override fun afterTextChanged(s: Editable?) {
@@ -233,28 +253,80 @@ class NewGoAbroadActivity : BaseActivity(), DatePickerFragment.OnDateSetListener
                 }
             }
         })
+        sp_dept?.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                applyDeptName=departments?.get(position)?.deptName
+            }
+        }
+        rg_isLoan.setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId)
+            {
+                R.id.yes->
+                {
+                    isLoan="0"
+                    ll_loanReason.visibility=View.VISIBLE
+                }
+                R.id.no->
+                {
+                    isLoan="1"
+                    ll_loanReason.visibility=View.GONE
+                }
+            }
+        }
+        et_loanReason.addTextChangedListener(object: TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_loanReason.text.toString()!="")
+                {
+                    loanReason=et_loanReason.text.toString()
+                }
+            }
+        })
         
     }
 
     private fun saveGoAbroadApply(flag: String) {
-//        HttpClient.instance.saveGoAbroadApply(flag!!,expendType!!,applyDeptName!!, isLoan!!,
-//                loanReason!!,budgetAmount!!,remark!!, cashContent!!,
-//                groupName!!,groupUnit!!,colonel!!,groupNum!!,visitingCountry!!,
-//                visitingDay!!,budgetAmount!!,ht_money!!,zs_money!!,
-//                hs_money!!,jt_money!!,qt_money!!)
-//                .bindToLifecycle(this)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe({
-//                    json: JsonObject ->
-//                    val data=json.getAsJsonObject("data")
-//
-//                    cancelProgressDialog()
-//
-//                }, {
-//                    e: Throwable ->
-//                    cancelProgressDialog()
-//                })
+        HttpClient.instance.saveGoAbroadApply(flag!!,expendType!!,applyDeptName!!, isLoan!!,
+                loanReason,budgetAmount!!,
+                groupName!!,groupUnit!!,colonel!!,groupNum!!,visitingCountry!!,
+                visitingDay!!,ht_money!!,zs_money!!,
+                hs_money!!,jt_money!!,qt_money!!)
+                .bindToLifecycle(this)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    json: JsonObject ->
+                    val data=json.getAsJsonObject("data")
+                    if(data!=null&&data.get("result")!=null)
+                    {
+                        if(flag=="0"){
+                            if(data.get("result").toString()=="1")
+                            {
+                                Toast.makeText(this,"提交成功", Toast.LENGTH_SHORT).show()
+                            }else{
+                                Toast.makeText(this,"提交失败", Toast.LENGTH_SHORT).show()
+                            }
+                        }else{
+                            if(data.get("result").toString()=="1")
+                            {
+                                Toast.makeText(this, "暂存成功", Toast.LENGTH_SHORT).show()
+                            }else{
+                                Toast.makeText(this, "暂存失败", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
+                    }
+                    cancelProgressDialog()
+
+                }, {
+                    e: Throwable ->
+                    cancelProgressDialog()
+                })
     }
 
     fun pickDate(v: View) {

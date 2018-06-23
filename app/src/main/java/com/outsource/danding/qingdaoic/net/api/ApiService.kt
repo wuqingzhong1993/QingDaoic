@@ -142,6 +142,16 @@ interface  ApiService{
     @POST("do_saveByOffice.do")
     fun saveCultivateActivity(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
 
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("do_saveByOffice.do")
+    fun saveGoAbroadApply(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("do_saveByOffice.do")
+    fun saveJdActivity(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
+
 
 
 }

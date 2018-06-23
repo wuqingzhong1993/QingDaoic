@@ -5,13 +5,20 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import android.widget.Toast
+import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.R
 import com.outsource.danding.qingdaoic.app.QdApplication
 import com.outsource.danding.qingdaoic.base.BaseActivity
 import com.outsource.danding.qingdaoic.bean.Department
+import com.outsource.danding.qingdaoic.net.HttpClient
 import com.outsource.danding.qingdaoic.ui.fragment.DatePickerFragment
+import com.trello.rxlifecycle2.kotlin.bindToLifecycle
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_new_jd.*
 
 class NewJdActivity : BaseActivity() ,DatePickerFragment.OnDateSetListener{
@@ -21,7 +28,24 @@ class NewJdActivity : BaseActivity() ,DatePickerFragment.OnDateSetListener{
 
     private var passIsShow = false
 
-    var trainTime:String?=null
+    var expendType:String="15"
+    var applyDeptName:String?=null
+    var isLoan:String="1"
+    var loanReason:String?=null
+    var budgetAmount:String?=null
+    var remark:String?=null
+    var trainName:String?=null
+    var trainPlace:String?=null
+    var trainNum:String?=null
+    var trainStaffNum:String?=null
+    var trainBudget:String?=null
+
+    var trainObject:String?=null
+
+    var departments:MutableList<Department>?=null
+    var departmentNames:MutableList<String>?=null
+
+    var jc_time:String?=null
     var visitorNum:String?=null
     var accompanyNum:String?=null
     var letterNo:String?=null
@@ -34,7 +58,8 @@ class NewJdActivity : BaseActivity() ,DatePickerFragment.OnDateSetListener{
     var jdzs_money:String?=null
     var jdhs_money:String?=null
     var jdqt_money:String?=null
-
+    var yj:String?="1"//是否饮酒默认值
+    var jdtype:String?="1"//街道类型默认
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_jd)
@@ -45,11 +70,11 @@ class NewJdActivity : BaseActivity() ,DatePickerFragment.OnDateSetListener{
         title="公务接待费"
 
         //初始化单位的adapter
-        val departments:MutableList<Department> = QdApplication.getDepartments()
-        val departmentNames= mutableListOf<String>()
-        for(department in departments)
+        departments= QdApplication.getDepartments()
+        departmentNames= mutableListOf<String>()
+        for(department in departments!!)
         {
-            departmentNames.add(department.deptName)
+            departmentNames?.add(department.deptName)
         }
         val adapter: ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_spinner_item, departmentNames)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -60,9 +85,61 @@ class NewJdActivity : BaseActivity() ,DatePickerFragment.OnDateSetListener{
     }
 
     private fun initListener() {
+        btn_commit.setOnClickListener{
+            saveJdApply("0")
+        }
+        btn_temp_save.setOnClickListener{
+            saveJdApply("1")
+        }
+        sp_dept?.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                applyDeptName=departments?.get(position)?.deptName
+            }
+        }
+        rg_isLoan.setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId)
+            {
+                R.id.yes->
+                {
+                    isLoan="0"
+                    ll_loanReason.visibility=View.VISIBLE
+                }
+                R.id.no->
+                {
+                    isLoan="1"
+                    ll_loanReason.visibility=View.GONE
+                }
+            }
+        }
+        et_loanReason.addTextChangedListener(object: TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_loanReason.text.toString()!="")
+                {
+                    loanReason=et_loanReason.text.toString()
+                }
+            }
+        })
+        et_remark.addTextChangedListener(object :TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(et_remark.text.toString()!="")
+                {
+                    remark=et_remark.text.toString()
+                }
+            }
 
-        ll_trainTime.setOnClickListener { v->
-            pickDate(tv_trainTime)
+        })
+        ll_jc_time.setOnClickListener { v->
+            pickDate(tv_jc_time)
         }
         et_visitorNum.addTextChangedListener(object:TextWatcher{
             override fun afterTextChanged(s: Editable?) {
@@ -236,6 +313,45 @@ class NewJdActivity : BaseActivity() ,DatePickerFragment.OnDateSetListener{
 
     }
 
+    private fun saveJdApply(flag: String) {
+        HttpClient.instance.saveJdApply(flag!!,expendType!!,applyDeptName!!, isLoan!!,
+                loanReason,budgetAmount!!,remark,
+                jdtype!!,visitorNum!!,accompanyNum!!,letterNo!!,guestUnit!!,nameAndPost!!,
+                activityContent!!,tv_jc_time.text.toString()!!,jc_address!!,zs_address!!,zs_days!!,yj!!,
+                jdzs_money!!,jdhs_money!!,jdqt_money!!)
+                .bindToLifecycle(this)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    json: JsonObject ->
+                    val data=json.getAsJsonObject("data")
+                    if(data!=null&&data.get("result")!=null)
+                    {
+                        if(flag=="0"){
+                            if(data.get("result").toString()=="1")
+                            {
+                                Toast.makeText(this,"提交成功", Toast.LENGTH_SHORT).show()
+                            }else{
+                                Toast.makeText(this,"提交失败", Toast.LENGTH_SHORT).show()
+                            }
+                        }else{
+                            if(data.get("result").toString()=="1")
+                            {
+                                Toast.makeText(this, "暂存成功", Toast.LENGTH_SHORT).show()
+                            }else{
+                                Toast.makeText(this, "暂存失败", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
+                    }
+                    cancelProgressDialog()
+
+                }, {
+                    e: Throwable ->
+                    cancelProgressDialog()
+                })
+    }
+
     fun pickDate(v: View) {
         mTarget=v//设置需要绑定日期回调的控件
         val datePicker = DatePickerFragment()
@@ -272,7 +388,7 @@ class NewJdActivity : BaseActivity() ,DatePickerFragment.OnDateSetListener{
             when(mTarget.id)
             {
                 R.id.tv_trainTime->
-                    trainTime=dateStr
+                    jc_time=dateStr
 
             }
 
