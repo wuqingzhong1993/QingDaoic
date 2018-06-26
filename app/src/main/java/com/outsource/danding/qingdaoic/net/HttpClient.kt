@@ -3,6 +3,8 @@ package com.outsource.danding.qingdaoic.net
 import android.os.Build
 import android.text.TextUtils
 import com.google.gson.*
+import com.outsource.danding.qingdaoic.annotation.Security
+import com.outsource.danding.qingdaoic.api.IAPI
 import com.outsource.danding.qingdaoic.app.QdApp
 import com.outsource.danding.qingdaoic.app.QdApplication
 import com.outsource.danding.qingdaoic.net.api.ApiConstants
@@ -24,18 +26,19 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import org.json.JSONObject
 import okhttp3.RequestBody
+import retrofit2.Call
 import kotlin.collections.AbstractList
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 
-class HttpClient private constructor() {
+class HttpClient private constructor() : IAPI {
 
     private var mOkHttpClient: OkHttpClient? = null
 
     private var personId: String? = null
 
-    private val apiService: ApiService
+    val apiService: ApiService
 
     private fun getBaseMap(isAddToken: Boolean = true): TreeMap<String, String> {
         val map = TreeMap<String, String>()
@@ -85,6 +88,10 @@ class HttpClient private constructor() {
     fun getUserInfo():Observable<JsonObject>{
 
         return apiService.getUserInfo(this.personId!!)
+    }
+
+    override fun getUserInfoSync():Call<JsonObject>{
+        return apiService.getUserInfoSync(this.personId!!)
     }
 
     /**
@@ -412,6 +419,7 @@ class HttpClient private constructor() {
     }
 
 
+
     /**
      * 出国申请添加页面——提交0,暂存1
      * zy20180619
@@ -636,5 +644,7 @@ class HttpClient private constructor() {
                 }
                 return INSTANCE!!
             }
+
+
     }
 }

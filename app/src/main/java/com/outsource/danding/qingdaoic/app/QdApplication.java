@@ -3,21 +3,37 @@ package com.outsource.danding.qingdaoic.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
+import com.google.gson.JsonObject;
 import com.imnjh.imagepicker.PickerConfig;
 import com.imnjh.imagepicker.SImagePicker;
 import com.outsource.danding.qingdaoic.R;
+import com.outsource.danding.qingdaoic.annotation.Security;
+import com.outsource.danding.qingdaoic.api.Aop;
+import com.outsource.danding.qingdaoic.api.IAPI;
 import com.outsource.danding.qingdaoic.bean.City;
 import com.outsource.danding.qingdaoic.bean.Department;
 import com.outsource.danding.qingdaoic.bean.Person;
 import com.outsource.danding.qingdaoic.bean.Province;
 import com.outsource.danding.qingdaoic.bean.UserInfo;
 import com.outsource.danding.qingdaoic.bean.ZhiChu;
+import com.outsource.danding.qingdaoic.net.HttpClient;
 import com.outsource.danding.qingdaoic.widget.GlideImageLoader;
 
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.http.GET;
 
 public class QdApplication extends Application {
 
@@ -29,9 +45,8 @@ public class QdApplication extends Application {
     private List<Person> persons;
     private List<ZhiChu> zhiChuList;
     private UserInfo userInfo;
-
+    private HttpClient apiProxy;
     private String cookie;
-
 
 
     @Override
@@ -44,6 +59,37 @@ public class QdApplication extends Application {
         mInstance.persons=new ArrayList<>();
         mInstance.cities=new ArrayList<>();
         mInstance.zhiChuList=new ArrayList<>();
+//        try{
+//
+//
+//
+//
+//            mInstance.apiProxy = (HttpClient) Proxy.newProxyInstance(IAPI.class.getClassLoader(), new Class<?>[]{HttpClient.class}, new InvocationHandler() {
+//
+//                @Override
+//                public Object invoke(Object proxy, Method method, Object[] args)
+//                        throws Throwable {
+//
+//                    Integer pageCount = (Integer) args[0];
+//                    Integer pageIndex = (Integer) args[1];
+//                    //System.out.println("参数: " + pageCount + "," + pageIndex);
+//                    //System.out.println("方法名: " + method.getName());
+//
+//                    Security annotation = method.getAnnotation(Security.class);
+//                    String url= annotation.value().toString();
+//                    JsonObject res= Aop.authSecurity(url, QdApplication.class.getMethod("onResult",JsonObject.class));
+//                    Log.d("application",res.toString());
+//                    method.invoke(this,args);
+//
+//                    return null;
+//                }
+//            });
+//        }catch (Exception e)
+//        {
+//            e.printStackTrace();
+//        }
+
+
 
         SImagePicker.init(new PickerConfig.Builder().setAppContext(this)
                 .setImageLoader(new GlideImageLoader())
@@ -52,10 +98,25 @@ public class QdApplication extends Application {
 
     }
 
+    public static void onResult(JsonObject json)
+    {
+        Log.d("","");
+    }
+
     public static void  setDepartments(List<Department> deps)
     {
         if(mInstance!=null)
             mInstance.departmentList=deps;
+    }
+
+    public static HttpClient getApiProxy()
+    {
+        if(mInstance!=null)
+        {
+            return mInstance.apiProxy;
+        }
+        mInstance=new QdApplication();
+        return mInstance.apiProxy;
     }
 
     public static List<Province> getProvinces(){

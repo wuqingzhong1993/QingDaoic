@@ -5,6 +5,7 @@ import io.reactivex.Observable
 import retrofit2.http.*
 import com.outsource.danding.qingdaoic.bean.*
 import okhttp3.RequestBody
+import retrofit2.Call
 
 
 interface  ApiService{
@@ -45,6 +46,11 @@ interface  ApiService{
     @Headers("Accept-Encoding:application/json")
     @POST("m_getUserInfoDetail.do")
     fun getUserInfo(@Field("personId") personId:String): Observable<JsonObject>
+
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("m_getUserInfoDetail.do")
+    fun getUserInfoSync(@Field("personId") personId:String): Call<JsonObject>
 
     @FormUrlEncoded
     @Headers("Accept-Encoding:application/json")

@@ -29,37 +29,58 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:background="#fff"
             >
 
             <LinearLayout
+                android:id="@+id/ll_audit_list"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:gravity="center"
-                android:padding="4dp">
+                android:paddingTop="10dp">
+
                 <TextView
+                    android:id="@+id/tv_audit_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="审核列表"
-                    android:textColor="#222"
+                    android:textColor="#21B9F0"
                     android:textSize="22sp"/>
+                <View
+                    android:id="@+id/view_audit_list"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#21B9F0"/>
             </LinearLayout>
 
 
             <LinearLayout
+                android:id="@+id/ll_audit_history"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:gravity="center"
-                android:padding="4dp">
+                android:paddingTop="10dp">
+
                 <TextView
+                    android:id="@+id/tv_audit_history"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="22sp"
-                    android:textColor="#222"
+                    android:textColor="#aaa"
                     android:text="审核历史"/>
+
+                <View
+                    android:id="@+id/view_audit_history"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#21B9F0"
+                    android:visibility="invisible"/>
             </LinearLayout>
 
 

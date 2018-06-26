@@ -84,6 +84,7 @@ class NewBusinessActivity : BaseActivity() , BusinessOfficeView.OnItemDelete{
         sp_zhichu.adapter=zhichuAdapter
 
         //添加新的办公数据
+        observerList= mutableListOf()
         addOffice()
         //officeList= mutableListOf(BusinessOffice("","","","","",""))
 

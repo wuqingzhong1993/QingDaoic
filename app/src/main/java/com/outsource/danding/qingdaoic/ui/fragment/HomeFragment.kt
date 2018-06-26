@@ -31,6 +31,13 @@ class HomeFragment:BaseFragment() {
         initListener()
         initApplyAdd()
         getUserInfo()
+        //调用动态代理
+        val thread=Thread(Runnable {
+            kotlin.run {
+                //QdApplication.getApiProxy().getUserInfoSync()
+            }
+        })
+        thread.start()
     }
 
     private fun initView(){
