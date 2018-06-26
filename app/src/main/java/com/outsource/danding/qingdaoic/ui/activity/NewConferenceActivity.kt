@@ -237,7 +237,7 @@ class NewConferenceActivity : BaseActivity(), DatePickerFragment.OnDateSetListen
                 meetingName!!,tv_meetingTime.text.toString()!!,tv_trainEnd.text.toString()!!,
                 tv_trainReport.text.toString()!!,tv_trainLeave.text.toString()!!,
                 meetingCategory!!,meetingPlace!!,estimatedNum!!,staffNum!!,
-                meetingBudget,meetingReason)
+                meetingBudget!!,meetingReason)
                 .bindToLifecycle(this)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

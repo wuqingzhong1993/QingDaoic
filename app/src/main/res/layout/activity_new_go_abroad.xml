@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.outsource.danding.qingdaoic.ui.activity.NewGoAbroadActivity"
-    >
-
-
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        tools:context="com.outsource.danding.qingdaoic.ui.activity.NewGoAbroadActivity"
         android:orientation="vertical">
 
-
         <include layout="@layout/base_title_bar" />
-
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+         >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -106,7 +102,7 @@
                     android:textSize="17sp" />
 
                 <RadioGroup
-                    android:id="@+id/rent"
+                    android:id="@+id/rg_isLoan"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
@@ -133,7 +129,38 @@
                 </RadioGroup>
 
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_loanReason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="#fff"
+                android:padding="4dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="20dp"
+                android:layout_marginTop="2dp"
+                android:visibility="gone"
+                >
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="借款理由:"
+                    android:textColor="#444"
+                    android:textSize="17sp"
+                    />
+
+
+                <EditText
+                    android:id="@+id/et_loanReason"
+                    android:layout_marginStart="30dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -382,7 +409,6 @@
                     android:textColor="#444"
                     android:textSize="17sp" />
 
-
                 <EditText
                     android:id="@+id/et_zs_money"
                     android:layout_width="0dp"
@@ -391,9 +417,36 @@
                     android:hint="请输入住宿费用"
                     android:layout_weight="1"
                     />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="#fff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="4dp"
+                android:paddingEnd="20dp"
+                android:paddingStart="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="伙食费用:"
+                    android:drawableLeft="@drawable/ic_star_red_24"
+                    android:textColor="#444"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/et_hs_money"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:hint="请输入伙食费用"
+                    android:layout_weight="1" />
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -425,7 +478,6 @@
                     android:layout_weight="1" />
 
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -456,553 +508,6 @@
                     android:layout_weight="1" />
 
             </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="#fff"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:paddingEnd="20dp"
-            android:paddingStart="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="接待类型:"
-                android:textColor="#444"
-                android:textSize="17sp" />
-
-            <RadioGroup
-                android:id="@+id/jdtype"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/type_business"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="普通公务"
-                    android:textAlignment="center" />
-
-                <RadioButton
-                    android:id="@+id/type_investment"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:text="招商引资"
-                    android:textAlignment="center" />
-
-            </RadioGroup>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:background="#fff"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="4dp"
-            android:paddingEnd="20dp"
-            android:paddingStart="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:textAlignment="center"
-                android:text="来客/陪客\n人数:"
-                android:drawableLeft="@drawable/ic_star_red_24"
-                android:textColor="#444"
-                android:textSize="17sp" />
-
-
-            <EditText
-                android:id="@+id/et_visitorNum"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:hint="请输入来客数"
-                android:layout_weight="1"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:textAlignment="center"
-                android:text="/"
-                android:textColor="#444"
-                android:textSize="17sp" />
-
-
-            <EditText
-                android:id="@+id/et_accompanyNum"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:hint="请输入陪客数"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:background="#fff"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="4dp"
-            android:paddingEnd="20dp"
-            android:paddingStart="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="公函号:"
-                android:drawableLeft="@drawable/ic_star_red_24"
-                android:textColor="#444"
-                android:textSize="17sp" />
-
-
-            <EditText
-                android:id="@+id/et_letterNo"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:hint="请输入公函号"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:background="#fff"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="4dp"
-            android:paddingEnd="20dp"
-            android:paddingStart="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="来宾单位:"
-                android:drawableLeft="@drawable/ic_star_red_24"
-                android:textColor="#444"
-                android:textSize="17sp" />
-
-
-            <EditText
-                android:id="@+id/et_guestUnit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:hint="请输入来宾单位"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:background="#fff"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="4dp"
-            android:paddingEnd="20dp"
-            android:paddingStart="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:textAlignment="center"
-                android:text="来宾姓名\n职务:"
-                android:drawableLeft="@drawable/ic_star_red_24"
-                android:textColor="#444"
-                android:textSize="17sp" />
-
-
-            <EditText
-                android:id="@+id/et_nameAndPost"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:hint="请输入来宾姓名职务"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:background="#fff"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="4dp"
-            android:paddingEnd="20dp"
-            android:paddingStart="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:textAlignment="center"
-                android:text="公务活动\n内容:"
-                android:drawableLeft="@drawable/ic_star_red_24"
-                android:textColor="#444"
-                android:textSize="17sp" />
-
-
-            <EditText
-                android:id="@+id/et_activityContent"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:hint="请输入公务活动内容"
-                android:layout_weight="1" />
-
-        </LinearLayout>
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:background="#fff"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="13dp"
-            android:paddingEnd="20dp"
-            android:paddingStart="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="就餐时间:"
-                android:textAlignment="center"
-                android:drawableLeft="@drawable/ic_star_red_24"
-                android:textColor="#444"
-                android:textSize="17sp" />
-
-            <LinearLayout
-                android:id="@+id/ll_trainTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:id="@+id/tv_trainTime"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_weight="1"
-                    android:enabled="false"
-                    android:hint="@string/jc_time"
-                    android:textColor="#000"
-                    android:textSize="15sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
-                    android:src="@drawable/ic_date_picker_black_24" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:background="#fff"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="4dp"
-            android:paddingEnd="20dp"
-            android:paddingStart="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="就餐地点:"
-                android:drawableLeft="@drawable/ic_star_red_24"
-                android:textColor="#444"
-                android:textSize="17sp" />
-
-
-            <EditText
-                android:id="@+id/et_jc_address"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:hint="请输入就餐地点"
-                android:layout_weight="1" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:background="#fff"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="4dp"
-            android:paddingEnd="20dp"
-            android:paddingStart="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="住宿地点:"
-                android:textColor="#444"
-                android:textSize="17sp" />
-
-
-            <EditText
-                android:id="@+id/et_zs_address"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="35dp"
-                android:hint="请输入住宿地点"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:background="#fff"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="4dp"
-            android:paddingEnd="20dp"
-            android:paddingStart="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="住宿天数:"
-                android:textColor="#444"
-                android:textSize="17sp" />
-
-
-            <EditText
-                android:id="@+id/et_zs_days"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="35dp"
-                android:hint="请输入住宿天数"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:background="#fff"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:paddingEnd="20dp"
-            android:paddingStart="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="是否饮酒:"
-                android:textColor="#444"
-                android:textSize="17sp" />
-
-            <RadioGroup
-                android:id="@+id/rg_yj"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/yes_1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="是"
-                    android:textAlignment="center" />
-
-                <RadioButton
-                    android:id="@+id/no_2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:text="否"
-                    android:textAlignment="center" />
-
-            </RadioGroup>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:background="#fff"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="4dp"
-            android:paddingEnd="20dp"
-            android:paddingStart="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="住宿费用:"
-                android:drawableLeft="@drawable/ic_star_red_24"
-                android:textColor="#444"
-                android:textSize="17sp" />
-
-
-            <EditText
-                android:id="@+id/et_jdzs_money"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:hint="请输入住宿费用"
-                android:layout_weight="1" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:background="#fff"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="4dp"
-            android:paddingEnd="20dp"
-            android:paddingStart="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="伙食费用:"
-                android:drawableLeft="@drawable/ic_star_red_24"
-                android:textColor="#444"
-                android:textSize="17sp" />
-
-
-            <EditText
-                android:id="@+id/et_jdhs_money"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:hint="请输入伙食费用"
-                android:layout_weight="1" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:background="#fff"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="4dp"
-            android:paddingEnd="20dp"
-            android:paddingStart="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="其他费用:"
-                android:drawableLeft="@drawable/ic_star_red_24"
-                android:textColor="#444"
-                android:textSize="17sp" />
-
-
-            <EditText
-                android:id="@+id/et_jdqt_money"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:hint="请输入其他费用"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:background="#fff"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:paddingEnd="20dp"
-            android:paddingStart="10dp">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:text="费用总计:"
-                android:textColor="#444"
-                android:textSize="17sp" />
-
-            <TextView
-                android:id="@+id/tv_budgetAmount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:textColor="#444"
-                android:textSize="17sp" />
-
-        </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -1044,7 +549,7 @@
             android:padding="10dp">
 
             <LinearLayout
-                android:id="@+id/ll_commit"
+                android:id="@+id/btn_commit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -1062,6 +567,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/btn_temp_save"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -1082,6 +588,5 @@
 
 
     </LinearLayout>
-
+    </ScrollView>
 </LinearLayout>
-</ScrollView>

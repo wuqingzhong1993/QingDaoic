@@ -76,7 +76,7 @@
                 android:textSize="17sp" />
 
             <RadioGroup
-                android:id="@+id/rent"
+                android:id="@+id/rg_isLoan"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
@@ -99,8 +99,37 @@
                     android:checked="true"
                     android:text="否"
                     android:textAlignment="center" />
-
             </RadioGroup>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_loanReason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#fff"
+            android:padding="4dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="2dp"
+            android:visibility="gone"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="借款理由:"
+                android:textColor="#444"
+                android:textSize="17sp"
+                />
+
+            <EditText
+                android:id="@+id/et_loanReason"
+                android:layout_marginStart="30dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
 
         </LinearLayout>
 
@@ -355,14 +384,14 @@
                 android:textSize="17sp" />
 
             <LinearLayout
-                android:id="@+id/ll_trainTime"
+                android:id="@+id/ll_jc_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:id="@+id/tv_trainTime"
+                    android:id="@+id/tv_jc_time"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
@@ -692,7 +721,7 @@
             android:padding="10dp">
 
             <LinearLayout
-                android:id="@+id/ll_commit"
+                android:id="@+id/btn_commit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -710,6 +739,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/btn_temp_save"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
