@@ -28,7 +28,7 @@ class MineFragment : BaseFragment() {
 
     private fun initView(){
 
-
+        getZCList()
         //banner.setImages(images).setImageLoader(GlideImageLoader()).start()
     }
 
@@ -51,13 +51,6 @@ class MineFragment : BaseFragment() {
 
     }
 
-
-    override fun onResume() {
-        super.onResume()
-        //获取个人资产
-        getZCList()
-    }
-
     private fun getZCList() {
         HttpClient.instance.getZCList()
                 .bindToLifecycle(this)
@@ -65,7 +58,6 @@ class MineFragment : BaseFragment() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     json: JsonObject ->
-                    handleLoginData(json)
                     cancelProgressDialog()
 
                 }, {

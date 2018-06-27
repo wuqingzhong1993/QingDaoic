@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId "com.outsource.danding.qingdaoic"
         minSdkVersion 21
-        targetSdkVersion 22
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

@@ -152,7 +152,7 @@ class HttpClient private constructor() : IAPI {
      * 获取个人资产
      */
     fun getZCList(): Observable<JsonObject> {
-        return apiService.getAuditByOperator(this.personId!!,"1")
+        return apiService.getDoZCList(this.personId!!,"1")
     }
 
     /**

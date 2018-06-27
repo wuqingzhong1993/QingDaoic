@@ -301,7 +301,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="10dp"
+                        android:padding="5dp"
                         >
 
                         <LinearLayout
@@ -320,8 +320,8 @@
                                 android:layout_weight="1">
                                 <ImageView
                                     style="@style/BaseIVInLL"
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
+                                    android:layout_width="55dp"
+                                    android:layout_height="55dp"
                                     android:src="@drawable/business" />
                             </LinearLayout>
                             <LinearLayout
@@ -358,8 +358,8 @@
                                 android:layout_weight="1">
                                 <ImageView
                                     style="@style/BaseIVInLL"
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
+                                    android:layout_width="55dp"
+                                    android:layout_height="55dp"
                                     android:src="@drawable/travel" />
                             </LinearLayout>
                             <LinearLayout
@@ -396,8 +396,8 @@
                                 android:layout_weight="1">
                                 <ImageView
                                     style="@style/BaseIVInLL"
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
+                                    android:layout_width="55dp"
+                                    android:layout_height="55dp"
                                     android:src="@drawable/conference" />
                             </LinearLayout>
                             <LinearLayout
@@ -434,8 +434,8 @@
                                 android:layout_weight="1">
                                 <ImageView
                                     style="@style/BaseIVInLL"
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
+                                    android:layout_width="55dp"
+                                    android:layout_height="55dp"
                                     android:src="@drawable/cultivate" />
                             </LinearLayout>
                             <LinearLayout
@@ -472,7 +472,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="10dp"
+                        android:padding="6dp"
                         >
 
                         <LinearLayout
@@ -491,8 +491,8 @@
                                 android:layout_weight="1">
                                 <ImageView
                                     style="@style/BaseIVInLL"
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
+                                    android:layout_width="55dp"
+                                    android:layout_height="55dp"
                                     android:src="@drawable/reception" />
                             </LinearLayout>
                             <LinearLayout
@@ -529,8 +529,8 @@
                                 android:layout_weight="1">
                                 <ImageView
                                     style="@style/BaseIVInLL"
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
+                                    android:layout_width="55dp"
+                                    android:layout_height="55dp"
                                     android:src="@drawable/go_abroad" />
                             </LinearLayout>
                             <LinearLayout
@@ -567,8 +567,8 @@
                                 android:layout_weight="1">
                                 <ImageView
                                     style="@style/BaseIVInLL"
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
+                                    android:layout_width="55dp"
+                                    android:layout_height="55dp"
                                     android:src="@drawable/reimburse" />
                             </LinearLayout>
                             <LinearLayout
@@ -604,8 +604,8 @@
                                 android:layout_weight="1">
                                 <ImageView
                                     style="@style/BaseIVInLL"
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
+                                    android:layout_width="55dp"
+                                    android:layout_height="55dp"
                                     android:src="@drawable/else_business" />
                             </LinearLayout>
                             <LinearLayout
