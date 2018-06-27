@@ -2,6 +2,8 @@ package com.outsource.danding.qingdaoic.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.R
@@ -16,6 +18,11 @@ import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_home.*
+import okhttp3.ResponseBody
+import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
+import java.io.OutputStream
 
 
 class HomeFragment:BaseFragment() {
@@ -31,6 +38,7 @@ class HomeFragment:BaseFragment() {
         initListener()
         initApplyAdd()
         getUserInfo()
+        //downloadPic()
         //调用动态代理
         val thread=Thread(Runnable {
             kotlin.run {
@@ -87,6 +95,46 @@ class HomeFragment:BaseFragment() {
             activity?.startActivityForResult(intent,0)
         }
 
+    }
+
+    private fun downloadPic()
+    {
+        HttpClient.instance.downloadPic("http://www.lnmoto.cn/bbs/data/attachment/forum/201310/03/075632kpll31ppggpog1ip.jpg")
+                .bindToLifecycle(this)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .subscribe({
+                    body: ResponseBody ->
+
+                    try{
+                        val  file:File = File(Environment.getExternalStorageDirectory(),"qindaoic.jpg")
+                        var inputStream: InputStream? = null
+                        var outputStream: OutputStream? = null
+                        val fileReader = ByteArray(4096)
+                        val fileSize = body.contentLength()
+                        val fileSizeDownloaded: Long = 0
+
+                        inputStream = body.byteStream();
+                        outputStream =  FileOutputStream(file)
+                        while (true) {
+                            val read = inputStream.read(fileReader);
+                            if (read == -1) {
+                                break;
+                            }
+                            outputStream.write(fileReader, 0, read);
+                        }
+
+                        outputStream.flush();
+
+
+                    }catch (e:Exception)
+                    {
+                        e.printStackTrace()
+                    }
+                }, {
+                    e: Throwable ->
+                    cancelProgressDialog()
+                })
     }
 
     private fun getUserInfo()

@@ -180,7 +180,7 @@ class AuditApplyDetailActivity : BaseActivity() {
                                     photoList?.add(photo )
                                 }
                                 val photo = photoList!![0]
-                                GlideApp.with(this).load("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530331671&di=bfc46f4a5d174dee13f4f962f75a96dd&imgtype=jpg&er=1&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fe850352ac65c10380a5706e4b9119313b07e89ef.jpg").fitCenter().into(img_country)
+                                GlideApp.with(this).load("http://www.lnmoto.cn/bbs/data/attachment/forum/201310/03/075632kpll31ppggpog1ip.jpg").fitCenter().into(img_country)
                             }
                         }
 

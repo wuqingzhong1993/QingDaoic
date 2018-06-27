@@ -13,5 +13,6 @@
     <color name="colorToolbar">#2368d5</color>
     <color name="colorTabTextSelect">#21B9F0</color>
     <color name="colorTabTextNormal">#aaa</color>
-
+    <color name="colorApplyButton">#2368d5</color>
+    <color name="colorDenyButton">#da3c48</color>
 </resources>

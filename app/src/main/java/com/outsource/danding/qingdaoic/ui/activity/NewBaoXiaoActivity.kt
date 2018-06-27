@@ -10,30 +10,34 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.google.gson.JsonObject
+import com.outsource.danding.qingdaoic.OnItemIndexDelete
 import com.outsource.danding.qingdaoic.R
 import com.outsource.danding.qingdaoic.app.QdApplication
 import com.outsource.danding.qingdaoic.base.BaseActivity
+import com.outsource.danding.qingdaoic.bean.BusinessOffice
 import com.outsource.danding.qingdaoic.bean.Department
 import com.outsource.danding.qingdaoic.bean.Receipt
 import com.outsource.danding.qingdaoic.bean.ZhiChu
 import com.outsource.danding.qingdaoic.net.HttpClient
 import com.outsource.danding.qingdaoic.ui.fragment.DatePickerFragment
 import com.outsource.danding.qingdaoic.widget.ReceiptAdapter
+import com.outsource.danding.qingdaoic.widget.ReceiptView
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_new_bao_xiao.*
-import kotlinx.android.synthetic.main.item_list_audit_apply.*
 
 class NewBaoXiaoActivity : BaseActivity(), DatePickerFragment.OnDateSetListener ,
-        ReceiptAdapter.OnDeleteListener {
+        ReceiptView.OnItemDelete {
 
     private  lateinit var mTarget: View
 
     private var passIsShow = false
 
-    lateinit var receiptAdapter: ReceiptAdapter
+
     var receiptList:MutableList<Receipt>?=null
+    private var observerList:MutableList<OnItemIndexDelete>?=null
+
     var receiptAmount:Int=0
     var receiptNumber:Int=0
     private var amountMap:MutableMap<Int,Int> = mutableMapOf()
@@ -89,9 +93,11 @@ class NewBaoXiaoActivity : BaseActivity(), DatePickerFragment.OnDateSetListener 
         sp_zhichu.adapter=zhichuAdapter
 
 
-        receiptList= mutableListOf(Receipt("","0","0"))
-        receiptAdapter= ReceiptAdapter(this,receiptList!!)
-        lt_receipt.adapter=receiptAdapter
+        //初始化收据的列表
+        receiptList= mutableListOf()
+        observerList= mutableListOf()
+        addReceipt()
+
 
         amountMap= mutableMapOf()
         numberMap= mutableMapOf()
@@ -109,26 +115,25 @@ class NewBaoXiaoActivity : BaseActivity(), DatePickerFragment.OnDateSetListener 
         }
 
         img_add.setOnClickListener {
-            receiptList?.add(Receipt("","0","0"))
-            receiptAdapter.notifyDataSetChanged()
-            var totalHeight=0
-            for(i in receiptList!!.indices)
-            {
-                val itemView = receiptAdapter.getView(i, null, lt_receipt)
-                itemView.measure(0,0)
-                totalHeight+=itemView.measuredHeight
-            }
-            var params:ViewGroup.LayoutParams  = lt_receipt.getLayoutParams();
-            params.height = totalHeight + (lt_receipt.getDividerHeight() * (receiptAdapter.count -1))
-            lt_receipt.layoutParams=params
+            addReceipt()
         }
 
-        lt_receipt.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom -> onNotify(null,null) }
-
-        //todo 设置删除项的回调
-
-
     }
+
+
+    private fun addReceipt(){
+        val receipt = Receipt("","0","0")
+        receiptList?.add(receipt)
+        val receiptView= ReceiptView(this,receiptList!!.size-1)
+        ll_receipt.addView(receiptView)
+        receiptView.setDataSource(receiptList)//绑定数据源
+        observerList?.add(receiptView)//添加监听者
+
+        receiptView.setReimbName(receipt.reimbName)
+        receiptView.setAmount(receipt.amount)
+        receiptView.setNumber(receipt.number)
+    }
+
 
     private fun saveBaoXiaoApply(flag: String) {
         HttpClient.instance.saveBaoXiaoApply(flag!!,applyDeptId!!,applyDeptName!!, internalId!!,
@@ -153,6 +158,17 @@ class NewBaoXiaoActivity : BaseActivity(), DatePickerFragment.OnDateSetListener 
         mTarget=v//设置需要绑定日期回调的控件
         val datePicker = DatePickerFragment()
         datePicker.show(supportFragmentManager, "datePicker")
+    }
+
+
+    override fun onDelete(position: Int) {
+        ll_receipt.removeViewAt(position)
+        receiptList?.removeAt(position)
+        observerList?.removeAt(position)
+        for(observer in observerList!!)
+        {
+            observer.onItemIndexDelete(position)
+        }
     }
 
     override fun onDateSet(year: Int, month: Int, day: Int) {
@@ -186,49 +202,7 @@ class NewBaoXiaoActivity : BaseActivity(), DatePickerFragment.OnDateSetListener 
         }
     }
 
-    override fun onDelete() {
-        var totalHeight=0
-        for(i in receiptList!!.indices)
-        {
-            val itemView = receiptAdapter.getView(i, null, lt_receipt)
-            itemView.measure(0,0)
-            totalHeight+=itemView.measuredHeight
-        }
-        var params: ViewGroup.LayoutParams  = lt_receipt.getLayoutParams();
-        params.height = totalHeight + (lt_receipt.getDividerHeight() * (receiptAdapter.count -1))
-        lt_receipt.layoutParams=params
 
-    }
-
-    /**
-     * todo 将通知整合成按下标进行组织的形式
-     */
-    fun onNotify(number:Int?,amount:Int?) {
-
-        if(lt_receipt.childCount>0)
-        {
-            receiptAmount=0
-            receiptNumber=0
-            for(i in 0  until  lt_receipt.childCount)
-            {
-                val j=i
-                if(lt_receipt.getChildAt(i)==null)
-                {
-                    continue;
-                }
-                val container=lt_receipt.getChildAt(i)!! as LinearLayout
-                val et_number= container.findViewById<EditText>(R.id.et_number)
-                if(et_number.text.toString()!="")
-                {
-                    receiptNumber+=et_number.text.toString().toInt()
-                }
-            }
-
-            tv_receipt_number.text=receiptNumber.toString()
-            tv_receipt_amount.text=receiptAmount.toString()
-        }
-
-    }
 
 
 }

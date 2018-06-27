@@ -6,6 +6,13 @@ import retrofit2.http.*
 import com.outsource.danding.qingdaoic.bean.*
 import okhttp3.RequestBody
 import retrofit2.Call
+import okhttp3.ResponseBody
+import retrofit2.http.GET
+import retrofit2.http.Url
+
+
+
+
 
 
 interface  ApiService{
@@ -159,6 +166,8 @@ interface  ApiService{
     fun saveJdActivity(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
 
 
+    @GET
+    fun downloadFileWithDynamicUrlSync(@Url fileUrl: String): Observable<ResponseBody>
 
 }
 

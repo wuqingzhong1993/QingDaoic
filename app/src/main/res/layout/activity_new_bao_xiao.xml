@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+
+
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.outsource.danding.qingdaoic.ui.activity.NewBaoXiaoActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.outsource.danding.qingdaoic.ui.activity.NewBaoXiaoActivity"
-    >
+    android:orientation="vertical">
 
 
-    <LinearLayout
+    <include layout="@layout/base_title_bar" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="#eee"
+        >
 
-
-        <include layout="@layout/base_title_bar" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="#eee"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -204,16 +205,20 @@
 
             </LinearLayout>
 
-            <RelativeLayout
+
+            <LinearLayout
+                android:id="@+id/ll_receipt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ListView
-                    android:layout_marginEnd="0dp"
-                    android:id="@+id/lt_receipt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
-            </RelativeLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:orientation="vertical"
+                android:padding="4dp"
+                android:paddingEnd="0dp"
+                android:paddingStart="0dp"
+                >
+
+            </LinearLayout>
+
 
 
             <android.support.constraint.ConstraintLayout
@@ -301,14 +306,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="10dp"
+                android:layout_marginTop="20dp">
+
 
                 <LinearLayout
                     android:id="@+id/btn_commit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#00f"
+                    android:background="@color/colorApplyButton"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal"
                     android:padding="10dp">
@@ -325,7 +332,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#0ff"
+                    android:background="@color/colorDenyButton"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal"
                     android:padding="10dp">
@@ -342,6 +349,6 @@
 
 
         </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>

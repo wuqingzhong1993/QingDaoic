@@ -30,6 +30,7 @@ import retrofit2.Call
 import kotlin.collections.AbstractList
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
+import kotlin.collections.HashSet
 
 
 class HttpClient private constructor() : IAPI {
@@ -313,6 +314,14 @@ class HttpClient private constructor() : IAPI {
         val map = HashMap<String,String>()
         map.put("personId", this.personId!!)
         return apiService.commit(map)
+    }
+
+    /**
+     * 下载图片
+     */
+
+    fun downloadPic(url:String):Observable<ResponseBody>{
+        return apiService.downloadFileWithDynamicUrlSync(url)
     }
 
 
@@ -628,16 +637,16 @@ class HttpClient private constructor() : IAPI {
             val originalResponse = chain?.proceed(chain?.request())
             if(originalResponse?.headers("Set-Cookie")!=null)
             {
-                val cookieBuffer = StringBuffer()
-                for(header in originalResponse.headers("Set-Cookie"))
-                {
-                    val cookieArray = header.split(";")
-                    val cookie=cookieArray[0]
-                    cookieBuffer.append(cookie).append(";")
+                var cookies:MutableSet<String> = mutableSetOf()
+
+                for (header in originalResponse.headers("Set-Cookie")) {
+                    cookies.add(header)
                 }
-                if(!cookieBuffer.isEmpty())//cookie不为空
+
+
+                if(cookies.size>0)//cookie不为空
                 {
-                    QdApplication.setCookie(cookieBuffer.toString())
+                    QdApplication.setCookie(cookies)
                 }
 
             }
@@ -650,9 +659,12 @@ class HttpClient private constructor() : IAPI {
         override fun intercept(chain: Interceptor.Chain?): Response {
 
             val builder = chain?.request()?.newBuilder()
-            if(QdApplication.getCookie()!=null)
+            if(QdApplication.getCookie()!=null&&QdApplication.getCookie().size>0)
             {
-                builder?.addHeader("Cookie", QdApplication.getCookie())
+                for( cookie in QdApplication.getCookie())
+                {
+                    builder?.addHeader("Cookie", cookie)
+                }
             }
 
             return chain?.proceed(builder?.build())!!

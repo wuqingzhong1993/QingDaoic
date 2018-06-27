@@ -35,10 +35,7 @@ class LoginActivity : BaseActivity() {
     private fun initListener() {
 
 
-        iv_is_show.setOnClickListener {
-            passIsShow = !passIsShow
-            Utils.isShowPass(passIsShow, iv_is_show, et_pass)
-        }
+
 //        ll_area.setOnClickListener {
 //            val intent = Intent(this, ChooseAreaActivity::class.java)
 //            startActivityForResult(intent, ChooseAreaActivity.CHOOSE_COUNTRY_CODE)
@@ -82,7 +79,7 @@ class LoginActivity : BaseActivity() {
      * 新加账户4:  刘雪青  1 -> 审核
      */
     private fun login(username: String, password: String) {
-        HttpClient.instance.login("陈琳", "1")
+        HttpClient.instance.login(username, password)
                 .bindToLifecycle(this)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

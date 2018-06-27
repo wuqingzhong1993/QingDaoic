@@ -54,6 +54,10 @@ class NewGoAbroadActivity : BaseActivity(), DatePickerFragment.OnDateSetListener
     }
 
     private fun initView(){
+
+        title="因公出国(境)"
+
+
         //初始化单位的adapter
         departments= QdApplication.getDepartments()
         departmentNames= mutableListOf<String>()

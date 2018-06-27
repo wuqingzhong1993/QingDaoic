@@ -25,7 +25,7 @@ class MainActivity : BaseTabActivity() {
 
     override fun getStrings(): Array<String> = arrayOf("申请","审核","我的")
 
-    override fun getIcons(): IntArray = intArrayOf(R.drawable.apply,R.drawable.audit,R.drawable.me)
+    override fun getIcons(): IntArray = intArrayOf(R.drawable.bg_tab_apply,R.drawable.bg_tab_audit,R.drawable.bg_tab_mine)
 
     private var images= mutableListOf(R.drawable.banner,R.drawable.banner,R.drawable.banner)
 
@@ -74,6 +74,7 @@ class MainActivity : BaseTabActivity() {
             1->{
                 title=getString(R.string.tab_audit)
                 toolbar.visibility = View.GONE
+
             }
             2 ->{
                 title= getString(R.string.tab_mine)

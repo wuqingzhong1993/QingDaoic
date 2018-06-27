@@ -18,6 +18,7 @@ import com.outsource.danding.qingdaoic.base.FNAdapter
 import com.outsource.danding.qingdaoic.bean.BusinessInfo
 import com.outsource.danding.qingdaoic.net.HttpClient
 import com.outsource.danding.qingdaoic.ui.fragment.BusinessApplyFragment
+import com.outsource.danding.qingdaoic.ui.fragment.TravelApplyFragment
 import com.outsource.danding.qingdaoic.widget.TabFragmentPagerAdapter
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -45,7 +46,7 @@ class TravelActivity : BaseActivity() {
     private fun initView() {
         title = "差旅"
 
-        fragments= mutableListOf(BusinessApplyFragment(), BusinessApplyFragment())
+        fragments= mutableListOf(TravelApplyFragment(), TravelApplyFragment())
         adapter= TabFragmentPagerAdapter(supportFragmentManager,fragments)
         view_pager.adapter=adapter
 

@@ -17,55 +17,64 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/view_margin_small"
         android:background="#fff"
-        android:padding="10dp"
         android:orientation="horizontal"
         >
 
         <LinearLayout
+            android:id="@+id/ll_unfinish"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="10dp">
 
             <TextView
-                android:id="@+id/tv_tab_one"
+                android:id="@+id/tv_unfinish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/view_padding_small"
-                android:text="时间排序"
-                android:textColor="@android:color/black"
+                android:text="未完成"
+                android:textColor="#21B9F0"
                 android:textSize="18sp"
                 />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:src="@drawable/sort_vertical"/>
+            <View
+                android:id="@+id/view_unfinish"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#21B9F0"/>
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_done"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="10dp">
 
             <TextView
-                android:id="@+id/tv_tab_two"
+                android:id="@+id/tv_done"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/view_padding_small"
-                android:text="待审"
-                android:textColor="@android:color/black"
+                android:text="已完成"
+                android:textColor="#aaa"
                 android:textSize="18sp"
                 />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:src="@drawable/sort_vertical"/>
+
+            <View
+                android:id="@+id/view_done"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#21B9F0"
+                android:visibility="invisible"/>
 
         </LinearLayout>
 
@@ -76,7 +85,13 @@
     </LinearLayout>
 
 
-    <include layout="@layout/base_recycler_view" />
+    <android.support.v4.view.ViewPager
+        android:padding="0dp"
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
 
 
 

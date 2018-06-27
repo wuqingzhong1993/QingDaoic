@@ -27,7 +27,9 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -46,7 +48,7 @@ public class QdApplication extends Application {
     private List<ZhiChu> zhiChuList;
     private UserInfo userInfo;
     private HttpClient apiProxy;
-    private String cookie;
+    private Set<String> cookies;
 
 
     @Override
@@ -59,6 +61,7 @@ public class QdApplication extends Application {
         mInstance.persons=new ArrayList<>();
         mInstance.cities=new ArrayList<>();
         mInstance.zhiChuList=new ArrayList<>();
+        mInstance.cookies=new HashSet<>();
 //        try{
 //
 //
@@ -171,21 +174,21 @@ public class QdApplication extends Application {
         return null;
     }
 
-    public static String getCookie(){
+    public static Set<String> getCookie(){
         if(mInstance!=null)
         {
-            return mInstance.cookie;
+            return mInstance.cookies;
         }
         mInstance=new QdApplication();
         return null;
     }
 
-    public static void setCookie(String cookie){
+    public static void setCookie(Set<String> cookie){
         if(mInstance==null)
         {
             mInstance=new QdApplication();
         }
-        mInstance.cookie=cookie;
+        mInstance.cookies=cookie;
 
     }
 
