@@ -111,6 +111,11 @@ interface  ApiService{
     @POST("do_saveByOffice.do")
     fun saveBusinessApply(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
 
+    @FormUrlEncoded
+    @Headers("Accept-Encoding:application/json")
+    @POST("do_editShenHeAll.do.do")
+    fun reSaveBusinessApply(@FieldMap map: HashMap<String, String>): Observable<JsonObject>
+
 
 
     @FormUrlEncoded

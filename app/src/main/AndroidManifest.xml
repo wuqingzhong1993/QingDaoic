@@ -53,6 +53,8 @@
         <activity android:name=".ui.activity.BaoXiaoAuditActivity"></activity>
         <activity android:name=".ui.activity.AuditBaoxiaoApplyDetailActivity"/>
         <activity android:name=".ui.activity.TravelDetailActivity"/>
+        <activity android:name=".ui.activity.ConferenceDetailActivity" />
+
     </application>
 
 </manifest>

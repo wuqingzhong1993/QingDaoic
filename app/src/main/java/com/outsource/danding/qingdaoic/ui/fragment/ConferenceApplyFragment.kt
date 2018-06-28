@@ -11,6 +11,7 @@ import com.outsource.danding.qingdaoic.base.FNAdapter
 import com.outsource.danding.qingdaoic.bean.BusinessInfo
 import com.outsource.danding.qingdaoic.net.HttpClient
 import com.outsource.danding.qingdaoic.ui.activity.AuditApplyDetailActivity
+import com.outsource.danding.qingdaoic.ui.activity.ConferenceDetailActivity
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -81,7 +82,7 @@ class ConferenceApplyFragment : BaseListFragment<BusinessInfo>() {
 
 
     override fun onItemClick(holder: FNAdapter.MyViewHolder?, position: Int) {
-        val intent= Intent(activity, AuditApplyDetailActivity::class.java)
+        val intent= Intent(activity, ConferenceDetailActivity::class.java)
         intent.putExtra("expendId",mList[position].expendId)
         startActivity(intent)
     }

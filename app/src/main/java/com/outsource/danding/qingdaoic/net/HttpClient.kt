@@ -280,6 +280,47 @@ class HttpClient private constructor() : IAPI {
         }
         return apiService.saveBusinessApply(map)
     }
+    /**
+     * 会议申请，未提交或提交未审核页面——提交0,暂存1
+     * zy20180619
+     */
+    fun reSaveConferenceApply(flag:String,expendType:String,applyDeptName:String, isLoan:String,
+                            loanReason:String?,budgetAmount:String?,remark:String?,
+                            meetingName:String,meetingTime:String,trainEnd:String,trainReport:String,trainLeave:String,
+                            meetingCategory:String,meetingPlace:String,estimatedNum:String,staffNum:String,
+                            meetingBudget:String,meetingReason:String?):Observable<JsonObject>{
+
+        val map = HashMap<String,String>()
+        map.put("personId", this.personId!!)
+        map.put("flag",flag)
+        map.put("expendType",expendType)
+        map.put("applyDeptName",applyDeptName)
+        map.put("isLoan",isLoan)
+        if(loanReason!=null){
+            map.put("loanReason",loanReason)
+        }
+        if(budgetAmount!=null){
+            map.put("budgetAmount",budgetAmount)
+        }
+        if(remark!=null){
+            map.put("remark",remark)
+        }
+
+        map.put("meetingName",meetingName)
+        map.put("meetingTime",meetingTime)
+        map.put("trainEnd",trainEnd)
+        map.put("trainReport",trainReport)
+        map.put("trainLeave",trainLeave)
+        map.put("meetingCategory",meetingCategory)
+        map.put("meetingPlace",meetingPlace)
+        map.put("estimatedNum",estimatedNum)
+        map.put("staffNum",staffNum)
+        map.put("meetingBudget",meetingBudget)
+        if(meetingReason!=null){
+            map.put("meetingReason",meetingReason)
+        }
+        return apiService.reSaveBusinessApply(map)
+    }
 
     /**
      * 计算金额
