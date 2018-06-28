@@ -196,39 +196,44 @@ class TravelDetailActivity : BaseActivity() , AuditOfficeView.OnItemDelete {
                             {
 
                                 ll_travel.visibility= View.VISIBLE
-                                val  gson= Gson()
-                                for((index,ob) in list.withIndex())
+                                try{
+                                    val  gson= Gson()
+                                    for((index,ob) in list.withIndex())
+                                    {
+                                        val travel: TravelInfo = gson.fromJson(ob, TravelInfo::class.java)
+                                        travelList?.add(travel)
+                                        var travelView= TravelInfoView(this, index)
+                                        ll_travel.addView(travelView)
+                                        travelView.setDataSource(travelList)//绑定数据源
+                                        observerList?.add(travelView)//添加监听者
+
+                                        var layoutParams = travelView.layoutParams
+                                        layoutParams.width= LinearLayout.LayoutParams.MATCH_PARENT
+                                        layoutParams.height= LinearLayout.LayoutParams.WRAP_CONTENT
+                                        travelView.layoutParams=layoutParams
+
+
+                                        travelView.setCity(travel.city)
+                                        travelView.setCityTown(travel.city_town)
+                                        travelView.setZsMoney(travel.zs_money)
+                                        travelView.setFare(travel.fare)
+                                        travelView.setHotel(travel.ht_money)
+                                        travelView.setHsMoney(travel.hs_money)
+                                        travelView.setJtMoney(travel.jt_money)
+                                        travelView.setLevels(travel.all_money)
+                                        travelView.setOtherFee(travel.qt_money)
+                                        travelView.setSendCar(travel.sendCar)
+                                        travelView.setzsJd(travel.zs_jd)
+                                        travelView.setJtToolsStr(travel.jt_tools_str)
+                                        travelView.setfhToolsStr(travel.fh_tools_str)
+                                        travelView.setWNumber(travel.w_number)
+                                        travelView.setRemarks(travel.remarks)
+
+
+                                    }
+                                }catch (e:Exception)
                                 {
-                                    val travel: TravelInfo = gson.fromJson(ob, TravelInfo::class.java)
-                                    travelList?.add(travel)
-                                    var travelView= TravelInfoView(this, index)
-                                    ll_travel.addView(travelView)
-                                    travelView.setDataSource(travelList)//绑定数据源
-                                    observerList?.add(travelView)//添加监听者
-
-                                    var layoutParams = travelView.layoutParams
-                                    layoutParams.width= LinearLayout.LayoutParams.MATCH_PARENT
-                                    layoutParams.height= LinearLayout.LayoutParams.WRAP_CONTENT
-                                    travelView.layoutParams=layoutParams
-
-
-                                    travelView.setCity(travel.city)
-                                    travelView.setCityTown(travel.city_town)
-                                    travelView.setZsMoney(travel.zs_money)
-                                    travelView.setFare(travel.fare)
-                                    travelView.setHotel(travel.ht_money)
-                                    travelView.setHsMoney(travel.hs_money)
-                                    travelView.setJtMoney(travel.jt_money)
-                                    travelView.setLevels(travel.all_money)
-                                    travelView.setOtherFee(travel.qt_money)
-                                    travelView.setSendCar(travel.sendCar)
-                                    travelView.setzsJd(travel.zs_jd)
-                                    travelView.setJtToolsStr(travel.jt_tools_str)
-                                    travelView.setfhToolsStr(travel.fh_tools_str)
-                                    travelView.setWNumber(travel.w_number)
-                                    travelView.setRemarks(travel.remarks)
-
-
+                                    e.printStackTrace()
                                 }
                             }
                         }
