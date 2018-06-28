@@ -8,10 +8,10 @@ import com.google.gson.JsonObject
 import com.outsource.danding.qingdaoic.R
 import com.outsource.danding.qingdaoic.base.BaseListFragment
 import com.outsource.danding.qingdaoic.base.FNAdapter
-import com.outsource.danding.qingdaoic.bean.AuditApplyInfo
 import com.outsource.danding.qingdaoic.bean.BusinessInfo
 import com.outsource.danding.qingdaoic.net.HttpClient
 import com.outsource.danding.qingdaoic.ui.activity.AuditApplyDetailActivity
+import com.outsource.danding.qingdaoic.ui.activity.BusinessDetailActivity
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -40,7 +40,7 @@ class BusinessApplyFragment : BaseListFragment<BusinessInfo>() {
 
     private fun getBusinessApplyList()
     {
-        HttpClient.instance.getshenQingInfoList()
+        HttpClient.instance.getshenQingInfoList("99",mPage+1)
                 .bindToLifecycle(this)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -61,10 +61,14 @@ class BusinessApplyFragment : BaseListFragment<BusinessInfo>() {
                                 val applyInfo: BusinessInfo = gson.fromJson(ob, BusinessInfo::class.java)
                                 mList.add(applyInfo)
                             }
+                            if (list.size() < mCount) {
+                                enableLoadMore(false)
+                            } else {
+                                enableLoadMore(true)
+                            }
                         }
                     }
 
-                    enableLoadMore(false)
                     setListAdapter()
 
                 }, {
@@ -74,9 +78,20 @@ class BusinessApplyFragment : BaseListFragment<BusinessInfo>() {
     }
 
     override fun onItemClick(holder: FNAdapter.MyViewHolder?, position: Int) {
-        val intent= Intent(activity, AuditApplyDetailActivity::class.java)
-        intent.putExtra("expendId",mList[position].expendId)
-        startActivity(intent)
+        when(mList[position].expendType)
+        {
+            "办公费","\"办公费\""->{
+                val intent= Intent(activity, BusinessDetailActivity::class.java)
+                intent.putExtra("expendId",mList[position].expendId)
+                startActivity(intent)
+            }
+            else->{
+                val intent= Intent(activity, AuditApplyDetailActivity::class.java)
+                intent.putExtra("expendId",mList[position].expendId)
+                startActivity(intent)
+            }
+        }
+
     }
 
 

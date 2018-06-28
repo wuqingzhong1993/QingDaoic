@@ -186,8 +186,8 @@ class HttpClient private constructor() : IAPI {
     /**
      * 获取审核报销申请的列表
      */
-    fun getBaoxiaoInfoList():Observable<JsonObject>{
-        return apiService.getBaoxiaoInfoList(this.personId!!,"1")
+    fun getBaoxiaoInfoList(page:Int?):Observable<JsonObject>{
+        return apiService.getBaoxiaoInfoList(this.personId!!,page?.toString()?:"1")
     }
 
     /**
@@ -335,9 +335,8 @@ class HttpClient private constructor() : IAPI {
     }
 
 
-
-    fun getshenQingInfoList():Observable<JsonObject>{
-        return apiService.getshenQingInfoList(this.personId!!,"3")
+    fun getshenQingInfoList(expendType: String,page:Int?):Observable<JsonObject>{
+        return apiService.getshenQingInfoList(this.personId!!,page?.toString()?: "3" ,expendType)
     }
 
 

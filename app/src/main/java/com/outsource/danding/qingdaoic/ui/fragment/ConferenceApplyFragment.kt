@@ -40,7 +40,7 @@ class ConferenceApplyFragment : BaseListFragment<BusinessInfo>() {
 
     private fun getBusinessApplyList()
     {
-        HttpClient.instance.getshenQingInfoList()
+        HttpClient.instance.getshenQingInfoList("13",mPage+1)
                 .bindToLifecycle(this)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -56,15 +56,21 @@ class ConferenceApplyFragment : BaseListFragment<BusinessInfo>() {
                         if(list!=null&&list.size()>0)
                         {
                             val  gson= Gson()
+
                             for(ob in list)
                             {
                                 val applyInfo: BusinessInfo = gson.fromJson(ob, BusinessInfo::class.java)
                                 mList.add(applyInfo)
                             }
+
+                            if (list.size() < mCount) {
+                                enableLoadMore(false)
+                            } else {
+                                enableLoadMore(true)
+                            }
                         }
                     }
 
-                    enableLoadMore(false)
                     setListAdapter()
 
                 }, {
@@ -72,6 +78,7 @@ class ConferenceApplyFragment : BaseListFragment<BusinessInfo>() {
                     cancelProgressDialog()
                 })
     }
+
 
     override fun onItemClick(holder: FNAdapter.MyViewHolder?, position: Int) {
         val intent= Intent(activity, AuditApplyDetailActivity::class.java)

@@ -1,10 +1,6 @@
 package com.outsource.danding.qingdaoic.ui.activity
 
-import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.ActivityOptionsCompat
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -21,17 +17,17 @@ import com.outsource.danding.qingdaoic.bean.*
 import com.outsource.danding.qingdaoic.net.HttpClient
 import com.outsource.danding.qingdaoic.widget.AuditOfficeView
 import com.outsource.danding.qingdaoic.widget.AuditRecordAdapter
+import com.outsource.danding.qingdaoic.widget.TravelInfoView
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_business_detail.*
+import kotlinx.android.synthetic.main.activity_travel_detail.*
 
-
-class BusinessDetailActivity : BaseActivity() , AuditOfficeView.OnItemDelete {
+class TravelDetailActivity : BaseActivity() , AuditOfficeView.OnItemDelete {
 
 
     private var passIsShow = false
-    private var officeList:MutableList<AuditOffice>?=null
+    private var travelList:MutableList<TravelInfo>?=null
     private var photoList:MutableList<Photo>?=null
     private var recordList:MutableList<AuditRecord>?=null
     private var recordAdapter: AuditRecordAdapter?=null
@@ -44,33 +40,23 @@ class BusinessDetailActivity : BaseActivity() , AuditOfficeView.OnItemDelete {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_business_detail)
+        setContentView(R.layout.activity_travel_detail)
         initView()
     }
 
     private fun initView() {
         title="申请详情"
 
-        officeList= mutableListOf()
+        travelList= mutableListOf()
 
         recordList= mutableListOf()
-        recordAdapter=AuditRecordAdapter(this,recordList!!)
+        recordAdapter= AuditRecordAdapter(this, recordList!!)
         lt_record.adapter=recordAdapter
         photoList= mutableListOf()
 
         observerList= mutableListOf()
 
 
-        //支出事项
-        zhichuList = QdApplication.getZhiChuList()
-        zhichuNames= mutableListOf<String>()
-        for(zhichu in zhichuList!!)
-        {
-            zhichuNames?.add(zhichu.key)
-        }
-        val zhichuAdapter: ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_spinner_item, zhichuNames)
-        zhichuAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        sp_zhichu.adapter=zhichuAdapter
 
 
         //初始化单位的adapter
@@ -99,25 +85,41 @@ class BusinessDetailActivity : BaseActivity() , AuditOfficeView.OnItemDelete {
 
 
         img_add.setOnClickListener {
-
-            val office =AuditOffice("","","","","","0","0","")
-            officeList?.add(office)
-            val officeView= AuditOfficeView(this,officeList!!.size-1)
-            ll_office.addView(officeView)
-            officeView.setDataSource(officeList)//绑定数据源
-            observerList?.add(officeView)//添加监听者
-
-            var layoutParams = officeView.layoutParams
-            layoutParams.width=LinearLayout.LayoutParams.MATCH_PARENT
-            layoutParams.height=LinearLayout.LayoutParams.WRAP_CONTENT
-            officeView.layoutParams=layoutParams
-            officeView.setName(office.name)
-            officeView.setMoney(office.money)
-            officeView.setNumber(office.number)
-            officeView.setStandard(office.standard)
-            officeView.setUnivalent(office.univalent)
-            officeView.setRemarks(office.remarks)
+            addTravelInfoView()
         }
+    }
+
+    private fun addTravelInfoView()
+    {
+        val travel = TravelInfo(mutableListOf(), "", "", "", "", "", "", "",
+                "","","","","","","","","","","0",
+                "0","0","0","0","0","0","")
+        travelList?.add(travel)
+        val travelView= TravelInfoView(this, travelList!!.size - 1)
+        //ll_office.addView(officeView)
+        travelView.setDataSource(travelList)//绑定数据源
+        observerList?.add(travelView)//添加监听者
+
+        var layoutParams = travelView.layoutParams
+        layoutParams.width= LinearLayout.LayoutParams.MATCH_PARENT
+        layoutParams.height= LinearLayout.LayoutParams.WRAP_CONTENT
+        travelView.layoutParams=layoutParams
+
+        travelView.setCity(travel.city)
+        travelView.setCityTown(travel.city_town)
+        travelView.setZsMoney(travel.zs_money)
+        travelView.setFare(travel.fare)
+        travelView.setHotel(travel.ht_money)
+        travelView.setHsMoney(travel.hs_money)
+        travelView.setJtMoney(travel.jt_money)
+        travelView.setLevels(travel.all_money)
+        travelView.setOtherFee(travel.qt_money)
+        travelView.setSendCar(travel.sendCar)
+        travelView.setzsJd(travel.zs_jd)
+        travelView.setJtToolsStr(travel.jt_tools_str)
+        travelView.setfhToolsStr(travel.fh_tools_str)
+        travelView.setWNumber(travel.w_number)
+        travelView.setRemarks(travel.remarks)
     }
 
     private fun getBusinessInfoDetail(){
@@ -134,22 +136,10 @@ class BusinessDetailActivity : BaseActivity() , AuditOfficeView.OnItemDelete {
                     val data= json.getAsJsonObject("data")
                     if(data!=null)
                     {
-                        tv_cashContent.text=data.get("cashContent").toString().replace("\"","")
-                        tv_remark.text=data.get("remark").toString().replace("\"","")
 
-                        if(data.get("expendType")!=null&&zhichuNames!=null)
-                        {
-                            val expendTypeStr=data.get("expendType").toString().replace("\"","")
-                            for((index,name) in zhichuNames!!.withIndex())
-                            {
+                        //tv_remark.text=data.get("remark").toString().replace("\"","")
 
-                                if(name==expendTypeStr)
-                                {
-                                    sp_zhichu.setSelection(index,true)
-                                    break
-                                }
-                            }
-                        }
+
 
                         if(data.get("applyDeptName")!=null&&departmentNames?.size!=0)
                         {
@@ -164,11 +154,7 @@ class BusinessDetailActivity : BaseActivity() , AuditOfficeView.OnItemDelete {
                             }
                         }
 
-                        //预算金额
-                        if(data.get("budgetAmount")!=null)
-                        {
-                            et_budgetAmount.setText(data.get("budgetAmount").toString())
-                        }
+
 
                         if(data.get("isLoan")!=null)
                         {
@@ -200,36 +186,48 @@ class BusinessDetailActivity : BaseActivity() , AuditOfficeView.OnItemDelete {
                             }
                         }
 
-                        //办公费
-                        officeList?.clear()
+                        //差旅信息
+                        travelList?.clear()
 
-                        if(data.get("dataList")!=null&& data.getAsJsonArray("dataList")!=null)
+                        if(data.get("travelList")!=null&& data.getAsJsonArray("travelList")!=null)
                         {
-                            val list=data.getAsJsonArray("dataList")
+                            val list=data.getAsJsonArray("travelList")
                             if(list!=null&&list.size()>0)
                             {
 
-                                ll_office.visibility= View.VISIBLE
+                                ll_travel.visibility= View.VISIBLE
                                 val  gson= Gson()
                                 for((index,ob) in list.withIndex())
                                 {
-                                    val office: AuditOffice = gson.fromJson(ob, AuditOffice::class.java)
-                                    officeList?.add(office)
-                                    var officeView= AuditOfficeView(this,index)
-                                    ll_office.addView(officeView)
-                                    officeView.setDataSource(officeList)//绑定数据源
-                                    observerList?.add(officeView)//添加监听者
+                                    val travel: TravelInfo = gson.fromJson(ob, TravelInfo::class.java)
+                                    travelList?.add(travel)
+                                    var travelView= TravelInfoView(this, index)
+                                    ll_travel.addView(travelView)
+                                    travelView.setDataSource(travelList)//绑定数据源
+                                    observerList?.add(travelView)//添加监听者
 
-                                    var layoutParams = officeView.layoutParams
-                                    layoutParams.width=LinearLayout.LayoutParams.MATCH_PARENT
-                                    layoutParams.height=LinearLayout.LayoutParams.WRAP_CONTENT
-                                    officeView.layoutParams=layoutParams
-                                    officeView.setName(office.name)
-                                    officeView.setMoney(office.money)
-                                    officeView.setNumber(office.number)
-                                    officeView.setStandard(office.standard)
-                                    officeView.setUnivalent(office.univalent)
-                                    officeView.setRemarks(office.remarks)
+                                    var layoutParams = travelView.layoutParams
+                                    layoutParams.width= LinearLayout.LayoutParams.MATCH_PARENT
+                                    layoutParams.height= LinearLayout.LayoutParams.WRAP_CONTENT
+                                    travelView.layoutParams=layoutParams
+
+
+                                    travelView.setCity(travel.city)
+                                    travelView.setCityTown(travel.city_town)
+                                    travelView.setZsMoney(travel.zs_money)
+                                    travelView.setFare(travel.fare)
+                                    travelView.setHotel(travel.ht_money)
+                                    travelView.setHsMoney(travel.hs_money)
+                                    travelView.setJtMoney(travel.jt_money)
+                                    travelView.setLevels(travel.all_money)
+                                    travelView.setOtherFee(travel.qt_money)
+                                    travelView.setSendCar(travel.sendCar)
+                                    travelView.setzsJd(travel.zs_jd)
+                                    travelView.setJtToolsStr(travel.jt_tools_str)
+                                    travelView.setfhToolsStr(travel.fh_tools_str)
+                                    travelView.setWNumber(travel.w_number)
+                                    travelView.setRemarks(travel.remarks)
+
 
                                 }
                             }
@@ -243,7 +241,7 @@ class BusinessDetailActivity : BaseActivity() , AuditOfficeView.OnItemDelete {
                                 val list=data.getAsJsonArray("recordList")
                                 if(list!=null&&list.size()>0)
                                 {
-                                    ll_record.visibility=View.VISIBLE
+                                    ll_record.visibility= View.VISIBLE
                                     val  gson= Gson()
                                     for(ob in list)
                                     {
@@ -258,14 +256,14 @@ class BusinessDetailActivity : BaseActivity() , AuditOfficeView.OnItemDelete {
                                         itemView?.measure(0,0)
                                         totalHeight+=itemView!!.measuredHeight
                                     }
-                                    var params: ViewGroup.LayoutParams  = lt_record.getLayoutParams();
+                                    var params: ViewGroup.LayoutParams = lt_record.getLayoutParams();
                                     params.height = totalHeight + (lt_record.getDividerHeight() * (recordAdapter!!.count -1))
                                     lt_record.layoutParams=params
                                 }
                             }
                             else ->
                             {
-                                Log.d("","")
+                                Log.d("", "")
                             }
                         }
 
@@ -283,8 +281,8 @@ class BusinessDetailActivity : BaseActivity() , AuditOfficeView.OnItemDelete {
 
 
     override fun onDelete(position: Int) {
-        ll_office.removeViewAt(position)
-        officeList?.removeAt(position)
+        //ll_office.removeViewAt(position)
+        travelList?.removeAt(position)
         observerList?.removeAt(position)
         for(observer in observerList!!)
         {

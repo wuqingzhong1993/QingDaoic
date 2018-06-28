@@ -40,7 +40,7 @@ class GoAbroadApplyFragment : BaseListFragment<BusinessInfo>() {
 
     private fun getBusinessApplyList()
     {
-        HttpClient.instance.getshenQingInfoList()
+        HttpClient.instance.getshenQingInfoList("22",mPage+1)
                 .bindToLifecycle(this)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -61,10 +61,15 @@ class GoAbroadApplyFragment : BaseListFragment<BusinessInfo>() {
                                 val applyInfo: BusinessInfo = gson.fromJson(ob, BusinessInfo::class.java)
                                 mList.add(applyInfo)
                             }
+
+                            if (list.size() < mCount) {
+                                enableLoadMore(false)
+                            } else {
+                                enableLoadMore(true)
+                            }
                         }
                     }
 
-                    enableLoadMore(false)
                     setListAdapter()
 
                 }, {

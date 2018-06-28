@@ -27,7 +27,7 @@ public abstract class BaseListFragment<T> extends BaseFragment implements FNAdap
     protected List<T> mList;
     protected FNAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    protected int mPage, mCount = 10;
+    protected int mPage, mCount = 5;
     protected int maxId, minId = 0;
     private boolean isViewCreated = false;
     private boolean isFirst = true;

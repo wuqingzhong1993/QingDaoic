@@ -18,6 +18,7 @@ import com.outsource.danding.qingdaoic.base.FNAdapter
 import com.outsource.danding.qingdaoic.bean.ApplyInfo
 import com.outsource.danding.qingdaoic.net.HttpClient
 import com.outsource.danding.qingdaoic.ui.fragment.BusinessApplyFragment
+import com.outsource.danding.qingdaoic.ui.fragment.ConferenceApplyFragment
 import com.outsource.danding.qingdaoic.ui.fragment.TravelApplyFragment
 import com.outsource.danding.qingdaoic.widget.TabFragmentPagerAdapter
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
@@ -44,7 +45,7 @@ class ConferenceActivity : BaseActivity() {
 
     private fun initView() {
         title = "会议"
-        fragments= mutableListOf(TravelApplyFragment(), TravelApplyFragment())
+        fragments= mutableListOf(ConferenceApplyFragment(), ConferenceApplyFragment())
         adapter= TabFragmentPagerAdapter(supportFragmentManager,fragments)
         view_pager.adapter=adapter
         view_pager.addOnPageChangeListener(object: ViewPager.OnPageChangeListener{

@@ -42,7 +42,7 @@ class AuditBaoXiaoApplyFragment : BaseListFragment<AuditBaoxiaoApplyInfo>() {
 
     private fun getBaoXiaoAuditApplyList()
     {
-        HttpClient.instance.getBaoxiaoInfoList()
+        HttpClient.instance.getBaoxiaoInfoList(mPage+1)
                 .bindToLifecycle(this)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

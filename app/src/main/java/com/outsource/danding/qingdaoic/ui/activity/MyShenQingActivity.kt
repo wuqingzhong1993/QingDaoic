@@ -61,7 +61,7 @@ class MyShenQingActivity : BaseListActivity<ShenQing>() {
 
     private fun getApplyInfoList()
     {
-        HttpClient.instance.getshenQingInfoList()
+        HttpClient.instance.getshenQingInfoList("",null)
                 .bindToLifecycle(this)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

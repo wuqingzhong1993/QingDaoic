@@ -116,7 +116,7 @@ interface  ApiService{
     @FormUrlEncoded
     @Headers("Accept-Encoding:application/json")
     @POST("m_getshenQingInfoList.do")
-    fun getshenQingInfoList(@Field("personId") personId:String,@Field("pageNum") pageNum: String): Observable<JsonObject>
+    fun getshenQingInfoList(@Field("personId") personId:String,@Field("pageNum") pageNum: String , @Field("expendType") expendType:String): Observable<JsonObject>
 
 
     @FormUrlEncoded
