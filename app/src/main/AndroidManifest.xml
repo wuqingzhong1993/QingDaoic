@@ -10,15 +10,14 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".app.QdApp"
+        android:name=".app.QdApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.MainActivity">
-        </activity>
+        <activity android:name=".ui.activity.MainActivity" />
         <activity android:name=".ui.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,6 +25,36 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.AuditWaitingActivity" />
+        <activity android:name=".ui.activity.BasicInfoActivity" />
+        <activity android:name=".ui.activity.DetailActivity" />
+        <activity android:name=".ui.activity.AuditByOperatorActivity" />
+        <activity android:name=".ui.activity.BusinessActivity" />
+        <activity android:name=".ui.activity.NewBusinessActivity" />
+        <activity android:name=".ui.activity.TravelActivity" />
+        <activity android:name=".ui.activity.NewTravelActivity" />
+        <activity android:name=".ui.activity.CultivateActivity" />
+        <activity android:name=".ui.activity.NewCultivateActivity" />
+        <activity android:name=".ui.activity.JdActivity" />
+        <activity android:name=".ui.activity.NewJdActivity" />
+        <activity android:name=".ui.activity.GoAbroadActivity" />
+        <activity android:name=".ui.activity.NewGoAbroadActivity" />
+        <activity android:name=".ui.activity.ConferenceActivity" />
+        <activity android:name=".ui.activity.NewConferenceActivity" />
+        <activity android:name=".ui.activity.BaoXiaoActivity" />
+        <activity android:name=".ui.activity.NewBaoXiaoActivity" />
+        <activity android:name=".ui.activity.AuditActivity" />
+        <activity android:name=".ui.activity.AuditApplyDetailActivity" />
+        <activity android:name=".ui.activity.MyShenQingActivity" />
+        <activity android:name=".ui.activity.PasswordModifyActivity" />
+        <activity android:name=".ui.activity.MyAssetActivity" />
+        <activity android:name=".ui.activity.MyAssetDetailActivity" />
+        <activity android:name=".ui.activity.BusinessDetailActivity" />
+        <activity android:name=".ui.activity.BaoXiaoAuditActivity"></activity>
+        <activity android:name=".ui.activity.AuditBaoxiaoApplyDetailActivity"/>
+        <activity android:name=".ui.activity.TravelDetailActivity"/>
+        <activity android:name=".ui.activity.ConferenceDetailActivity" />
+
     </application>
 
 </manifest>
